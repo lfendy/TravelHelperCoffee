@@ -1,0 +1,10 @@
+ThoughtWorks Melbourne
+----------------------
+
+Travel Script, written in Coffee Script
+
+Dependencies:
+-------------
+Coffee Script
+Jasmine
+Mustache
