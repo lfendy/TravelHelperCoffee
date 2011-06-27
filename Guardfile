@@ -1,7 +1,3 @@
-guard 'coffeescript', :output => 'public/javascripts/' do
-  watch(%r{public/coffee/(.+\.coffee)})
-end
-
-guard 'coffeescript', :output => 'spec/javascripts/' do
-  watch(%r{spec/coffee/(.+\.coffee)})
-end
+guard 'coffeescript', :input => 'app/assets/javascripts'
+guard 'coffeescript', :input => 'public/coffee', :output => 'public/javascripts'
+guard 'coffeescript', :input => 'spec/coffee', :output => 'spec/javascripts'
