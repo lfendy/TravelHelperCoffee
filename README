@@ -3,8 +3,24 @@ ThoughtWorks Melbourne
 
 Travel Script, written in Coffee Script
 
+Purpose of script:
+. to screen scrape flight page, produce e-mail friendly page
+. to add hotel bookings, according to info in google spreadsheet
+. to add car bookings and travel times
+. to export relevant info to a different google spreadsheet
+
+Notes for dev:
+. 'rake' by default will run minify_js and produce TravelHelper.min.js
+. 'rake jasmine' will run jasmine server for testing
+. 'guard' is set up to compile .coffee files to .js
+
+
 Dependencies:
 -------------
-Coffee Script
-Jasmine
-Mustache
+Rake
+Bundler
+Juicer        - minify js files 
+Coffee Script - compile .coffee to .js
+Guard         - watches coffee files changes, auto-compile
+Jasmine       - JS BDD
+Mustache      - templating engine
