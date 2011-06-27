@@ -13,6 +13,7 @@ task :minify_js do
   inputs = []
   inputs.push path + 'jquery-1.6.1.js'
   inputs.push path + 'mustache.js'
+  inputs.push path + 'VirginScraper.js'
   inputs.push path + 'TravelHelper.js'
   output = path + 'TravelHelper.min.js'
   system('juicer merge ' + inputs.join(' ') + ' -s -o ' + output)
