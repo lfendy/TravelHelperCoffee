@@ -47,7 +47,7 @@
       var flight, flights, passenger, view;
       passenger = screenScraper.passenger();
       flights = screenScraper.flights();
-      return view = {
+      view = {
         passengerName: passenger.name,
         mobileNumber: passenger.mobileNumber,
         reservationNumber: passenger.reservationNumber,
@@ -61,13 +61,12 @@
           return _results;
         })()
       };
+      return view;
     };
     TravelHelper.prototype.run = function() {
       var inputForm, v, view;
       v = new VirginScraper();
-      view = {
-        passengerName: v.passengerName()
-      };
+      view = createView(v);
       inputForm = Mustache.to_html(this.uiTemplate, view);
       return ($('body')).prepend(inputForm);
     };
