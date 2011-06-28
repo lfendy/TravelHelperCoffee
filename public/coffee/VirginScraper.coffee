@@ -2,7 +2,7 @@ window.Flight = class Flight
   constructor: () ->
 
   toJSON: () ->
-    departureDate: @departureDate 
+    departureDate: @departureDate
     departureTime: @departureTime 
     arrivalDate:   @arrivalDate 
     arrivalTime:   @arrivalTime 

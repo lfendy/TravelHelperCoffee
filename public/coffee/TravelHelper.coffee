@@ -10,7 +10,7 @@ window.TravelHelper = class TravelHelper
   <div id="contact">
     <h2>Contact Details for {{passengerName}}</h2>
     <span class="formLabel">mobile:</span>
-    <input id="mobileNumber" value="{{mobileNumber}} />
+    <input id="mobileNumber" value="{{mobileNumber}}" />
     <br/>
   </div>
 
@@ -44,6 +44,7 @@ window.TravelHelper = class TravelHelper
 </div>
 '
 
+
   createView: (screenScraper) ->
     passenger = screenScraper.passenger()
     flights   = screenScraper.flights()
@@ -57,14 +58,17 @@ window.TravelHelper = class TravelHelper
 
   run: () ->
     v = new VirginScraper()
-
     view = @createView v
-    
     inputForm = Mustache.to_html(@uiTemplate, view);
 
+    #inject ui
     ($ 'body').prepend inputForm
+
+    #bind listeners
+    ($ 'input#mobileNumber').bind 'focusout', ->
+      ($ 'span#mobileNumber').text '(' + ($ 'input#mobileNumber').val() + ')'
 
 
 th = new TravelHelper()
 th.run()
-
+($ 'div.logoVirginBlue').hide()

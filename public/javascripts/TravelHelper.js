@@ -9,7 +9,7 @@
   <div id="contact">\
     <h2>Contact Details for {{passengerName}}</h2>\
     <span class="formLabel">mobile:</span>\
-    <input id="mobileNumber" value="{{mobileNumber}} />\
+    <input id="mobileNumber" value="{{mobileNumber}}" />\
     <br/>\
   </div>\
 \
@@ -68,10 +68,14 @@
       v = new VirginScraper();
       view = this.createView(v);
       inputForm = Mustache.to_html(this.uiTemplate, view);
-      return ($('body')).prepend(inputForm);
+      ($('body')).prepend(inputForm);
+      return ($('input#mobileNumber')).bind('focusout', function() {
+        return ($('span#mobileNumber')).text('(' + ($('input#mobileNumber')).val() + ')');
+      });
     };
     return TravelHelper;
   })();
   th = new TravelHelper();
   th.run();
+  ($('div.logoVirginBlue')).hide();
 }).call(this);
