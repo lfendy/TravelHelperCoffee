@@ -1,8 +1,12 @@
 (function() {
-  var Flight, VirginScraper;
+  var Flight, Passenger, VirginScraper;
   window.Flight = Flight = (function() {
     function Flight() {}
     return Flight;
+  })();
+  window.Passenger = Passenger = (function() {
+    function Passenger() {}
+    return Passenger;
   })();
   window.VirginScraper = VirginScraper = (function() {
     function VirginScraper() {}
@@ -10,7 +14,8 @@
       return ($('td.itineraryGuestBaggageNameColumn')).text();
     };
     VirginScraper.prototype.mobileNumber = function() {
-      return ($('div#BookingConfirmationMain')).find('tr').eq(1).find('td').eq(3).html().split(/<br.*?>/g)[0];
+      var _ref;
+      return (_ref = ($('div#BookingConfirmationMain')).find('tr').eq(1).find('td').eq(3).html()) != null ? _ref.split(/<br.*?>/g)[0] : void 0;
     };
     VirginScraper.prototype.reservationNumber = function() {
       return ($('td.reservationnumber')).text().trim();
@@ -18,6 +23,7 @@
     VirginScraper.prototype.parseFlight = function(raw) {
       var destinationClone, f, originClone;
       f = new Flight();
+      f.airline = 'Virgin Airlines';
       f.flightNumber = ($(raw)).find('td.flightContents').eq(0).text();
       f.departureDate = ($(raw)).find('td.flightDate').text();
       f.arrivalDate = ($(raw)).find('td.flightDate').text();
@@ -40,6 +46,14 @@
         _results.push(result = this.parseFlight(raw));
       }
       return _results;
+    };
+    VirginScraper.prototype.passenger = function() {
+      var p;
+      p = new Passenger();
+      p.name = this.passengerName();
+      p.mobileNumber = this.mobileNumber();
+      p.reservationNumber = this.reservationNumber();
+      return p;
     };
     return VirginScraper;
   })();

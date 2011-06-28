@@ -1,10 +1,10 @@
 (function() {
-  var injectElement, setupFlightDetails, setupMobileNumber, setupPassengerName, setupReservationNumber;
+  var htmlElementWithFlightDetails, htmlElementWithMobileNumber, htmlElementWithPassengerName, htmlElementWithReservationNumber, injectElement, setupFlightDetails, setupMobileNumber, setupPassengerName, setupReservationNumber;
   injectElement = function(element) {
     return jasmine.getFixtures().set(element);
   };
-  setupMobileNumber = function(mobileNumber) {
-    return injectElement('\
+  htmlElementWithMobileNumber = function(mobileNumber) {
+    return '\
 <div id="BookingConfirmationMain" class="mainBody" style="height:100%">\
                 <table>\
                   <tbody><tr>\
@@ -37,10 +37,10 @@ VIC\
                   </tr>\
                 </tbody></table>\
                 <div class="changeItineraryButtonContainer"><a href="javascript:__doPostBack(\'ControlGroupChangeItineraryView$ErrorHandlingRetrieveBookingView$BookingConfirmationView3$ChangeControl2$LinkButtonChangeContact\',\'\')" class="buttonBlank buttonBlankDefault buttonEditContact">edit contact detail »</a><a id="ChangeItineraryLink1" href="ChangeItinerary.aspx?resend=true&amp;r=14309#ChangeItinerary" class="buttonBlank buttonBlankDefault buttonResendItinerary">re-send itinerary »</a></div>\
-              </div>'.replace('##MOBILE_NUMBER##', mobileNumber));
+              </div>'.replace('##MOBILE_NUMBER##', mobileNumber);
   };
-  setupFlightDetails = function(flight) {
-    return injectElement('              <div class="passengerDetailsFrame">\
+  htmlElementWithFlightDetails = function(flight) {
+    return '              <div class="passengerDetailsFrame">\
                 <fieldset class="passengerDetailsField">\
                   <legend class="intneraryFrameTitle"><span class="redFont">Departing Flight</span></legend>\
                   <table>\
@@ -68,14 +68,26 @@ Adult\
                   </table>\
                 </fieldset>\
               </div>\
-       '.replace('##FLIGHT_DATE##', flight.departureDate).replace('##FLIGHT_NUMBER##', flight.flightNumber).replace('##DEPARTURE_TIME##', flight.departureTime).replace('##ARRIVAL_TIME##', flight.arrivalTime).replace('##ORIGIN##', flight.origin).replace('##DESTINATION##', flight.destination));
+       '.replace('##FLIGHT_DATE##', flight.departureDate).replace('##FLIGHT_NUMBER##', flight.flightNumber).replace('##DEPARTURE_TIME##', flight.departureTime).replace('##ARRIVAL_TIME##', flight.arrivalTime).replace('##ORIGIN##', flight.origin).replace('##DESTINATION##', flight.destination);
+  };
+  htmlElementWithReservationNumber = function(number) {
+    return '<td class="reservationnumber">##NUMBER##\
+    <input id="reservationnumber" type="hidden" value="E1E95Y"></td>'.replace('##NUMBER##', number);
+  };
+  htmlElementWithPassengerName = function(name) {
+    return '<td class="itineraryGuestBaggageNameColumn">##NAME##</td>'.replace('##NAME##', name);
+  };
+  setupMobileNumber = function(mobileNumber) {
+    return injectElement(htmlElementWithMobileNumber(mobileNumber));
+  };
+  setupFlightDetails = function(flight) {
+    return injectElement(htmlElementWithFlightDetails(flight));
   };
   setupReservationNumber = function(number) {
-    return injectElement('<td class="reservationnumber">##NUMBER##\
-    <input id="reservationnumber" type="hidden" value="E1E95Y"></td>'.replace('##NUMBER##', number));
+    return injectElement(htmlElementWithReservationNumber(number));
   };
   setupPassengerName = function(name) {
-    return injectElement('<td class="itineraryGuestBaggageNameColumn">##NAME##</td>'.replace('##NAME##', name));
+    return injectElement(htmlElementWithPassengerName(name));
   };
   describe("VirginScraper", function() {
     it("should scrape passenger name", function() {
@@ -95,6 +107,12 @@ Adult\
       setupReservationNumber('E1E95Y');
       v = new VirginScraper();
       return (expect(v.reservationNumber())).toEqual('E1E95Y');
+    });
+    it("should populate scraped data to Passenger", function() {
+      var p, v;
+      v = new VirginScraper();
+      p = v.passenger();
+      return (expect(p instanceof Passenger)).toEqual(true);
     });
     describe("when parsing flight details", function() {
       beforeEach(function() {

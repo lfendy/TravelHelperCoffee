@@ -1,6 +1,8 @@
 window.Flight = class Flight
   constructor: () ->
   
+window.Passenger = class Passenger
+  constructor: () ->
 
 
 window.VirginScraper = class VirginScraper
@@ -13,13 +15,14 @@ window.VirginScraper = class VirginScraper
     ($ 'div#BookingConfirmationMain')
       .find('tr').eq(1)
       .find('td').eq(3)
-      .html().split(/<br.*?>/g)[0]
+      .html()?.split(/<br.*?>/g)[0]
 
   reservationNumber: () ->
     ($ 'td.reservationnumber').text().trim()
 
   parseFlight: (raw) ->
     f = new Flight()
+    f.airline       = 'Virgin Airlines'
     f.flightNumber  = ($ raw).find('td.flightContents').eq(0).text()
     f.departureDate = ($ raw).find('td.flightDate').text()
     f.arrivalDate   = ($ raw).find('td.flightDate').text()
@@ -37,6 +40,12 @@ window.VirginScraper = class VirginScraper
     result = (@parseFlight raw) for raw in ($ 'div.passengerDetailsFrame')
 
 
+  passenger: () ->
+    p = new Passenger()
+    p.name              = @passengerName()
+    p.mobileNumber      = @mobileNumber()
+    p.reservationNumber = @reservationNumber()
+    p
 
 
 

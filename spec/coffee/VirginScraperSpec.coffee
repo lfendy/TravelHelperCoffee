@@ -2,8 +2,9 @@ injectElement = (element) ->
   jasmine.getFixtures().set element
 
 #sample htmls
-setupMobileNumber = (mobileNumber) ->
-    injectElement '
+
+htmlElementWithMobileNumber = (mobileNumber) ->
+  '
 <div id="BookingConfirmationMain" class="mainBody" style="height:100%">
                 <table>
                   <tbody><tr>
@@ -38,8 +39,8 @@ VIC
                 <div class="changeItineraryButtonContainer"><a href="javascript:__doPostBack(\'ControlGroupChangeItineraryView$ErrorHandlingRetrieveBookingView$BookingConfirmationView3$ChangeControl2$LinkButtonChangeContact\',\'\')" class="buttonBlank buttonBlankDefault buttonEditContact">edit contact detail »</a><a id="ChangeItineraryLink1" href="ChangeItinerary.aspx?resend=true&amp;r=14309#ChangeItinerary" class="buttonBlank buttonBlankDefault buttonResendItinerary">re-send itinerary »</a></div>
               </div>'.replace('##MOBILE_NUMBER##', mobileNumber)
 
-setupFlightDetails = (flight) ->
-      injectElement '              <div class="passengerDetailsFrame">
+htmlElementWithFlightDetails = (flight) ->
+  '              <div class="passengerDetailsFrame">
                 <fieldset class="passengerDetailsField">
                   <legend class="intneraryFrameTitle"><span class="redFont">Departing Flight</span></legend>
                   <table>
@@ -73,13 +74,25 @@ Adult
         .replace('##ARRIVAL_TIME##',flight.arrivalTime)
         .replace('##ORIGIN##',flight.origin)
         .replace('##DESTINATION##',flight.destination)
+  
+htmlElementWithReservationNumber = (number) ->
+  '<td class="reservationnumber">##NUMBER##
+    <input id="reservationnumber" type="hidden" value="E1E95Y"></td>'.replace('##NUMBER##',number)
+  
+htmlElementWithPassengerName = (name) ->
+  '<td class="itineraryGuestBaggageNameColumn">##NAME##</td>'.replace('##NAME##', name)
+
+setupMobileNumber = (mobileNumber) ->
+  injectElement htmlElementWithMobileNumber mobileNumber
+
+setupFlightDetails = (flight) ->
+  injectElement htmlElementWithFlightDetails flight
 
 setupReservationNumber = (number) ->
-  injectElement '<td class="reservationnumber">##NUMBER##
-    <input id="reservationnumber" type="hidden" value="E1E95Y"></td>'.replace('##NUMBER##',number)
+  injectElement htmlElementWithReservationNumber number
 
 setupPassengerName = (name) ->
-  injectElement '<td class="itineraryGuestBaggageNameColumn">##NAME##</td>'.replace('##NAME##', name)
+  injectElement htmlElementWithPassengerName name
 
 
 describe "VirginScraper", ->
@@ -101,6 +114,10 @@ describe "VirginScraper", ->
     v = new VirginScraper()
     (expect v.reservationNumber()).toEqual 'E1E95Y'
 
+  it "should populate scraped data to Passenger", ->
+    v = new VirginScraper()
+    p = v.passenger()
+    (expect p instanceof Passenger).toEqual true
 
   describe "when parsing flight details", ->
     beforeEach ->
@@ -154,5 +171,6 @@ describe "VirginScraper", ->
 
     it "should return Flight objects", ->
       ((expect flight instanceof Flight).toEqual true) for flight in @flights
+
 
       
