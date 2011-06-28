@@ -2,6 +2,18 @@
   var Flight, Passenger, VirginScraper;
   window.Flight = Flight = (function() {
     function Flight() {}
+    Flight.prototype.toJSON = function() {
+      return {
+        departureDate: this.departureDate,
+        departureTime: this.departureTime,
+        arrivalDate: this.arrivalDate,
+        arrivalTime: this.arrivalTime,
+        origin: this.origin,
+        destination: this.destination,
+        airline: 'Virgin Airlines',
+        flightNumber: this.flightNumber
+      };
+    };
     return Flight;
   })();
   window.Passenger = Passenger = (function() {
@@ -23,7 +35,6 @@
     VirginScraper.prototype.parseFlight = function(raw) {
       var destinationClone, f, originClone;
       f = new Flight();
-      f.airline = 'Virgin Airlines';
       f.flightNumber = ($(raw)).find('td.flightContents').eq(0).text();
       f.departureDate = ($(raw)).find('td.flightDate').text();
       f.arrivalDate = ($(raw)).find('td.flightDate').text();

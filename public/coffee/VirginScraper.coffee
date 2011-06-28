@@ -1,6 +1,17 @@
 window.Flight = class Flight
   constructor: () ->
-  
+
+  toJSON: () ->
+    departureDate: @departureDate 
+    departureTime: @departureTime 
+    arrivalDate:   @arrivalDate 
+    arrivalTime:   @arrivalTime 
+    origin:        @origin 
+    destination:   @destination 
+    airline:       'Virgin Airlines'
+    flightNumber:  @flightNumber 
+      
+
 window.Passenger = class Passenger
   constructor: () ->
 
@@ -22,7 +33,6 @@ window.VirginScraper = class VirginScraper
 
   parseFlight: (raw) ->
     f = new Flight()
-    f.airline       = 'Virgin Airlines'
     f.flightNumber  = ($ raw).find('td.flightContents').eq(0).text()
     f.departureDate = ($ raw).find('td.flightDate').text()
     f.arrivalDate   = ($ raw).find('td.flightDate').text()

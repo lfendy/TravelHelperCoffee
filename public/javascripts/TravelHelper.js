@@ -1,6 +1,5 @@
 (function() {
   var TravelHelper, th;
-  var __bind = function(fn, me){ return function(){ return fn.apply(me, arguments); }; };
   window.TravelHelper = TravelHelper = (function() {
     function TravelHelper() {
       this.uiTemplate = ' \
@@ -45,20 +44,25 @@
 ';
     }
     TravelHelper.prototype.createView = function(screenScraper) {
-      var flights, passenger, view;
+      var flight, flights, passenger, view;
       passenger = screenScraper.passenger();
       flights = screenScraper.flights();
       return view = {
         passengerName: passenger.name,
         mobileNumber: passenger.mobileNumber,
         reservationNumber: passenger.reservationNumber,
-        flights: [{}]
+        flights: (function() {
+          var _i, _len, _results;
+          _results = [];
+          for (_i = 0, _len = flights.length; _i < _len; _i++) {
+            flight = flights[_i];
+            _results.push(flight.toJSON);
+          }
+          return _results;
+        })()
       };
     };
-    return TravelHelper;
-  })();
-  ({
-    run: __bind(function() {
+    TravelHelper.prototype.run = function() {
       var inputForm, v, view;
       v = new VirginScraper();
       view = {
@@ -66,8 +70,9 @@
       };
       inputForm = Mustache.to_html(this.uiTemplate, view);
       return ($('body')).prepend(inputForm);
-    }, this)
-  });
+    };
+    return TravelHelper;
+  })();
   th = new TravelHelper();
   th.run();
 }).call(this);

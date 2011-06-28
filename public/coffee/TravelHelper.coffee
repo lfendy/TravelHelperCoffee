@@ -51,12 +51,12 @@ window.TravelHelper = class TravelHelper
       passengerName:     passenger.name
       mobileNumber:      passenger.mobileNumber
       reservationNumber: passenger.reservationNumber
-      flights: [ 
-                {}
-               ]
+      flights:           flight.toJSON for flight in flights
+                
+               
     
 
-  run: () =>
+  run: () ->
     v = new VirginScraper()
 
     view = 
