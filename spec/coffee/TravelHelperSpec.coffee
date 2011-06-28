@@ -1,4 +1,4 @@
 describe "TravelHelper", ->
   
-  it "should do something", ->
+  it "should render passenger name", ->
     (expect 2).toEqual 2

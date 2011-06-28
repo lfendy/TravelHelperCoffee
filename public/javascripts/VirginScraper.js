@@ -10,7 +10,10 @@
       return ($('td.itineraryGuestBaggageNameColumn')).text();
     };
     VirginScraper.prototype.mobileNumber = function() {
-      return $('div#BookingConfirmationMain').find('tr').eq(1).find('td').eq(3).html().split(/<br.*?>/g)[0];
+      return ($('div#BookingConfirmationMain')).find('tr').eq(1).find('td').eq(3).html().split(/<br.*?>/g)[0];
+    };
+    VirginScraper.prototype.reservationNumber = function() {
+      return ($('td.reservationnumber')).text().trim();
     };
     VirginScraper.prototype.parseFlight = function(raw) {
       var destinationClone, f, originClone;

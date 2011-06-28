@@ -16,7 +16,7 @@ task :minify_js do
   inputs.push path + 'VirginScraper.js'
   inputs.push path + 'TravelHelper.js'
   output = path + 'TravelHelper.min.js'
-  system('juicer merge ' + inputs.join(' ') + ' -s -o ' + output)
+  system('juicer merge ' + inputs.join(' ') + ' --force -s -o ' + output)
 end
 
 task :default => [:minify_js]

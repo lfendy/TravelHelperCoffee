@@ -1,5 +1,5 @@
 (function() {
-  var injectElement, setupFlightDetails, setupMobileNumber;
+  var injectElement, setupFlightDetails, setupMobileNumber, setupPassengerName, setupReservationNumber;
   injectElement = function(element) {
     return jasmine.getFixtures().set(element);
   };
@@ -70,10 +70,17 @@ Adult\
               </div>\
        '.replace('##FLIGHT_DATE##', flight.departureDate).replace('##FLIGHT_NUMBER##', flight.flightNumber).replace('##DEPARTURE_TIME##', flight.departureTime).replace('##ARRIVAL_TIME##', flight.arrivalTime).replace('##ORIGIN##', flight.origin).replace('##DESTINATION##', flight.destination));
   };
+  setupReservationNumber = function(number) {
+    return injectElement('<td class="reservationnumber">##NUMBER##\
+    <input id="reservationnumber" type="hidden" value="E1E95Y"></td>'.replace('##NUMBER##', number));
+  };
+  setupPassengerName = function(name) {
+    return injectElement('<td class="itineraryGuestBaggageNameColumn">##NAME##</td>'.replace('##NAME##', name));
+  };
   describe("VirginScraper", function() {
     it("should scrape passenger name", function() {
       var v;
-      injectElement('<td class="itineraryGuestBaggageNameColumn">JACK JOHNSON</td>');
+      setupPassengerName('JACK JOHNSON');
       v = new VirginScraper();
       return (expect(v.passengerName())).toEqual('JACK JOHNSON');
     });
@@ -82,6 +89,12 @@ Adult\
       setupMobileNumber('+61-0430123456');
       v = new VirginScraper();
       return (expect(v.mobileNumber())).toEqual('+61-0430123456');
+    });
+    it("should scrape reservation number", function() {
+      var v;
+      setupReservationNumber('E1E95Y');
+      v = new VirginScraper();
+      return (expect(v.reservationNumber())).toEqual('E1E95Y');
     });
     describe("when parsing flight details", function() {
       beforeEach(function() {
@@ -121,14 +134,13 @@ Adult\
         return (expect(this.flight.destination)).toEqual('Brisbane');
       });
     });
-    return describe("for given flight details", function() {
+    return describe("for several flight details", function() {
       beforeEach(function() {
         var v;
-        injectElement('              <div class="passengerDetailsFrame">\
-              </div>\
-              <div class="passengerDetailsFrame">\
-              </div>\
-');
+        injectElement('<div class="passengerDetailsFrame">\
+                     </div>\
+                     <div class="passengerDetailsFrame">\
+                     </div>');
         v = new VirginScraper();
         return this.flights = v.flights();
       });

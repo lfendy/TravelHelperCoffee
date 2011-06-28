@@ -10,10 +10,13 @@ window.VirginScraper = class VirginScraper
     ($ 'td.itineraryGuestBaggageNameColumn').text()
 
   mobileNumber: () ->
-    $('div#BookingConfirmationMain')
+    ($ 'div#BookingConfirmationMain')
       .find('tr').eq(1)
       .find('td').eq(3)
       .html().split(/<br.*?>/g)[0]
+
+  reservationNumber: () ->
+    ($ 'td.reservationnumber').text().trim()
 
   parseFlight: (raw) ->
     f = new Flight()
@@ -31,7 +34,7 @@ window.VirginScraper = class VirginScraper
     f
 
   flights: () ->
-    result = @parseFlight(raw) for raw in ($ 'div.passengerDetailsFrame')
+    result = (@parseFlight raw) for raw in ($ 'div.passengerDetailsFrame')
 
 
 

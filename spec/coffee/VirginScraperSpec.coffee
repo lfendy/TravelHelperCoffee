@@ -74,11 +74,18 @@ Adult
         .replace('##ORIGIN##',flight.origin)
         .replace('##DESTINATION##',flight.destination)
 
+setupReservationNumber = (number) ->
+  injectElement '<td class="reservationnumber">##NUMBER##
+    <input id="reservationnumber" type="hidden" value="E1E95Y"></td>'.replace('##NUMBER##',number)
+
+setupPassengerName = (name) ->
+  injectElement '<td class="itineraryGuestBaggageNameColumn">##NAME##</td>'.replace('##NAME##', name)
+
 
 describe "VirginScraper", ->
 
   it "should scrape passenger name", ->
-    injectElement '<td class="itineraryGuestBaggageNameColumn">JACK JOHNSON</td>'
+    setupPassengerName 'JACK JOHNSON'
     v = new VirginScraper()
     (expect v.passengerName()).toEqual 'JACK JOHNSON'
 
@@ -87,6 +94,12 @@ describe "VirginScraper", ->
     setupMobileNumber '+61-0430123456'
     v = new VirginScraper()
     (expect v.mobileNumber()).toEqual '+61-0430123456'
+
+
+  it "should scrape reservation number", ->
+    setupReservationNumber 'E1E95Y'
+    v = new VirginScraper()
+    (expect v.reservationNumber()).toEqual 'E1E95Y'
 
 
   describe "when parsing flight details", ->
@@ -125,14 +138,14 @@ describe "VirginScraper", ->
     it "should return correct destination", ->
       (expect @flight.destination).toEqual 'Brisbane'
 
-  describe "for given flight details", ->
 
+  describe "for several flight details", ->
     beforeEach ->
-      injectElement '              <div class="passengerDetailsFrame">
-              </div>
-              <div class="passengerDetailsFrame">
-              </div>
-'
+      injectElement '<div class="passengerDetailsFrame">
+                     </div>
+                     <div class="passengerDetailsFrame">
+                     </div>'
+
       v = new VirginScraper()
       @flights = v.flights()
 
