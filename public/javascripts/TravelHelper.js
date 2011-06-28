@@ -15,7 +15,7 @@
       view = {
         passengerName: v.passengerName()
       };
-      inputForm = Mustache.to_html(uiTemplate, view);
+      inputForm = Mustache.to_html(this.uiTemplate, view);
       return ($('body')).prepend(inputForm);
     };
     return TravelHelper;

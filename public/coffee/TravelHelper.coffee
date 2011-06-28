@@ -12,11 +12,11 @@ window.TravelHelper = class TravelHelper
 
   run: () ->
     v = new VirginScraper()
-    view = {
+    view = 
       passengerName: v.passengerName()
-    }
+    
       
-    inputForm = Mustache.to_html(uiTemplate, view);
+    inputForm = Mustache.to_html(@uiTemplate, view);
     ($ 'body').prepend inputForm
 
 
