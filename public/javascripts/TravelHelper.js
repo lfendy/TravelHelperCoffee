@@ -66,7 +66,7 @@
     TravelHelper.prototype.run = function() {
       var inputForm, v, view;
       v = new VirginScraper();
-      view = createView(v);
+      view = this.createView(v);
       inputForm = Mustache.to_html(this.uiTemplate, view);
       return ($('body')).prepend(inputForm);
     };

@@ -54,13 +54,11 @@ window.TravelHelper = class TravelHelper
       flights:           flight.toJSON for flight in flights
     view
                 
-               
-    
 
   run: () ->
     v = new VirginScraper()
 
-    view = createView v
+    view = @createView v
     
     inputForm = Mustache.to_html(@uiTemplate, view);
 
