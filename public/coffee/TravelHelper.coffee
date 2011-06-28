@@ -10,7 +10,7 @@ window.TravelHelper = class TravelHelper
 </div>
 '
 
-  run: () ->
+  run: () =>
     v = new VirginScraper()
     view = 
       passengerName: v.passengerName()

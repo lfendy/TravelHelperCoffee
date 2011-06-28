@@ -1,8 +1,9 @@
 (function() {
   var TravelHelper, th;
+  var __bind = function(fn, me){ return function(){ return fn.apply(me, arguments); }; };
   window.TravelHelper = TravelHelper = (function() {
     function TravelHelper() {
-      this.uiTemplate = ' \
+      this.run = __bind(this.run, this);      this.uiTemplate = ' \
 <div id="travelplanner">\
 <h1>travel planner</h1>\
 <h2>Contact Details for {{passengerName}}</h2>\
