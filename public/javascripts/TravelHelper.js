@@ -3,7 +3,7 @@
   window.TravelHelper = TravelHelper = (function() {
     function TravelHelper() {
       this.uiTemplate = ' \
-<div id="travelplanner">\
+<div id="travelplanner" style="margin: 10px; padding: 0px 20px 20px; background: none repeat scroll 0% 0% white; border: 5px dotted grey;">\
   <h1>travel planner</h1>\
 \
   <div id="contact">\
@@ -56,7 +56,7 @@
           _results = [];
           for (_i = 0, _len = flights.length; _i < _len; _i++) {
             flight = flights[_i];
-            _results.push(flight.toJSON);
+            _results.push(flight.toJSON());
           }
           return _results;
         })()

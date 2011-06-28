@@ -4,7 +4,7 @@
 window.TravelHelper = class TravelHelper
   constructor: () ->
     @uiTemplate=' 
-<div id="travelplanner">
+<div id="travelplanner" style="margin: 10px; padding: 0px 20px 20px; background: none repeat scroll 0% 0% white; border: 5px dotted grey;">
   <h1>travel planner</h1>
 
   <div id="contact">
@@ -51,7 +51,7 @@ window.TravelHelper = class TravelHelper
       passengerName:     passenger.name
       mobileNumber:      passenger.mobileNumber
       reservationNumber: passenger.reservationNumber
-      flights:           flight.toJSON for flight in flights
+      flights:           flight.toJSON() for flight in flights
     view
                 
 
