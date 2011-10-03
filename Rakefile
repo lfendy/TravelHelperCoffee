@@ -9,13 +9,12 @@ rescue LoadError
 end
 
 task :minify_js do
-  path = 'public/javascripts/'
+  path = './public/javascripts/'
   inputs = []
-  inputs.push path + 'jquery-1.6.1.js'
-  inputs.push path + 'mustache.js'
-  inputs.push path + 'VirginScraper.js'
-  inputs.push path + 'TravelHelper.js'
-  output = path + 'TravelHelper.min.js'
+  Dir[File.expand_path(path)+('/**/**')].each do |path_to_js_file|
+    inputs.push path_to_js_file
+  end
+  output = 'TravelHelper.min.js'
   system('juicer merge ' + inputs.join(' ') + ' --force -s -o ' + output)
 end
 
