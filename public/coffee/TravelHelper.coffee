@@ -48,13 +48,12 @@ window.TravelHelper = class TravelHelper
   createView: (screenScraper) ->
     passenger = screenScraper.passenger()
     flights   = screenScraper.flights()
-    view = 
+    view =
       passengerName:     passenger.name
       mobileNumber:      passenger.mobileNumber
       reservationNumber: passenger.reservationNumber
       flights:           flight.toJSON() for flight in flights
     view
-                
 
   run: () ->
     v = new VirginScraper()
@@ -76,5 +75,5 @@ window.TravelHelper = class TravelHelper
 
 
 th = new TravelHelper()
-th.run()
+($.ready(th.run()))
 ($ 'div.logoVirginBlue').hide()

@@ -76,6 +76,6 @@
     return TravelHelper;
   })();
   th = new TravelHelper();
-  th.run();
+  $.ready(th.run());
   ($('div.logoVirginBlue')).hide();
 }).call(this);
