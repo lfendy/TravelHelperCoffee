@@ -22,7 +22,7 @@
     Travel Itinerary For:\
     <br/>\
     <span id="passengerName"> {{passengerName}} </span>\
-    <span id="mobileNumber"> </span>\
+    <span id="mobileNumber"> {{mobileNumber}} </span>\
     <br/>\
     -----------------------------------------------------------------------\
     <div id="flights">\
