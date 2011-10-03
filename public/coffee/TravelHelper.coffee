@@ -75,5 +75,5 @@ window.TravelHelper = class TravelHelper
 
 
 th = new TravelHelper()
-($.ready(th.run()))
+($ document).ready(() -> th.run())
 ($ 'div.logoVirginBlue').hide()
