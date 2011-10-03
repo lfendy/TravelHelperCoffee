@@ -69,6 +69,12 @@ window.TravelHelper = class TravelHelper
       ($ 'span#mobileNumber').text '(' + ($ 'input#mobileNumber').val() + ')'
 
 
+
+
+
+# =========== Code for injecting the travel helper =============
+
+
 th = new TravelHelper()
 th.run()
 ($ 'div.logoVirginBlue').hide()

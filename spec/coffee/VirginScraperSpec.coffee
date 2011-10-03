@@ -74,13 +74,13 @@ Adult
         .replace('##ARRIVAL_TIME##',flight.arrivalTime)
         .replace('##ORIGIN##',flight.origin)
         .replace('##DESTINATION##',flight.destination)
-  
+
 htmlElementWithReservationNumber = (number) ->
   '<td class="reservationnumber">##NUMBER##
     <input id="reservationnumber" type="hidden" value="E1E95Y"></td>'.replace('##NUMBER##',number)
-  
+
 htmlElementWithPassengerName = (name) ->
-  '<td class="itineraryGuestBaggageNameColumn">##NAME##</td>'.replace('##NAME##', name)
+  '<td class="itineraryGuestBaggageGuestHeadingWithButton"><span float="left">Guest1: ##NAME##</span></td>'.replace('##NAME##', name)
 
 setupMobileNumber = (mobileNumber) ->
   injectElement htmlElementWithMobileNumber mobileNumber

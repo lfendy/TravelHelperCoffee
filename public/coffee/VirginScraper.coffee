@@ -3,14 +3,13 @@ window.Flight = class Flight
 
   toJSON: () ->
     departureDate: @departureDate
-    departureTime: @departureTime 
-    arrivalDate:   @arrivalDate 
-    arrivalTime:   @arrivalTime 
-    origin:        @origin 
-    destination:   @destination 
+    departureTime: @departureTime
+    arrivalDate:   @arrivalDate
+    arrivalTime:   @arrivalTime
+    origin:        @origin
+    destination:   @destination
     airline:       'Virgin Airlines'
-    flightNumber:  @flightNumber 
-      
+    flightNumber:  @flightNumber
 
 window.Passenger = class Passenger
   constructor: () ->
@@ -20,7 +19,8 @@ window.VirginScraper = class VirginScraper
   constructor: () ->
 
   passengerName: () ->
-    ($ 'td.itineraryGuestBaggageNameColumn').text()
+    ($ 'td.itineraryGuestBaggageGuestHeadingWithButton').text().replace('Guest1: ', '')
+
 
   mobileNumber: () ->
     ($ 'div#BookingConfirmationMain')
