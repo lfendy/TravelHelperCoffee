@@ -9,6 +9,7 @@ window.UITemplate = '
     <br/>
   </div>
 
+
   <div id="email">
     <h2>Itinerary</h2>
     <b>Flight Booking Reference: </b> {{reservationNumber}}
