@@ -19,7 +19,14 @@ window.VirginScraper = class VirginScraper
   constructor: () ->
 
   passengerName: () ->
-    ($ 'td.itineraryGuestBaggageGuestHeadingWithButton').text().replace('Guest1: ', '')
+    console.log('Im here')
+
+    ($ 'td.itineraryGuestBaggageGuestHeadingWithButton')
+      .find('span').eq(0)
+      .text().split(/\s+/)
+      .filter((word, index) -> index > 0)
+      .join(' ')
+
 
 
   mobileNumber: () ->

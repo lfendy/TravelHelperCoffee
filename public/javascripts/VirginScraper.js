@@ -23,7 +23,10 @@
   window.VirginScraper = VirginScraper = (function() {
     function VirginScraper() {}
     VirginScraper.prototype.passengerName = function() {
-      return ($('td.itineraryGuestBaggageGuestHeadingWithButton')).text().replace('Guest1: ', '');
+      console.log('Im here');
+      return ($('td.itineraryGuestBaggageGuestHeadingWithButton')).find('span').eq(0).text().split(/\s+/).filter(function(word, index) {
+        return index > 0;
+      }).join(' ');
     };
     VirginScraper.prototype.mobileNumber = function() {
       var _ref;

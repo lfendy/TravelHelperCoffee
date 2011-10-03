@@ -59,7 +59,7 @@ VIC\
                       <td class="flightContents"><span class="flightTimeTerminus">##ARRIVAL_TIME##</span> \
 ##DESTINATION##</td>\
                       <td class="flightFareContents">\
-                        <div>1 \
+                        <div>1\
 Adult\
 </div>\
                       </td>\
@@ -75,7 +75,10 @@ Adult\
     <input id="reservationnumber" type="hidden" value="E1E95Y"></td>'.replace('##NUMBER##', number);
   };
   htmlElementWithPassengerName = function(name) {
-    return '<td class="itineraryGuestBaggageGuestHeadingWithButton"><span float="left">Guest1: ##NAME##</span></td>'.replace('##NAME##', name);
+    return '<td class="itineraryGuestBaggageGuestHeadingWithButton"><span float="left">Guest1: \
+##NAME##</span>\
+<span class="alignRight"> VELOCITY REWARDS: xxxxx </span>\
+</td>'.replace('##NAME##', name);
   };
   setupMobileNumber = function(mobileNumber) {
     return injectElement(htmlElementWithMobileNumber(mobileNumber));
