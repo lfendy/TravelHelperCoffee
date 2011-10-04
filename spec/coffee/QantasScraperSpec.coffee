@@ -13,8 +13,6 @@ htmlElementWithPassengerName = (name) ->
 		</tbody>
 	</table>
   </div>'.replace('##NAME##', name)
-setupPassengerName = (name) -> injectElement htmlElementWithPassengerName name
-
 
 htmlElementWithMobileNumber = (number) ->
   '<div class="paxRecap" id="ContactDetails">
@@ -78,11 +76,22 @@ htmlElementWithMobileNumber = (number) ->
 		<br class="clear">
 	</div>
   </div>'.replace('##NUM##', number)
+
+htmlElementWithReservationNumber = (number) ->
+  '<div id="title">
+	<h1>Manage Your Booking</h1>
+	<h2>
+		Booking reference: <em class="">##NUM##</em>
+	</h2>
+</div>'.replace('##NUM##', number)
+
+
+setupPassengerName = (name) -> injectElement htmlElementWithPassengerName name
 setupMobileNumber = (number) -> injectElement htmlElementWithMobileNumber number
+setupReservationNumber = (number) -> injectElement htmlElementWithReservationNumber number
 
 
 describe "QantasScraper", ->
-  
   it "should scrape passenger name", ->
     setupPassengerName 'John Doe'
     q = new QantasScraper()
@@ -92,3 +101,9 @@ describe "QantasScraper", ->
     setupMobileNumber '+61-0430123456'
     q = new QantasScraper()
     (expect q.mobileNumber()).toEqual '+61-0430123456'
+
+  it "should scrape reservation number", ->
+    setupReservationNumber '6C82U6'
+    q = new QantasScraper()
+    (expect q.reservationNumber()).toEqual '6C82U6'
+

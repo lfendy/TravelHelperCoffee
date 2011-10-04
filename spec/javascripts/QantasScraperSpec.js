@@ -1,5 +1,5 @@
 (function() {
-  var htmlElementWithMobileNumber, htmlElementWithPassengerName, injectElement, setupMobileNumber, setupPassengerName;
+  var htmlElementWithMobileNumber, htmlElementWithPassengerName, htmlElementWithReservationNumber, injectElement, setupMobileNumber, setupPassengerName, setupReservationNumber;
   injectElement = function(element) {
     return jasmine.getFixtures().set(element);
   };
@@ -13,9 +13,6 @@
 		</tbody>\
 	</table>\
   </div>'.replace('##NAME##', name);
-  };
-  setupPassengerName = function(name) {
-    return injectElement(htmlElementWithPassengerName(name));
   };
   htmlElementWithMobileNumber = function(number) {
     return '<div class="paxRecap" id="ContactDetails">\
@@ -80,8 +77,22 @@
 	</div>\
   </div>'.replace('##NUM##', number);
   };
+  htmlElementWithReservationNumber = function(number) {
+    return '<div id="title">\
+	<h1>Manage Your Booking</h1>\
+	<h2>\
+		Booking reference: <em class="">##NUM##</em>\
+	</h2>\
+</div>'.replace('##NUM##', number);
+  };
+  setupPassengerName = function(name) {
+    return injectElement(htmlElementWithPassengerName(name));
+  };
   setupMobileNumber = function(number) {
     return injectElement(htmlElementWithMobileNumber(number));
+  };
+  setupReservationNumber = function(number) {
+    return injectElement(htmlElementWithReservationNumber(number));
   };
   describe("QantasScraper", function() {
     it("should scrape passenger name", function() {
@@ -90,11 +101,17 @@
       q = new QantasScraper();
       return (expect(q.passengerName())).toEqual('John Doe');
     });
-    return it("should scrape guest mobile number", function() {
+    it("should scrape guest mobile number", function() {
       var q;
       setupMobileNumber('+61-0430123456');
       q = new QantasScraper();
       return (expect(q.mobileNumber())).toEqual('+61-0430123456');
+    });
+    return it("should scrape reservation number", function() {
+      var q;
+      setupReservationNumber('6C82U6');
+      q = new QantasScraper();
+      return (expect(q.reservationNumber())).toEqual('6C82U6');
     });
   });
 }).call(this);

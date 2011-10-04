@@ -6,3 +6,6 @@ window.QantasScraper = class QantasScraper
 
   mobileNumber: () ->
     ($ "div#ContactDetails").find("table.pax-contact").find("tr").eq(5).find("td").eq(1).text()
+
+  reservationNumber: () ->
+    ($ "div#title").find("h2").text().trim().split(/\s+/).filter((word, index) -> index == 2).join('')
