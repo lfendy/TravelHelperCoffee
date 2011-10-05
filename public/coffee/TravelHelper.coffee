@@ -23,7 +23,8 @@ window.TravelHelper = class TravelHelper
       if s.isReady()
         readyScraper = s
 
-    if readyScraper?
+#checking for Null is not enough?
+    if readyScraper? and readyScraper.isReady()
       view = @createView readyScraper
       inputForm = Mustache.to_html(UITemplate, view);
       #inject ui
