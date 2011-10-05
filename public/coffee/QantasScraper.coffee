@@ -12,6 +12,23 @@ window.QantasScraper = class QantasScraper
 
   name: () ->
     "QantasScraper"
+  
+  makePrettyDate: (scrapedDate) ->
+    components = []
+    
+    if scrapedDate.indexOf('-') != -1 
+      components = scrapedDate.split('-')
+    else
+      components = scrapedDate.split(' ')   
+
+   
+    if components[2]? && components[2].length < 4
+      components[2] = '20' + components[2]
+
+    us_date = components[1] + '/' + components[0] + '/' + components[2]
+    date = new Date(Date.parse(us_date))
+    formattedDate = days[date.getDay()] + ' ' + date.getDate() + ' ' + months[date.getMonth()] + ' ' + date.getFullYear()
+    formattedDate
 
   passengerName: () ->
     ($ 'div#ContactDetails').find('td').eq(0).text()
@@ -36,6 +53,7 @@ window.QantasScraper = class QantasScraper
     f = new Flight()
     f.flightNumber  = ($ raw).find('span.flightnumber').text().trim()
     f.departureDate = ($ raw).find('td').eq(0).text().trim()
+    f.formattedDepartureDate = @makePrettyDate f.departureDate
     f.arrivalDate   = ($ raw).find('td').eq(0).text().trim()
     f.departureTime = ($ raw).find('td').eq(1).text().trim()
     f.arrivalTime   = ($ raw).find('td').eq(3).text().trim()

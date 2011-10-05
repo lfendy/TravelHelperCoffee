@@ -16,6 +16,22 @@
     QantasScraper.prototype.name = function() {
       return "QantasScraper";
     };
+    QantasScraper.prototype.makePrettyDate = function(scrapedDate) {
+      var components, date, formattedDate, us_date;
+      components = [];
+      if (scrapedDate.indexOf('-') !== -1) {
+        components = scrapedDate.split('-');
+      } else {
+        components = scrapedDate.split(' ');
+      }
+      if ((components[2] != null) && components[2].length < 4) {
+        components[2] = '20' + components[2];
+      }
+      us_date = components[1] + '/' + components[0] + '/' + components[2];
+      date = new Date(Date.parse(us_date));
+      formattedDate = days[date.getDay()] + ' ' + date.getDate() + ' ' + months[date.getMonth()] + ' ' + date.getFullYear();
+      return formattedDate;
+    };
     QantasScraper.prototype.passengerName = function() {
       return ($('div#ContactDetails')).find('td').eq(0).text();
     };
@@ -50,6 +66,7 @@
       f = new Flight();
       f.flightNumber = ($(raw)).find('span.flightnumber').text().trim();
       f.departureDate = ($(raw)).find('td').eq(0).text().trim();
+      f.formattedDepartureDate = this.makePrettyDate(f.departureDate);
       f.arrivalDate = ($(raw)).find('td').eq(0).text().trim();
       f.departureTime = ($(raw)).find('td').eq(1).text().trim();
       f.arrivalTime = ($(raw)).find('td').eq(3).text().trim();
