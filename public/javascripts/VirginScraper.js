@@ -17,7 +17,6 @@
       return "VirginScraper";
     };
     VirginScraper.prototype.passengerName = function() {
-      console.log('Im here');
       return ($('td.itineraryGuestBaggageGuestHeadingWithButton')).find('span').eq(0).text().split(/\s+/).filter(function(word, index) {
         return index > 0;
       }).join(' ');

@@ -14,8 +14,6 @@ window.VirginScraper = class VirginScraper
     "VirginScraper" 
 
   passengerName: () ->
-    console.log('Im here')
-
     ($ 'td.itineraryGuestBaggageGuestHeadingWithButton')
       .find('span').eq(0)
       .text().split(/\s+/)

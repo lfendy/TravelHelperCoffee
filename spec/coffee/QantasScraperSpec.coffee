@@ -94,11 +94,52 @@ htmlElementWithPageTitle = (title) ->
 		name="ENC"> <input type="hidden" value="1" name="ENCT">
 </form>'.replace('##TITLE##', title)
 
+htmlElementWithFlightDetails = (flight) ->
+  '<div id="YourFlights" class="flightsRecap">
+	<h2>
+		<a
+			href="http://www.qantas.com.au/travel/airlines/conditions-carriage/global/en"
+			target="_blank" class="h2link"> Terms And Conditions of Carriage
+		</a> Your Flights
+	</h2>
+	<div class="nobg">
+		<table cellspacing="0" id="cols_10" class="full">
+			<tbody>
+				<tr class="tr_first greyOn" id="idFlightOutFirst_col10">
+					<td>##FLIGHT_DATE##</td>
+					<td><strong>##DEPARTURE_TIME##</strong>
+					</td>
+					<td>##ORIGIN##</td>
+					<td><strong>##ARRIVAL_TIME##</strong>
+					</td>
+					<td>##DESTINATION##</td>
+					<td><a title="" class="logo"> <span class="wcaginfo">Qantas
+								flight</span> <img title="" alt="QF"
+							src="qf_v1.1_ui_cr4673263_13_230911/img/airlinesicons/QF.gif">
+							<span class="flightnumber">##FLIGHT_NUMBER##</span> </a></td>
+					<td class="aligncenter">3</td>
+					<td id="fareConditionFlightOutFirst">Flexi Saver</td>
+					<td class="checkin">30 minutes <br>before departure</td>
+					<td class="baggage">Included:<br> 1 piece<br
+						class="tweak">
+					</td>
+				</tr>
+			</tbody>
+		</table>
+	</div>
+</div>'.replace('##FLIGHT_DATE##',flight.departureDate)
+        .replace('##FLIGHT_NUMBER##',flight.flightNumber)
+        .replace('##DEPARTURE_TIME##',flight.departureTime)
+        .replace('##ARRIVAL_TIME##',flight.arrivalTime)
+        .replace('##ORIGIN##',flight.origin)
+        .replace('##DESTINATION##',flight.destination)
+
+
 setupWebpageTitle = (title) -> injectElement htmlElementWithPageTitle title
 setupPassengerName = (name) -> injectElement htmlElementWithPassengerName name
 setupMobileNumber = (number) -> injectElement htmlElementWithMobileNumber number
 setupReservationNumber = (number) -> injectElement htmlElementWithReservationNumber number
-
+setupFlightDetails = (flight) -> injectElement htmlElementWithFlightDetails flight
 
 describe "QantasScraper", ->
   it "should check whether scraper is ready for scraping", ->
@@ -121,3 +162,57 @@ describe "QantasScraper", ->
     q = new QantasScraper()
     (expect q.reservationNumber()).toEqual '6C82U6'
 
+  it "should populate scraped data to Passenger", ->
+    q = new QantasScraper()
+    p = q.passenger()
+    (expect p instanceof Passenger).toEqual true
+
+  describe "when parsing flight details", ->
+    beforeEach ->
+      flight = new Flight()
+      flight.flightNumber  = 'QF467'
+      flight.departureDate = '20/06/2011'
+      flight.arrivalDate   = '20/06/2011'
+      flight.departureTime = '6:00 AM'
+      flight.arrivalTime   = '7:30 AM'                                                                                                                                            
+      flight.origin        = 'Sydney'
+      flight.destination   = 'Brisbane'
+      setupFlightDetails flight
+      raw = ($ 'tr.tr_first')
+      q = new QantasScraper()
+      @flight = q.parseFlight raw
+
+    it "should return correct flight number", ->
+      (expect @flight.flightNumber).toEqual 'QF467'
+
+    it "should return correct departure date", ->
+      (expect @flight.departureDate).toEqual '20/06/2011'
+
+    it "should return correct arrival date", ->
+      (expect @flight.arrivalDate).toEqual '20/06/2011'
+
+    it "should return correct departure time", ->
+      (expect @flight.departureTime).toEqual '6:00 AM'
+
+    it "should return correct arrival time", ->
+      (expect @flight.arrivalTime).toEqual '7:30 AM'
+
+    it "should return correct origin", ->
+      (expect @flight.origin).toEqual 'Sydney'
+
+    it "should return correct destination", ->
+      (expect @flight.destination).toEqual 'Brisbane'
+
+  describe "for several flight details", ->
+    beforeEach ->
+      injectElement '<tr class="tr_first"><td></td><td></td></tr>
+                     <tr class="tr_first"><td></td><td></td></tr>'
+
+      q = new QantasScraper()
+      @flights = q.flights()
+
+    it "should scrape each 'passengerDetailsFrame' to flights", ->
+      (expect @flights.length).toEqual 2
+
+    it "should return Flight objects", ->
+      ((expect flight instanceof Flight).toEqual true) for flight in @flights 
