@@ -1,6 +1,13 @@
 window.QantasScraper = class QantasScraper
   constructor: () ->
 
+  isReady: () ->
+    index = ($ document).text().toLowerCase().indexOf("qantas") 
+    if index != -1
+      true
+    else
+      false
+
   passengerName: () ->
     ($ 'div#ContactDetails').find('td').eq(0).text()
 

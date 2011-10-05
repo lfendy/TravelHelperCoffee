@@ -2,6 +2,15 @@
   var QantasScraper;
   window.QantasScraper = QantasScraper = (function() {
     function QantasScraper() {}
+    QantasScraper.prototype.isReady = function() {
+      var index;
+      index = ($(document)).text().toLowerCase().indexOf("qantas");
+      if (index !== -1) {
+        return true;
+      } else {
+        return false;
+      }
+    };
     QantasScraper.prototype.passengerName = function() {
       return ($('div#ContactDetails')).find('td').eq(0).text();
     };

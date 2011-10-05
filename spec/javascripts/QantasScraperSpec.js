@@ -1,5 +1,5 @@
 (function() {
-  var htmlElementWithMobileNumber, htmlElementWithPassengerName, htmlElementWithReservationNumber, injectElement, setupMobileNumber, setupPassengerName, setupReservationNumber;
+  var htmlElementWithMobileNumber, htmlElementWithPageTitle, htmlElementWithPassengerName, htmlElementWithReservationNumber, injectElement, setupMobileNumber, setupPassengerName, setupReservationNumber, setupWebpageTitle;
   injectElement = function(element) {
     return jasmine.getFixtures().set(element);
   };
@@ -85,6 +85,18 @@
 	</h2>\
 </div>'.replace('##NUM##', number);
   };
+  htmlElementWithPageTitle = function(title) {
+    return '<form\
+	action="http://www.##TITLE##.com.au/travel/airlines/your-booking/global/en"\
+	method="post" name="NEW_CAR_SEARCH_FACADE_FORM">\
+	<input type="hidden"\
+		value="70765A6C4473A6DF2414480357459359035D99847FC46BF7277FF182F86F0168"\
+		name="ENC"> <input type="hidden" value="1" name="ENCT">\
+</form>'.replace('##TITLE##', title);
+  };
+  setupWebpageTitle = function(title) {
+    return injectElement(htmlElementWithPageTitle(title));
+  };
   setupPassengerName = function(name) {
     return injectElement(htmlElementWithPassengerName(name));
   };
@@ -95,6 +107,12 @@
     return injectElement(htmlElementWithReservationNumber(number));
   };
   describe("QantasScraper", function() {
+    it("should check whether scraper is ready for scraping", function() {
+      var q;
+      setupWebpageTitle('Qantas');
+      q = new QantasScraper();
+      return (expect(q.isReady())).toEqual(true);
+    });
     it("should scrape passenger name", function() {
       var q;
       setupPassengerName('John Doe');

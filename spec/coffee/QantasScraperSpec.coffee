@@ -85,13 +85,27 @@ htmlElementWithReservationNumber = (number) ->
 	</h2>
 </div>'.replace('##NUM##', number)
 
+htmlElementWithPageTitle = (title) ->
+  '<form
+	action="http://www.##TITLE##.com.au/travel/airlines/your-booking/global/en"
+	method="post" name="NEW_CAR_SEARCH_FACADE_FORM">
+	<input type="hidden"
+		value="70765A6C4473A6DF2414480357459359035D99847FC46BF7277FF182F86F0168"
+		name="ENC"> <input type="hidden" value="1" name="ENCT">
+</form>'.replace('##TITLE##', title)
 
+setupWebpageTitle = (title) -> injectElement htmlElementWithPageTitle title
 setupPassengerName = (name) -> injectElement htmlElementWithPassengerName name
 setupMobileNumber = (number) -> injectElement htmlElementWithMobileNumber number
 setupReservationNumber = (number) -> injectElement htmlElementWithReservationNumber number
 
 
 describe "QantasScraper", ->
+  it "should check whether scraper is ready for scraping", ->
+    setupWebpageTitle 'Qantas'
+    q = new QantasScraper()
+    (expect q.isReady()).toEqual true
+
   it "should scrape passenger name", ->
     setupPassengerName 'John Doe'
     q = new QantasScraper()
