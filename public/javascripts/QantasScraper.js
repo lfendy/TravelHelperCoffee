@@ -6,10 +6,15 @@
       var index;
       index = ($(document)).text().toLowerCase().indexOf("qantas");
       if (index !== -1) {
+        console.log('QantasScraper is ready for action');
         return true;
       } else {
+        console.log('Qantascraper is NOT ready for action, the target page is not Qantas');
         return false;
       }
+    };
+    QantasScraper.prototype.name = function() {
+      return "QantasScraper";
     };
     QantasScraper.prototype.passengerName = function() {
       return ($('div#ContactDetails')).find('td').eq(0).text();

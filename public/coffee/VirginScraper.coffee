@@ -4,9 +4,14 @@ window.VirginScraper = class VirginScraper
   isReady: () ->
     index = ($ document).text().toLowerCase().indexOf("virgin") 
     if index != -1
+      console.log('VirginScraper is ready for action')
       true
     else
+      console.log('VirginScraper is NOT ready for action, the target page is not Virgin')
       false
+
+  name: () ->
+    "VirginScraper" 
 
   passengerName: () ->
     console.log('Im here')
