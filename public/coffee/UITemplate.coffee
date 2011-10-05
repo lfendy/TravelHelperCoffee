@@ -27,5 +27,4 @@ window.UITemplate = '
       <br /><br />
     {{/flights}}
     </div>
-  </div>
-</div>'
+  </div>' + window.UIFooterTemplate + '</div>'
