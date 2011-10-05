@@ -22,10 +22,10 @@ window.TravelHelper = class TravelHelper
     for s in scrapers
       if s.isReady()
         readyScraper = s
-        console.log "found ready scraper: " + s.name()
+        console.log "TravelHelper:: Found ready scraper: " + s.name()
 
     if readyScraper?
-      console.log "TravelHelper - has scraper ready!"
+      console.log "TravelHelper:: " + readyScraper.name() + " is starting to scrape.."
       view = @createView readyScraper
       inputForm = Mustache.to_html(UITemplate, view);
       #inject ui
@@ -34,7 +34,7 @@ window.TravelHelper = class TravelHelper
       ($ 'input#mobileNumber').bind 'focusout', ->
       ($ 'span#mobileNumber').text '(' + ($ 'input#mobileNumber').val() + ')'
     else
-      console.log "TravelHelper - does not have scraper ready!"
+      console.log "TravelHelper:: Does not have scraper ready!"
       ($ 'body').prepend "<p><h1>Oops! Text scraper is not ready. Contact TW support!</h1></p>"
 
 

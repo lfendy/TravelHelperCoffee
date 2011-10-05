@@ -4,10 +4,10 @@ window.QantasScraper = class QantasScraper
   isReady: () ->
     index = ($ document).text().toLowerCase().indexOf("qantas") 
     if index != -1
-      console.log('QantasScraper is ready for action')
+      console.log('QantasScraper:: QantasScraper is ready for action')
       true
     else
-      console.log('Qantascraper is NOT ready for action, the target page is not Qantas')
+      console.log('QantasScraper:: Qantascraper is NOT ready for action, the target page is not Qantas')
       false
 
   name: () ->

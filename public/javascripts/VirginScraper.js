@@ -6,10 +6,10 @@
       var index;
       index = ($(document)).text().toLowerCase().indexOf("virgin");
       if (index !== -1) {
-        console.log('VirginScraper is ready for action');
+        console.log('VirginScraper:: VirginScraper is ready for action');
         return true;
       } else {
-        console.log('VirginScraper is NOT ready for action, the target page is not Virgin');
+        console.log('VirginScraper:: VirginScraper is NOT ready for action, the target page is not Virgin');
         return false;
       }
     };
