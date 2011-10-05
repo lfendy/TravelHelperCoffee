@@ -163,6 +163,11 @@
       q = new QantasScraper();
       return (expect(q.mobileNumber())).toEqual('+61-0430123456');
     });
+    it("should expand scraped date into a pretty looking format", function() {
+      var v;
+      v = new QantasScraper();
+      return (expect(v.makePrettyDate('Tue 04 Oct 11'))).toEqual('Tuesday 4 October 2011');
+    });
     it("should scrape reservation number", function() {
       var q;
       setupReservationNumber('6C82U6');

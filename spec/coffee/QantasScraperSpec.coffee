@@ -157,6 +157,10 @@ describe "QantasScraper", ->
     q = new QantasScraper()
     (expect q.mobileNumber()).toEqual '+61-0430123456'
 
+  it "should expand scraped date into a pretty looking format", ->
+    v = new QantasScraper()
+    (expect v.makePrettyDate('Tue 04 Oct 11')).toEqual 'Tuesday 4 October 2011'
+
   it "should scrape reservation number", ->
     setupReservationNumber '6C82U6'
     q = new QantasScraper()

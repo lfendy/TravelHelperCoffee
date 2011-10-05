@@ -22,10 +22,10 @@ window.QantasScraper = class QantasScraper
       components = scrapedDate.split(' ')   
 
    
-    if components[2]? && components[2].length < 4
-      components[2] = '20' + components[2]
+    if components[3]? && components[3].length < 4
+      components[3] = '20' + components[3]
 
-    us_date = components[1] + '/' + components[0] + '/' + components[2]
+    us_date = components[2] + '/' + components[0] + ' ' + components[1] +  '/' + components[3]
     date = new Date(Date.parse(us_date))
     formattedDate = days[date.getDay()] + ' ' + date.getDate() + ' ' + months[date.getMonth()] + ' ' + date.getFullYear()
     formattedDate
