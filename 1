@@ -17,17 +17,17 @@ window.VirginScraper = class VirginScraper
     components = []
     
     if scrapedDate.indexOf('-') != -1 
-      components = scrapedDate.split('-')
+      components = date.split('-')
     else
-      components = scrapedDate.split(' ')	
+      components = date.split(' ')	
 
    
     if components[2]? && components[2].length < 4
       components[2] = '20' + components[2]
 
     us_date = components[1] + '/' + components[0] + '/' + components[2]
-    date = new Date(Date.parse(us_date))
-    formattedDate = days[date.getDay()] + ' ' + date.getDate() + ' ' + months[date.getMonth()] + ' ' + date.getFullYear()
+    alert us_date
+
     formattedDate
 
   passengerName: () ->
@@ -50,7 +50,6 @@ window.VirginScraper = class VirginScraper
     f = new Flight()
     f.flightNumber  = ($ raw).find('td.flightContents').eq(0).text()
     f.departureDate = ($ raw).find('td.flightDate').text()
-    f.formattedDepartureDate = @makePrettyDate f.departureDate
     f.arrivalDate   = ($ raw).find('td.flightDate').text()
     f.departureTime = ($ raw).find('span.flightTimeTerminus').eq(0).text()
     f.arrivalTime   = ($ raw).find('span.flightTimeTerminus').eq(1).text()

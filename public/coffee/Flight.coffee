@@ -3,6 +3,7 @@ window.Flight = class Flight
 
   toJSON: () ->
     departureDate: @departureDate
+    formattedDepartureDate: @formattedDepartureDate
     departureTime: @departureTime
     arrivalDate:   @arrivalDate
     arrivalTime:   @arrivalTime

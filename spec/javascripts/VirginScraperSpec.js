@@ -120,6 +120,11 @@ Adult\
       v = new VirginScraper();
       return (expect(v.passengerName())).toEqual('JACK JOHNSON');
     });
+    it("should expand scraped date into a pretty looking format", function() {
+      var v;
+      v = new VirginScraper();
+      return (expect(v.makePrettyDate('Tue 04-Oct-11'))).toEqual('Tuesday 4 October 2011');
+    });
     it("should scrape guest mobile number", function() {
       var v;
       setupMobileNumber('+61-0430123456');

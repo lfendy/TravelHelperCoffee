@@ -16,6 +16,22 @@
     VirginScraper.prototype.name = function() {
       return "VirginScraper";
     };
+    VirginScraper.prototype.makePrettyDate = function(scrapedDate) {
+      var components, date, formattedDate, us_date;
+      components = [];
+      if (scrapedDate.indexOf('-') !== -1) {
+        components = scrapedDate.split('-');
+      } else {
+        components = scrapedDate.split(' ');
+      }
+      if ((components[2] != null) && components[2].length < 4) {
+        components[2] = '20' + components[2];
+      }
+      us_date = components[1] + '/' + components[0] + '/' + components[2];
+      date = new Date(Date.parse(us_date));
+      formattedDate = days[date.getDay()] + ' ' + date.getDate() + ' ' + months[date.getMonth()] + ' ' + date.getFullYear();
+      return formattedDate;
+    };
     VirginScraper.prototype.passengerName = function() {
       return ($('td.itineraryGuestBaggageGuestHeadingWithButton')).find('span').eq(0).text().split(/\s+/).filter(function(word, index) {
         return index > 0;
@@ -33,6 +49,7 @@
       f = new Flight();
       f.flightNumber = ($(raw)).find('td.flightContents').eq(0).text();
       f.departureDate = ($(raw)).find('td.flightDate').text();
+      f.formattedDepartureDate = this.makePrettyDate(f.departureDate);
       f.arrivalDate = ($(raw)).find('td.flightDate').text();
       f.departureTime = ($(raw)).find('span.flightTimeTerminus').eq(0).text();
       f.arrivalTime = ($(raw)).find('span.flightTimeTerminus').eq(1).text();

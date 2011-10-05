@@ -5,6 +5,7 @@
     Flight.prototype.toJSON = function() {
       return {
         departureDate: this.departureDate,
+        formattedDepartureDate: this.formattedDepartureDate,
         departureTime: this.departureTime,
         arrivalDate: this.arrivalDate,
         arrivalTime: this.arrivalTime,

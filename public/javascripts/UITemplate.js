@@ -7,23 +7,21 @@
     <h2>Contact Details for {{passengerName}}</h2>\
     <span class="formLabel">mobile:</span>\
     <input id="mobileNumber" value="{{mobileNumber}}" />\
-    <br />\
+    <br /><br />\
   </div>\
 \
   <div id="email">\
     <h2>Itinerary</h2>\
-    <b>Flight Booking Reference: </b> {{reservationNumber}}\
-    <br /><br />\
-    -----------------------------------------------------------------------\
+    <b>Flight Booking Reference: </b> {{reservationNumber}}<br />\
+    -----------------------------------------------------------------------<br /><br />\
     Travel Itinerary For:\
     <br/>\
     <span id="passengerName"> {{passengerName}} </span>\
-    <span id="mobileNumber"> {{mobileNumber}} </span>\
-    <br /><br />\
-    -----------------------------------------------------------------------\
+    <span id="mobileNumber"> {{mobileNumber}} </span><br />\
+    -----------------------------------------------------------------------<br /><br />\
     <div id="flights" style="">\
     {{#flights}}\
-      <b> Flight Time {{departureTime}} {{departureDate}} </b><br />\
+      <strong>Flight Time {{departureTime}} {{formattedDepartureDate}}</strong><br />\
       Flight No: {{airline}} {{flightNumber}}<br />\
       Depart: {{departureDate}} {{departureTime}} - {{origin}} Domestic Airport<br />\
       Arrive: {{arrivalDate}} {{arrivalTime}} - {{destination}} Domestic Airport\
