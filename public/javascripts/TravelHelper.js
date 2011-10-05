@@ -33,7 +33,7 @@
           readyScraper = s;
         }
       }
-      if ((readyScraper != null) && readyScraper.isReady()) {
+      if (readyScraper != null) {
         view = this.createView(readyScraper);
         inputForm = Mustache.to_html(UITemplate, view);
         ($('body')).prepend(inputForm);
