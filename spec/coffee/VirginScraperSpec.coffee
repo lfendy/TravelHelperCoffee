@@ -85,6 +85,21 @@ htmlElementWithPassengerName = (name) ->
 <span class="alignRight"> VELOCITY REWARDS: xxxxx </span>
 </td>'.replace('##NAME##', name)
 
+htmlElementWithPageTitle = (title) ->
+  '<div id="header">
+	<div xmlns:ms="urn:schemas-microsoft-com:xslt"
+		class="logo logoVirginBlue" style="display: none;">
+		<a href="http://www.virginaustralia.com/"><img
+			title="Virgin Australia homepage - go to Virgin Australia homepage"
+			alt="Virgin Australia homepage - go to Virgin Australia homepage"
+			src="/images/VirginBlue/virginblue_logo_44_6.png">
+		</a>
+	</div>
+</div>'.replace('##TITLE##', title)
+
+setupWebpageTitle = (title) ->
+  injectElement htmlElementWithPageTitle title
+
 setupMobileNumber = (mobileNumber) ->
   injectElement htmlElementWithMobileNumber mobileNumber
 
@@ -99,6 +114,12 @@ setupPassengerName = (name) ->
 
 
 describe "VirginScraper", ->
+
+  it "should check whether scraper is ready for scraping", ->
+    setupWebpageTitle 'Virgin Australia'
+    v = new VirginScraper()
+    (expect v.isReady()).toEqual true
+
 
   it "should scrape passenger name", ->
     setupPassengerName 'JACK JOHNSON'

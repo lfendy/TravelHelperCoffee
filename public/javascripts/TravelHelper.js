@@ -23,14 +23,25 @@
       return view;
     };
     TravelHelper.prototype.run = function() {
-      var inputForm, v, view;
-      v = new VirginScraper();
-      view = this.createView(v);
-      inputForm = Mustache.to_html(UITemplate, view);
-      ($('body')).prepend(inputForm);
-      return ($('input#mobileNumber')).bind('focusout', function() {
+      var inputForm, readyScraper, s, scrapers, view, _i, _len;
+      scrapers = [];
+      scrapers.push(new VirginScraper());
+      scrapers.push(new QantasScraper());
+      for (_i = 0, _len = scrapers.length; _i < _len; _i++) {
+        s = scrapers[_i];
+        if (s.isReady()) {
+          readyScraper = s;
+        }
+      }
+      if (readyScraper != null) {
+        view = this.createView(readyScraper);
+        inputForm = Mustache.to_html(UITemplate, view);
+        ($('body')).prepend(inputForm);
+        ($('input#mobileNumber')).bind('focusout', function() {});
         return ($('span#mobileNumber')).text('(' + ($('input#mobileNumber')).val() + ')');
-      });
+      } else {
+        return ($('body')).prepend("<p><h1>Oops! Text scraper is not ready. Contact TW support!</h1></p>");
+      }
     };
     return TravelHelper;
   })();

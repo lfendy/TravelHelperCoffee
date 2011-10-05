@@ -1,27 +1,16 @@
 (function() {
-  var Flight, Passenger, VirginScraper;
-  window.Flight = Flight = (function() {
-    function Flight() {}
-    Flight.prototype.toJSON = function() {
-      return {
-        departureDate: this.departureDate,
-        departureTime: this.departureTime,
-        arrivalDate: this.arrivalDate,
-        arrivalTime: this.arrivalTime,
-        origin: this.origin,
-        destination: this.destination,
-        airline: 'Virgin Airlines',
-        flightNumber: this.flightNumber
-      };
-    };
-    return Flight;
-  })();
-  window.Passenger = Passenger = (function() {
-    function Passenger() {}
-    return Passenger;
-  })();
+  var VirginScraper;
   window.VirginScraper = VirginScraper = (function() {
     function VirginScraper() {}
+    VirginScraper.prototype.isReady = function() {
+      var index;
+      index = ($(document)).text().toLowerCase().indexOf("virgin");
+      if (index !== -1) {
+        return true;
+      } else {
+        return false;
+      }
+    };
     VirginScraper.prototype.passengerName = function() {
       console.log('Im here');
       return ($('td.itineraryGuestBaggageGuestHeadingWithButton')).find('span').eq(0).text().split(/\s+/).filter(function(word, index) {
@@ -68,6 +57,18 @@
       p.mobileNumber = this.mobileNumber();
       p.reservationNumber = this.reservationNumber();
       return p;
+    };
+    VirginScraper.prototype.toJSON = function() {
+      return {
+        departureDate: this.departureDate,
+        departureTime: this.departureTime,
+        arrivalDate: this.arrivalDate,
+        arrivalTime: this.arrivalTime,
+        origin: this.origin,
+        destination: this.destination,
+        airline: 'Virgin Airlines',
+        flightNumber: this.flightNumber
+      };
     };
     return VirginScraper;
   })();

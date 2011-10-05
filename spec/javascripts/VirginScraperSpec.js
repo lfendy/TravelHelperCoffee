@@ -1,5 +1,5 @@
 (function() {
-  var htmlElementWithFlightDetails, htmlElementWithMobileNumber, htmlElementWithPassengerName, htmlElementWithReservationNumber, injectElement, setupFlightDetails, setupMobileNumber, setupPassengerName, setupReservationNumber;
+  var htmlElementWithFlightDetails, htmlElementWithMobileNumber, htmlElementWithPageTitle, htmlElementWithPassengerName, htmlElementWithReservationNumber, injectElement, setupFlightDetails, setupMobileNumber, setupPassengerName, setupReservationNumber, setupWebpageTitle;
   injectElement = function(element) {
     return jasmine.getFixtures().set(element);
   };
@@ -80,6 +80,21 @@ Adult\
 <span class="alignRight"> VELOCITY REWARDS: xxxxx </span>\
 </td>'.replace('##NAME##', name);
   };
+  htmlElementWithPageTitle = function(title) {
+    return '<div id="header">\
+	<div xmlns:ms="urn:schemas-microsoft-com:xslt"\
+		class="logo logoVirginBlue" style="display: none;">\
+		<a href="http://www.virginaustralia.com/"><img\
+			title="Virgin Australia homepage - go to Virgin Australia homepage"\
+			alt="Virgin Australia homepage - go to Virgin Australia homepage"\
+			src="/images/VirginBlue/virginblue_logo_44_6.png">\
+		</a>\
+	</div>\
+</div>'.replace('##TITLE##', title);
+  };
+  setupWebpageTitle = function(title) {
+    return injectElement(htmlElementWithPageTitle(title));
+  };
   setupMobileNumber = function(mobileNumber) {
     return injectElement(htmlElementWithMobileNumber(mobileNumber));
   };
@@ -93,6 +108,12 @@ Adult\
     return injectElement(htmlElementWithPassengerName(name));
   };
   describe("VirginScraper", function() {
+    it("should check whether scraper is ready for scraping", function() {
+      var v;
+      setupWebpageTitle('Virgin Australia');
+      v = new VirginScraper();
+      return (expect(v.isReady())).toEqual(true);
+    });
     it("should scrape passenger name", function() {
       var v;
       setupPassengerName('JACK JOHNSON');

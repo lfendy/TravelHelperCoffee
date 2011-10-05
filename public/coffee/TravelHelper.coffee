@@ -15,17 +15,24 @@ window.TravelHelper = class TravelHelper
     view
 
   run: () ->
-    v = new VirginScraper()
-    view = @createView v
-    inputForm = Mustache.to_html(UITemplate, view);
+    scrapers = []
+    scrapers.push new VirginScraper()
+    scrapers.push new QantasScraper()
 
-    #inject ui
-    ($ 'body').prepend inputForm
+    for s in scrapers
+      if s.isReady()
+        readyScraper = s
 
-    #bind listeners
-    ($ 'input#mobileNumber').bind 'focusout', ->
+    if readyScraper?
+      view = @createView readyScraper
+      inputForm = Mustache.to_html(UITemplate, view);
+      #inject ui
+      ($ 'body').prepend inputForm
+      #bind listeners
+      ($ 'input#mobileNumber').bind 'focusout', ->
       ($ 'span#mobileNumber').text '(' + ($ 'input#mobileNumber').val() + ')'
-
+    else
+      ($ 'body').prepend "<p><h1>Oops! Text scraper is not ready. Contact TW support!</h1></p>"
 
 
 

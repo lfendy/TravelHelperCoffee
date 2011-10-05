@@ -1,22 +1,12 @@
-window.Flight = class Flight
-  constructor: () ->
-
-  toJSON: () ->
-    departureDate: @departureDate
-    departureTime: @departureTime
-    arrivalDate:   @arrivalDate
-    arrivalTime:   @arrivalTime
-    origin:        @origin
-    destination:   @destination
-    airline:       'Virgin Airlines'
-    flightNumber:  @flightNumber
-
-window.Passenger = class Passenger
-  constructor: () ->
-
-
 window.VirginScraper = class VirginScraper
   constructor: () ->
+
+  isReady: () ->
+    index = ($ document).text().toLowerCase().indexOf("virgin") 
+    if index != -1
+      true
+    else
+      false
 
   passengerName: () ->
     console.log('Im here')
@@ -26,8 +16,6 @@ window.VirginScraper = class VirginScraper
       .text().split(/\s+/)
       .filter((word, index) -> index > 0)
       .join(' ')
-
-
 
   mobileNumber: () ->
     ($ 'div#BookingConfirmationMain')
@@ -64,5 +52,13 @@ window.VirginScraper = class VirginScraper
     p.reservationNumber = @reservationNumber()
     p
 
-
+  toJSON: () ->
+    departureDate: @departureDate
+    departureTime: @departureTime
+    arrivalDate:   @arrivalDate
+    arrivalTime:   @arrivalTime
+    origin:        @origin
+    destination:   @destination
+    airline:       'Virgin Airlines'
+    flightNumber:  @flightNumber 
 
