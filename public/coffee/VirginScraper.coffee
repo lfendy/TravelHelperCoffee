@@ -1,6 +1,8 @@
 window.VirginScraper = class VirginScraper
+  util = UtilScraper.get() 
+ 
   constructor: () ->
-
+ 
   isReady: () ->
     index = ($ document).text().toLowerCase().indexOf("virgin") 
     if index != -1
@@ -11,7 +13,21 @@ window.VirginScraper = class VirginScraper
       false
 
   name: () ->
-    "VirginScraper" 
+    "VirginScraper"
+
+  carGoogleSpreadsheetAjaxCallback: (cells) ->
+    i = 0
+    while i < cells.length
+      city = cells[i].content.$t
+      company = cells[i + 1].content.$t
+      contact = cells[i + 2].content.$t
+      phone = cells[i + 3].content.$t
+      console.log city + ' | ' + company + ' | ' + contact + ' | ' + phone
+      i = i + 4
+
+  getCarGoogleSpreadsheetAsJson: () ->
+    util.getGoogleSpreadsheetAsJson 'pgZYLtdPRv51beYTHUIrFWg', 'od6', this, @carGoogleSpreadsheetAjaxCallback
+    "Alex"
 
   makePrettyDate: (scrapedDate) ->
     components = []
@@ -72,4 +88,4 @@ window.VirginScraper = class VirginScraper
     p.mobileNumber      = @mobileNumber()
     p.reservationNumber = @reservationNumber()
     p
-
+util

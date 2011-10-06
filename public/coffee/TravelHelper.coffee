@@ -30,8 +30,12 @@ window.TravelHelper = class TravelHelper
       inputForm = Mustache.to_html(UITemplate, view);
       #inject ui
       ($ 'body').prepend inputForm
+
       #bind listeners
       ($ 'input#mobileNumber').bind 'focusout', ->
+      ($ 'span#mobileNumber').text '(' + ($ 'input#mobileNumber').val() + ')'
+
+      ($ 'input#mobileNumber').bind 'change', ->
       ($ 'span#mobileNumber').text '(' + ($ 'input#mobileNumber').val() + ')'
     else
       console.log "TravelHelper:: Does not have scraper ready!"

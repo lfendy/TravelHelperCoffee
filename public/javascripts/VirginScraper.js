@@ -1,6 +1,8 @@
 (function() {
   var VirginScraper;
   window.VirginScraper = VirginScraper = (function() {
+    var util;
+    util = UtilScraper.get();
     function VirginScraper() {}
     VirginScraper.prototype.isReady = function() {
       var index;
@@ -15,6 +17,24 @@
     };
     VirginScraper.prototype.name = function() {
       return "VirginScraper";
+    };
+    VirginScraper.prototype.carGoogleSpreadsheetAjaxCallback = function(cells) {
+      var city, company, contact, i, phone, _results;
+      i = 0;
+      _results = [];
+      while (i < cells.length) {
+        city = cells[i].content.$t;
+        company = cells[i + 1].content.$t;
+        contact = cells[i + 2].content.$t;
+        phone = cells[i + 3].content.$t;
+        console.log(city + ' | ' + company + ' | ' + contact + ' | ' + phone);
+        _results.push(i = i + 4);
+      }
+      return _results;
+    };
+    VirginScraper.prototype.getCarGoogleSpreadsheetAsJson = function() {
+      util.getGoogleSpreadsheetAsJson('pgZYLtdPRv51beYTHUIrFWg', 'od6', this, this.carGoogleSpreadsheetAjaxCallback);
+      return "Alex";
     };
     VirginScraper.prototype.makePrettyDate = function(scrapedDate) {
       var components, date, formattedDate, us_date;
@@ -81,4 +101,5 @@
     };
     return VirginScraper;
   })();
+  util;
 }).call(this);

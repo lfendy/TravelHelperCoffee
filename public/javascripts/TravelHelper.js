@@ -40,6 +40,8 @@
         inputForm = Mustache.to_html(UITemplate, view);
         ($('body')).prepend(inputForm);
         ($('input#mobileNumber')).bind('focusout', function() {});
+        ($('span#mobileNumber')).text('(' + ($('input#mobileNumber')).val() + ')');
+        ($('input#mobileNumber')).bind('change', function() {});
         return ($('span#mobileNumber')).text('(' + ($('input#mobileNumber')).val() + ')');
       } else {
         console.log("TravelHelper:: Does not have scraper ready!");
