@@ -108,11 +108,6 @@ Adult\
     return injectElement(htmlElementWithPassengerName(name));
   };
   describe("VirginScraper", function() {
-    it("should perform Ajax GET sanity check to Google spreadsheet for cars info", function() {
-      var v;
-      v = new VirginScraper();
-      return (expect(v.getCarGoogleSpreadsheetAsJson())).toEqual('Alex');
-    });
     it("should check whether scraper is ready for scraping", function() {
       var v;
       setupWebpageTitle('Virgin Australia');

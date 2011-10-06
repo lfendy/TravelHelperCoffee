@@ -1,5 +1,4 @@
 window.VirginScraper = class VirginScraper
-  util = UtilScraper.get()
   constructor: () -> 
 
   isReady: () ->
@@ -13,24 +12,6 @@ window.VirginScraper = class VirginScraper
 
   name: () ->
     "VirginScraper"
-
-  carGoogleSpreadsheetAjaxCallback: (cells) ->
-    cars = []
-    
-    i = 4
-    while i < cells.length
-      cars.push @parseCar cells, i
-      i = i + 4
-    console.log cars
-    view =
-      cars: cars     
-    util.injectHtml UICarTemplate, view, ($ "p#car-content")
-
-
-  getCarGoogleSpreadsheetAsJson: () ->
-    util.getGoogleSpreadsheetAsJson 'pgZYLtdPRv51beYTHUIrFWg', 'od6', this, @carGoogleSpreadsheetAjaxCallback
-    "Alex"
-
 
   makePrettyDate: (scrapedDate) ->
     components = []
@@ -81,18 +62,6 @@ window.VirginScraper = class VirginScraper
     f.destination   = destinationClone.text().trim()
     f
 
-  parseCar: (cells, i) ->
-    city = cells[i].content.$t
-    company = cells[i + 1].content.$t
-    contact = cells[i + 2].content.$t
-    phone = cells[i + 3].content.$t
-    c = new Car()
-    c.city = city
-    c.company = company
-    c.contact = contact
-    c.phone = phone
-    console.log city + ' | ' + company + ' | ' + contact + ' | ' + phone
-    c
 
   flights: () ->
     result = (@parseFlight raw) for raw in ($ 'div.passengerDetailsFrame')

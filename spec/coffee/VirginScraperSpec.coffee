@@ -115,10 +115,6 @@ setupPassengerName = (name) ->
 
 describe "VirginScraper", ->
 
-  it "should perform Ajax GET sanity check to Google spreadsheet for cars info", ->
-    v = new VirginScraper()
-    (expect v.getCarGoogleSpreadsheetAsJson()).toEqual 'Alex'
-
   it "should check whether scraper is ready for scraping", ->
     setupWebpageTitle 'Virgin Australia'
     v = new VirginScraper()

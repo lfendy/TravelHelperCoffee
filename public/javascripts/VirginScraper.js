@@ -1,8 +1,6 @@
 (function() {
   var VirginScraper;
   window.VirginScraper = VirginScraper = (function() {
-    var util;
-    util = UtilScraper.get();
     function VirginScraper() {}
     VirginScraper.prototype.isReady = function() {
       var index;
@@ -17,24 +15,6 @@
     };
     VirginScraper.prototype.name = function() {
       return "VirginScraper";
-    };
-    VirginScraper.prototype.carGoogleSpreadsheetAjaxCallback = function(cells) {
-      var cars, i, view;
-      cars = [];
-      i = 4;
-      while (i < cells.length) {
-        cars.push(this.parseCar(cells, i));
-        i = i + 4;
-      }
-      console.log(cars);
-      view = {
-        cars: cars
-      };
-      return util.injectHtml(UICarTemplate, view, $("p#car-content"));
-    };
-    VirginScraper.prototype.getCarGoogleSpreadsheetAsJson = function() {
-      util.getGoogleSpreadsheetAsJson('pgZYLtdPRv51beYTHUIrFWg', 'od6', this, this.carGoogleSpreadsheetAjaxCallback);
-      return "Alex";
     };
     VirginScraper.prototype.makePrettyDate = function(scrapedDate) {
       var components, date, formattedDate, us_date;
@@ -80,20 +60,6 @@
       f.origin = originClone.text().trim();
       f.destination = destinationClone.text().trim();
       return f;
-    };
-    VirginScraper.prototype.parseCar = function(cells, i) {
-      var c, city, company, contact, phone;
-      city = cells[i].content.$t;
-      company = cells[i + 1].content.$t;
-      contact = cells[i + 2].content.$t;
-      phone = cells[i + 3].content.$t;
-      c = new Car();
-      c.city = city;
-      c.company = company;
-      c.contact = contact;
-      c.phone = phone;
-      console.log(city + ' | ' + company + ' | ' + contact + ' | ' + phone);
-      return c;
     };
     VirginScraper.prototype.flights = function() {
       var raw, result, _i, _len, _ref, _results;

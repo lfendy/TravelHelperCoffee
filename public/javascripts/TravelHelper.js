@@ -6,7 +6,6 @@
       var flight, flights, passenger, view;
       passenger = screenScraper.passenger();
       flights = screenScraper.flights();
-      screenScraper.getCarGoogleSpreadsheetAsJson();
       view = {
         passengerName: passenger.name,
         mobileNumber: passenger.mobileNumber,
@@ -24,7 +23,7 @@
       return view;
     };
     TravelHelper.prototype.run = function() {
-      var readyScraper, s, scrapers, util, view, _i, _len;
+      var readyScraper, s, scrapers, view, _i, _len;
       scrapers = [];
       scrapers.push(new VirginScraper());
       scrapers.push(new QantasScraper());
@@ -38,8 +37,8 @@
       if (readyScraper != null) {
         console.log("TravelHelper:: " + readyScraper.name() + " is starting to scrape..");
         view = this.createView(readyScraper);
-        util = UtilScraper.get();
-        util.injectHtml(UITemplate, view, $("body"));
+        UtilScraper.get().injectHtml(UITemplate, view, $("body"));
+        this.getCarGoogleSpreadsheetAsJson();
         ($('input#mobileNumber')).bind('focusout', function() {});
         ($('span#mobileNumber')).text('(' + ($('input#mobileNumber')).val() + ')');
         ($('input#mobileNumber')).bind('change', function() {});
@@ -48,6 +47,38 @@
         console.log("TravelHelper:: Does not have scraper ready!");
         return ($('body')).prepend("<p><h1>Oops! Text scraper is not ready. Contact TW support!</h1></p>");
       }
+    };
+    TravelHelper.prototype.carGoogleSpreadsheetAjaxCallback = function(cells) {
+      var cars, i, view;
+      cars = [];
+      i = 4;
+      while (i < cells.length) {
+        cars.push(this.parseCar(cells, i));
+        i = i + 4;
+      }
+      console.log(cars);
+      view = {
+        cars: cars
+      };
+      return UtilScraper.get().injectHtml(UICarTemplate, view, $("p#car-content"));
+    };
+    TravelHelper.prototype.getCarGoogleSpreadsheetAsJson = function() {
+      UtilScraper.get().getGoogleSpreadsheetAsJson('pgZYLtdPRv51beYTHUIrFWg', 'od6', this, this.carGoogleSpreadsheetAjaxCallback);
+      return "Alex";
+    };
+    TravelHelper.prototype.parseCar = function(cells, i) {
+      var c, city, company, contact, phone;
+      city = cells[i].content.$t;
+      company = cells[i + 1].content.$t;
+      contact = cells[i + 2].content.$t;
+      phone = cells[i + 3].content.$t;
+      c = new Car();
+      c.city = city;
+      c.company = company;
+      c.contact = contact;
+      c.phone = phone;
+      console.log(city + ' | ' + company + ' | ' + contact + ' | ' + phone);
+      return c;
     };
     return TravelHelper;
   })();
