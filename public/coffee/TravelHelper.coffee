@@ -2,8 +2,6 @@
 
 
 window.TravelHelper = class TravelHelper
-  util = UtilScraper.get()
-
   constructor: () ->
 
   createView: (screenScraper) ->
@@ -18,6 +16,7 @@ window.TravelHelper = class TravelHelper
     view
 
   run: () ->
+    util = UtilScraper.get()
     scrapers = []
     scrapers.push new VirginScraper()
     scrapers.push new QantasScraper()

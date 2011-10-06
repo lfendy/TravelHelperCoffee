@@ -1,8 +1,6 @@
 (function() {
   var TravelHelper, th;
   window.TravelHelper = TravelHelper = (function() {
-    var util;
-    util = UtilScraper.get();
     function TravelHelper() {}
     TravelHelper.prototype.createView = function(screenScraper) {
       var flight, flights, passenger, view;
@@ -26,7 +24,8 @@
       return view;
     };
     TravelHelper.prototype.run = function() {
-      var readyScraper, s, scrapers, view, _i, _len;
+      var readyScraper, s, scrapers, util, view, _i, _len;
+      util = UtilScraper.get();
       scrapers = [];
       scrapers.push(new VirginScraper());
       scrapers.push(new QantasScraper());
