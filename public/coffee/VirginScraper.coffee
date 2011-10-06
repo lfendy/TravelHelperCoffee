@@ -27,7 +27,7 @@ window.VirginScraper = class VirginScraper
       console.log string
       carHtml = carHtml + string + '<br />'
       i = i + 4
-    ($ "div#car-placeholder").html carHtml
+    ($ "p#car-content").html carHtml
 
   getCarGoogleSpreadsheetAsJson: () ->
     util.getGoogleSpreadsheetAsJson 'pgZYLtdPRv51beYTHUIrFWg', 'od6', this, @carGoogleSpreadsheetAjaxCallback

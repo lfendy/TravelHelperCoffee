@@ -4,14 +4,14 @@
   <h1>Travel Planner</h1>\
 \
   <div id="contact">\
-    <h2>Contact Details for {{passengerName}}</h2>\
+    <h2 style="margin-left: 0 !important">Contact Details for {{passengerName}}</h2>\
     <span class="formLabel">mobile:</span>\
     <input id="mobileNumber" value="{{mobileNumber}}" />\
     <br /><br />\
   </div>\
 \
   <div id="email">\
-    <h2>Itinerary</h2>\
+    <h2 style="margin-left: 0 !important">Itinerary</h2>\
     <b>Flight Booking Reference: </b> {{reservationNumber}}<br />\
     -----------------------------------------------------------------------<br /><br />\
     Travel Itinerary For:\
@@ -29,6 +29,9 @@
     {{/flights}}\
     </div>\
     -----------------------------------------------------------------------<br /><br />\
-	<div id="car-placeholder">Waiting for Google to reposnd..</div>\
+	<div id="car-placeholder">\
+	<h2 style="margin-left: 0 !important">Car Information</h2>\
+		<p id="car-content">Waiting for Google to respond..</p>\
+	</div>\
   </div>' + window.UIFooterTemplate + '</div>';
 }).call(this);

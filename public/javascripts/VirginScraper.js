@@ -32,7 +32,7 @@
         carHtml = carHtml + string + '<br />';
         i = i + 4;
       }
-      return ($("div#car-placeholder")).html(carHtml);
+      return ($("p#car-content")).html(carHtml);
     };
     VirginScraper.prototype.getCarGoogleSpreadsheetAsJson = function() {
       util.getGoogleSpreadsheetAsJson('pgZYLtdPRv51beYTHUIrFWg', 'od6', this, this.carGoogleSpreadsheetAjaxCallback);
