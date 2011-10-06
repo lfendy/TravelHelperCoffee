@@ -88,4 +88,3 @@ window.VirginScraper = class VirginScraper
     p.mobileNumber      = @mobileNumber()
     p.reservationNumber = @reservationNumber()
     p
-util

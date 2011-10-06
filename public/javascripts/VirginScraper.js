@@ -101,5 +101,4 @@
     };
     return VirginScraper;
   })();
-  util;
 }).call(this);
