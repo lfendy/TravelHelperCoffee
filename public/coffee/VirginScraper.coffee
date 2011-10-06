@@ -1,8 +1,7 @@
 window.VirginScraper = class VirginScraper
-  util = UtilScraper.get() 
- 
-  constructor: () ->
- 
+  util = UtilScraper.get()
+  constructor: () -> 
+
   isReady: () ->
     index = ($ document).text().toLowerCase().indexOf("virgin") 
     if index != -1

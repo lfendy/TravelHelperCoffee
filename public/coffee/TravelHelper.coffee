@@ -16,7 +16,6 @@ window.TravelHelper = class TravelHelper
     view
 
   run: () ->
-    util = UtilScraper.get()
     scrapers = []
     scrapers.push new VirginScraper()
     scrapers.push new QantasScraper()
@@ -30,6 +29,7 @@ window.TravelHelper = class TravelHelper
       console.log "TravelHelper:: " + readyScraper.name() + " is starting to scrape.."
       view = @createView readyScraper
       #inject ui
+      util = UtilScraper.get()
       util.injectHtml UITemplate, view, ($ "body")
 
       #bind listeners

@@ -25,7 +25,6 @@
     };
     TravelHelper.prototype.run = function() {
       var readyScraper, s, scrapers, util, view, _i, _len;
-      util = UtilScraper.get();
       scrapers = [];
       scrapers.push(new VirginScraper());
       scrapers.push(new QantasScraper());
@@ -39,6 +38,7 @@
       if (readyScraper != null) {
         console.log("TravelHelper:: " + readyScraper.name() + " is starting to scrape..");
         view = this.createView(readyScraper);
+        util = UtilScraper.get();
         util.injectHtml(UITemplate, view, $("body"));
         ($('input#mobileNumber')).bind('focusout', function() {});
         ($('span#mobileNumber')).text('(' + ($('input#mobileNumber')).val() + ')');
