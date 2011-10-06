@@ -1,6 +1,8 @@
 (function() {
   var TravelHelper, th;
   window.TravelHelper = TravelHelper = (function() {
+    var util;
+    util = UtilScraper.get();
     function TravelHelper() {}
     TravelHelper.prototype.createView = function(screenScraper) {
       var flight, flights, passenger, view;
@@ -24,7 +26,7 @@
       return view;
     };
     TravelHelper.prototype.run = function() {
-      var inputForm, readyScraper, s, scrapers, view, _i, _len;
+      var readyScraper, s, scrapers, view, _i, _len;
       scrapers = [];
       scrapers.push(new VirginScraper());
       scrapers.push(new QantasScraper());
@@ -38,8 +40,7 @@
       if (readyScraper != null) {
         console.log("TravelHelper:: " + readyScraper.name() + " is starting to scrape..");
         view = this.createView(readyScraper);
-        inputForm = Mustache.to_html(UITemplate, view);
-        ($('body')).prepend(inputForm);
+        util.injectHtml(UITemplate, view, $("body"));
         ($('input#mobileNumber')).bind('focusout', function() {});
         ($('span#mobileNumber')).text('(' + ($('input#mobileNumber')).val() + ')');
         ($('input#mobileNumber')).bind('change', function() {});

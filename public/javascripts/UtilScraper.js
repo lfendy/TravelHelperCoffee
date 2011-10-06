@@ -28,6 +28,11 @@
         return callback.call(target, json.feed.entry);
       });
     };
+    UtilScraper.prototype.injectHtml = function(uiTemplate, view, htmlElement) {
+      var inputForm;
+      inputForm = Mustache.to_html(uiTemplate, view);
+      return htmlElement.prepend(inputForm);
+    };
     return UtilScraper;
   })();
 }).call(this);

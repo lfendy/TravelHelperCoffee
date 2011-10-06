@@ -2,6 +2,8 @@
 
 
 window.TravelHelper = class TravelHelper
+  util = UtilScraper.get()
+
   constructor: () ->
 
   createView: (screenScraper) ->
@@ -28,9 +30,8 @@ window.TravelHelper = class TravelHelper
     if readyScraper?
       console.log "TravelHelper:: " + readyScraper.name() + " is starting to scrape.."
       view = @createView readyScraper
-      inputForm = Mustache.to_html(UITemplate, view);
       #inject ui
-      ($ 'body').prepend inputForm
+      util.injectHtml UITemplate, view, ($ "body")
 
       #bind listeners
       ($ 'input#mobileNumber').bind 'focusout', ->
