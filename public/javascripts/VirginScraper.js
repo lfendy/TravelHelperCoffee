@@ -19,20 +19,32 @@
       return "VirginScraper";
     };
     VirginScraper.prototype.carGoogleSpreadsheetAjaxCallback = function(cells) {
-      var carHtml, city, company, contact, i, phone, string;
+      var c, carHtml, cars, city, company, contact, i, inputForm, phone, string, view;
       carHtml = "";
-      i = 0;
+      cars = [];
+      i = 4;
       while (i < cells.length) {
         city = cells[i].content.$t;
         company = cells[i + 1].content.$t;
         contact = cells[i + 2].content.$t;
         phone = cells[i + 3].content.$t;
+        c = new Car();
+        c.city = city;
+        c.company = company;
+        c.contact = contact;
+        c.phone = phone;
+        cars.push(c);
         string = city + ' | ' + company + ' | ' + contact + ' | ' + phone;
         console.log(string);
         carHtml = carHtml + string + '<br />';
         i = i + 4;
       }
-      return ($("p#car-content")).html(carHtml);
+      console.log(cars);
+      view = {
+        cars: cars
+      };
+      inputForm = Mustache.to_html(UICarTemplate, view);
+      return ($("p#car-content")).html(inputForm);
     };
     VirginScraper.prototype.getCarGoogleSpreadsheetAsJson = function() {
       util.getGoogleSpreadsheetAsJson('pgZYLtdPRv51beYTHUIrFWg', 'od6', this, this.carGoogleSpreadsheetAjaxCallback);

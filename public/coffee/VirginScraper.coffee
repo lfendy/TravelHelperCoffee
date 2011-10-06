@@ -17,17 +17,31 @@ window.VirginScraper = class VirginScraper
 
   carGoogleSpreadsheetAjaxCallback: (cells) ->
     carHtml = ""
-    i = 0
+    cars = []
+    
+    i = 4
     while i < cells.length
       city = cells[i].content.$t
       company = cells[i + 1].content.$t
       contact = cells[i + 2].content.$t
       phone = cells[i + 3].content.$t
+      
+      c = new Car()
+      c.city = city
+      c.company = company
+      c.contact = contact
+      c.phone = phone
+      cars.push c
+
       string = city + ' | ' + company + ' | ' + contact + ' | ' + phone
       console.log string
       carHtml = carHtml + string + '<br />'
       i = i + 4
-    ($ "p#car-content").html carHtml
+    console.log cars
+    view =
+      cars: cars 
+    inputForm = Mustache.to_html(UICarTemplate, view);
+    ($ "p#car-content").html inputForm
 
   getCarGoogleSpreadsheetAsJson: () ->
     util.getGoogleSpreadsheetAsJson 'pgZYLtdPRv51beYTHUIrFWg', 'od6', this, @carGoogleSpreadsheetAjaxCallback
@@ -84,7 +98,6 @@ window.VirginScraper = class VirginScraper
 
   flights: () ->
     result = (@parseFlight raw) for raw in ($ 'div.passengerDetailsFrame')
-
 
   passenger: () ->
     p = new Passenger()
