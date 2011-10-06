@@ -16,14 +16,18 @@ window.VirginScraper = class VirginScraper
     "VirginScraper"
 
   carGoogleSpreadsheetAjaxCallback: (cells) ->
+    carHtml = ""
     i = 0
     while i < cells.length
       city = cells[i].content.$t
       company = cells[i + 1].content.$t
       contact = cells[i + 2].content.$t
       phone = cells[i + 3].content.$t
-      console.log city + ' | ' + company + ' | ' + contact + ' | ' + phone
+      string = city + ' | ' + company + ' | ' + contact + ' | ' + phone
+      console.log string
+      carHtml = carHtml + string + '<br />'
       i = i + 4
+    ($ "div#car-placeholder").html carHtml
 
   getCarGoogleSpreadsheetAsJson: () ->
     util.getGoogleSpreadsheetAsJson 'pgZYLtdPRv51beYTHUIrFWg', 'od6', this, @carGoogleSpreadsheetAjaxCallback

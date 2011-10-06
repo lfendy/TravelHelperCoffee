@@ -7,6 +7,7 @@ window.TravelHelper = class TravelHelper
   createView: (screenScraper) ->
     passenger = screenScraper.passenger()
     flights   = screenScraper.flights()
+    screenScraper.getCarGoogleSpreadsheetAsJson()
     view =
       passengerName:     passenger.name
       mobileNumber:      passenger.mobileNumber

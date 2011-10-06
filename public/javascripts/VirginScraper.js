@@ -19,18 +19,20 @@
       return "VirginScraper";
     };
     VirginScraper.prototype.carGoogleSpreadsheetAjaxCallback = function(cells) {
-      var city, company, contact, i, phone, _results;
+      var carHtml, city, company, contact, i, phone, string;
+      carHtml = "";
       i = 0;
-      _results = [];
       while (i < cells.length) {
         city = cells[i].content.$t;
         company = cells[i + 1].content.$t;
         contact = cells[i + 2].content.$t;
         phone = cells[i + 3].content.$t;
-        console.log(city + ' | ' + company + ' | ' + contact + ' | ' + phone);
-        _results.push(i = i + 4);
+        string = city + ' | ' + company + ' | ' + contact + ' | ' + phone;
+        console.log(string);
+        carHtml = carHtml + string + '<br />';
+        i = i + 4;
       }
-      return _results;
+      return ($("div#car-placeholder")).html(carHtml);
     };
     VirginScraper.prototype.getCarGoogleSpreadsheetAsJson = function() {
       util.getGoogleSpreadsheetAsJson('pgZYLtdPRv51beYTHUIrFWg', 'od6', this, this.carGoogleSpreadsheetAjaxCallback);

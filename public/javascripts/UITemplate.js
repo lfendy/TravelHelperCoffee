@@ -28,5 +28,7 @@
       <br /><br />\
     {{/flights}}\
     </div>\
+    -----------------------------------------------------------------------<br /><br />\
+	<div id="car-placeholder">Waiting for Google to reposnd..</div>\
   </div>' + window.UIFooterTemplate + '</div>';
 }).call(this);
