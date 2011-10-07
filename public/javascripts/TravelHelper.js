@@ -23,7 +23,7 @@
       return view;
     };
     TravelHelper.prototype.run = function() {
-      var fetcher, flight, idx, readyFlights, readyScraper, s, scrapers, view, _i, _len, _results;
+      var fetcher, readyScraper, s, scrapers, view, _i, _len;
       scrapers = [];
       scrapers.push(new VirginScraper());
       scrapers.push(new QantasScraper());
@@ -43,30 +43,9 @@
         ($('input#mobileNumber')).bind('focusout', function() {
           return ($('span#mobileNumber')).text('(' + ($('input#mobileNumber')).val() + ')');
         });
-        ($('input#mobileNumber')).change(function() {
+        return ($('input#mobileNumber')).change(function() {
           return ($('span#mobileNumber')).text('(' + ($('input#mobileNumber')).val() + ')');
         });
-        ($("input#arrive-before")).change(function() {
-          return alert("arrive before called");
-        });
-        readyFlights = readyScraper.flights();
-        idx = 0;
-        _results = [];
-        while (idx < readyFlights.length) {
-          flight = readyFlights[idx];
-          console.log("pickup-address-to-" + flight.origin + "-airport-" + flight.flightNumberNoWS);
-          ($("input#pickup-address-to-" + flight.origin + "-airport-" + flight.flightNumberNoWS)).change(function() {
-            return alert("pickup-address-to-" + flight.origin + "-airport-" + flight.flightNumberNoWS + " called");
-          });
-          ($("input#car-traveltime-to-" + flight.origin + "-airport-" + flight.flightNumberNoWS)).change(function() {
-            return alert("car-traveltime-to-" + flight.origin + "-airport-" + flight.flightNumberNoWS + " called");
-          });
-          ($("input#destination-address-from-" + flight.destination + "-airport-" + flight.flightNumberNoWS)).change(function() {
-            return alert("destination-address-from-" + flight.destination + "-airport-" + flight.flightNumberNoWS + " called");
-          });
-          _results.push(idx = idx + 1);
-        }
-        return _results;
       } else {
         console.log("TravelHelper:: Does not have scraper ready!");
         return ($('body')).prepend("<p><br /><br /><h1 style='color: red !important; padding: 15px;'>Oops! Text scraper is not ready. Contact TW support!</h1></p>");

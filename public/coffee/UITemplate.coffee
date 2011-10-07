@@ -16,16 +16,16 @@ window.UITemplate = '
 		{{#flights}}
     	<tr>
 			<td>to <b>{{origin}} Domestic Airport</b> from</td>
-			<td><input id="pickup-address-to-{{origin}}-airport-{{flightNumberNoWS}}" type="text" size="35" /></td>
-			<td>will take <input id="car-traveltime-to-{{origin}}-airport-{{flightNumberNoWS}}" type="text" size="5" /> minutes</td>
+			<td><input onchange="return UtilScraper.get().handleChange(this.id)" id="pickup-address-to-{{origin}}-airport-{{flightNumberNoWS}}" type="text" size="35" /></td>
+			<td>will take <input onchange="return UtilScraper.get().handleChange(this.id)" id="car-traveltime-to-{{origin}}-airport-{{flightNumberNoWS}}" type="text" size="5" /> minutes</td>
 		</tr>
         <tr>
             <td>from <b>{{destination}} Domestic Airport</b> to</td>
-            <td colspan="2"><input id="destination-address-from-{{destination}}-airport-{{flightNumberNoWS}}" type="text" size="35" /></td>
+            <td colspan="2"><input onchange="return UtilScraper.get().handleChange(this.id)" id="destination-address-from-{{destination}}-airport-{{flightNumberNoWS}}" type="text" size="35" /></td>
         </tr>
 		{{/flights}}
 		<tr>
-            <td colspan="3">All cars before flight should arrive <input id="arrive-before" type="text" size="5" /> minutes early to airports</td>
+            <td colspan="3">All cars before flight should arrive <input onchange="return UtilScraper.get().handleChange(this.id)" id="arrive-before" type="text" size="5" /> minutes early to airports</td>
         </tr>
 	</table>
 

@@ -20,6 +20,8 @@ window.UtilScraper = class UtilScraper
         json = jQuery.parseJSON jsonString
         callback.call target, json.feed.entry
 
+  handleChange: (elementId) ->
+    alert elementId
 
   injectHtml: (uiTemplate, view, htmlElement) ->
     inputForm = Mustache.to_html uiTemplate, view
