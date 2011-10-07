@@ -16,12 +16,12 @@ window.UITemplate = '
 		{{#flights}}
     	<tr>
 			<td>to <b>{{origin}} Domestic Airport</b> from</td>
-			<td><input onchange="return UtilScraper.get().handleChange(this.id)" id="pickup-address-to-{{origin}}-airport-{{flightNumberNoWS}}" type="text" size="35" /></td>
-			<td>will take <input onchange="return UtilScraper.get().handleChange(this.id)" id="car-traveltime-to-{{origin}}-airport-{{flightNumberNoWS}}" type="text" size="5" /> minutes</td>
+			<td><input onchange="return UtilScraper.get().handleChange(this.id, "{{departureTime}}", null)" id="pickup-address-to-{{origin}}-airport-{{flightNumberNoWS}}" type="text" size="35" /></td>
+			<td>will take <input onchange="return UtilScraper.get().handleChange(this.id, "{{departureTime}}", this.value)" id="car-traveltime-to-{{origin}}-airport-{{flightNumberNoWS}}" type="text" size="5" /> minutes</td>
 		</tr>
         <tr>
             <td>from <b>{{destination}} Domestic Airport</b> to</td>
-            <td colspan="2"><input onchange="return UtilScraper.get().handleChange(this.id)" id="destination-address-from-{{destination}}-airport-{{flightNumberNoWS}}" type="text" size="35" /></td>
+            <td colspan="2"><input onchange="return UtilScraper.get().handleChange(this.id, "{{departureTime}}", null)" id="destination-address-from-{{destination}}-airport-{{flightNumberNoWS}}" type="text" size="35" /></td>
         </tr>
 		{{/flights}}
 		<tr>
@@ -47,14 +47,14 @@ window.UITemplate = '
     <div id="flights" style="">
     {{#flights}}
       
-	  <div id="car-pickup-info-when-going-{{flightNumber}}"></div>
+	  <div id="pickup-to-{{origin}}-airport-{{flightNumberNoWS}}"></div>
       
 	  <strong>Flight Time {{departureTime}} {{formattedDepartureDate}}</strong><br />
       Flight No: {{airline}} {{flightNumber}}<br />
       Depart: {{departureDate}} {{departureTime}} - {{origin}} Domestic Airport<br />
       Arrive: {{arrivalDate}} {{arrivalTime}} - {{destination}} Domestic Airport
 	  
- 	  <div id="car-pickup-info-when-arrived-{{flightNumber}}"></div>
+ 	  <div id="pickup-address-from-{{destination}}-airport-{{flightNumberNoWS}}"></div>
       
 	  <br /><br />
       

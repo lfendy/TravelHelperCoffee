@@ -28,8 +28,8 @@
         return callback.call(target, json.feed.entry);
       });
     };
-    UtilScraper.prototype.handleChange = function(elementId) {
-      return alert(elementId);
+    UtilScraper.prototype.handleChange = function(elementId, departureTime, travelTime) {
+      return alert(elementId, departureTime, travelTime);
     };
     UtilScraper.prototype.injectHtml = function(uiTemplate, view, htmlElement) {
       var inputForm;
