@@ -63,17 +63,5 @@
 	{{/flights}}\
     </div>\
     -----------------------------------------------------------------------<br /><br />\
-  </div>' + window.UIFooterTemplate + '</div>\
-<br />\
-<script type="text/javascript">\
-{{#flights}}\
-$("#pickup-address-from-when-going-{{flightNumber}}").change(function() {\
-    alert("pickup-address-from-when-going-{{flightNumber}} called");\
-});\
-\
-$("#pickup-address-from-when-getting-back-{{flightNumber}}").change(function() {\
-    alert("pickup-address-from-when-getting-back-{{flightNumber}} called");\
-});\
-{{/flights}}\
-</script>';
+  </div>' + window.UIFooterTemplate + '</div>';
 }).call(this);

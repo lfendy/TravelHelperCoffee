@@ -59,6 +59,9 @@
       destinationClone.find('span.flightTimeTerminus').remove();
       f.origin = originClone.text().trim();
       f.destination = destinationClone.text().trim();
+      ($("#pickup-address-from-when-going-" + f.flightNumber)).change(function() {
+        return alert("pickup-address-from-when-going-" + f.flightNumber + " called");
+      });
       return f;
     };
     VirginScraper.prototype.flights = function() {
