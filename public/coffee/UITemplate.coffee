@@ -62,10 +62,8 @@ window.UITemplate = '
 	{{/flights}}
     </div>
     -----------------------------------------------------------------------<br /><br />
-  </div>' + window.UIFooterTemplate + '</div>'
-
-
-window.CarEvents = '                                                                                                                                                              
+  </div>' + window.UIFooterTemplate + '</div>
+<br />
 <script type="text/javascript">
 {{#flights}}
 $("#pickup-address-from-when-going-{{flightNumber}}").change(function() {
