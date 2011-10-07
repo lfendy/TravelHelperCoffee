@@ -60,10 +60,6 @@ window.VirginScraper = class VirginScraper
     destinationClone.find('span.flightTimeTerminus').remove()
     f.origin        = originClone.text().trim()
     f.destination   = destinationClone.text().trim()
-
-    ($ "#pickup-address-from-when-going-" + f.origin).change ->
-      alert "pickup-address-from-when-going-" + f.origin + " called"
-
     f
 
 

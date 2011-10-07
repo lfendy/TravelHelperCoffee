@@ -23,7 +23,7 @@
       return view;
     };
     TravelHelper.prototype.run = function() {
-      var fetcher, readyScraper, s, scrapers, view, _i, _len;
+      var fetcher, flight, readyScraper, s, scrapers, view, _i, _j, _len, _len2, _ref;
       scrapers = [];
       scrapers.push(new VirginScraper());
       scrapers.push(new QantasScraper());
@@ -42,8 +42,21 @@
         fetcher.getCarGoogleSpreadsheetAsJson();
         ($('input#mobileNumber')).bind('focusout', function() {});
         ($('span#mobileNumber')).text('(' + ($('input#mobileNumber')).val() + ')');
-        ($('input#mobileNumber')).bind('change', function() {});
-        return ($('span#mobileNumber')).text('(' + ($('input#mobileNumber')).val() + ')');
+        ($('input#mobileNumber')).bind('onchange', function() {});
+        ($('span#mobileNumber')).text('(' + ($('input#mobileNumber')).val() + ')');
+        _ref = readyScraper.flights();
+        for (_j = 0, _len2 = _ref.length; _j < _len2; _j++) {
+          flight = _ref[_j];
+          ($("input#pickup-address-from-when-going-" + flight.origin)).change(function() {
+            return alert("looped pickup-address-from-when-going-" + flight.origin + " called");
+          });
+        }
+        ($("input#pickup-address-from-when-going-Sydney")).change(function() {
+          return alert("default pickup-address-from-when-going-Sydney called");
+        });
+        return ($("input#pickup-address-from-when-going-Sydney")).bind('onchange', function() {
+          return alert("binded pickup-address-from-when-going-Sydney called");
+        });
       } else {
         console.log("TravelHelper:: Does not have scraper ready!");
         return ($('body')).prepend("<p><br /><br /><h1 style='color: red !important; padding: 15px;'>Oops! Text scraper is not ready. Contact TW support!</h1></p>");
