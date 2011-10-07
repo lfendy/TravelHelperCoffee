@@ -31,13 +31,13 @@ window.UtilScraper = class UtilScraper
     formattedDate
 
   handleOnChange: (direction, flightNumber) ->
-    fromAddress = ($ direction + "-" + flightNumber).val()
+    fromAddress = ($ "input#" + direction + "-" + flightNumber).val()
     targetAirport = ($ "input#" + direction + "-airport-" + flightNumber).val()
     targetDatetime = ($ "input#" + direction + "-datetime-" + flightNumber).val()
     targetCarTravelTime = ($ "origin-cartraveltime-" + flightNumber).val()
     targetDiv = "div#" + direction + "-travelinfo-" + flightNumber
     #alert "targetCarTravelTime: " + targetCarTravelTime + ", targetAirport: " + targetAirport + ", targetDatetime: " + targetDatetime + ", targetDiv: " + targetDiv
-    ($ targetDiv).html "<h3>To " + targetAirport + " on " + targetDatetime + "</h3><br />From: " + fromAddress
+    ($ targetDiv).html "<strong>To " + targetAirport + " on " + targetDatetime + "</strong><br />From: " + fromAddress + "<br /><br />"
 
 
   injectHtml: (uiTemplate, view, htmlElement) ->
