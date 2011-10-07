@@ -33,21 +33,24 @@ window.TravelHelper = class TravelHelper
       
       #bind listeners
       ($ 'input#mobileNumber').bind 'focusout', ->
-      ($ 'span#mobileNumber').text '(' + ($ 'input#mobileNumber').val() + ')'
+        ($ 'span#mobileNumber').text '(' + ($ 'input#mobileNumber').val() + ')'
 
-      ($ 'input#mobileNumber').bind 'onchange', ->
-      ($ 'span#mobileNumber').text '(' + ($ 'input#mobileNumber').val() + ')'
+      ($ 'input#mobileNumber').change ->
+        ($ 'span#mobileNumber').text '(' + ($ 'input#mobileNumber').val() + ')'
 
       for flight in readyScraper.flights()
         
-        ($ "input#pickup-address-from-when-going-" + flight.origin).change ->
-          alert "looped pickup-address-from-when-going-" + flight.origin + " called"
+        ($ "input#pickup-address-" + flight.origin).change ->
+          alert "pickup-address-" + flight.origin + " called"
 
-       ($ "input#pickup-address-from-when-going-Sydney").change ->
-         alert "default pickup-address-from-when-going-Sydney called" 
+        ($ "input#car-traveltime-" + flight.origin).change ->
+          alert "car-traveltime-" + flight.origin + " called"
 
-       ($ "input#pickup-address-from-when-going-Sydney").bind 'onchange', ->
-         alert "binded pickup-address-from-when-going-Sydney called"
+        ($ "input#pickup-address-return-" + flight.destination).change ->
+          alert "pickup-address-return-" + flight.destination + " called"
+
+        ($ "input#car-traveltime-return-" + flight.destination).change ->
+          alert "car-traveltime-return-" + flight.destination + " called"
     else
       console.log "TravelHelper:: Does not have scraper ready!"
       ($ 'body').prepend "<p><br /><br /><h1 style='color: red !important; padding: 15px;'>Oops! Text scraper is not ready. Contact TW support!</h1></p>"
