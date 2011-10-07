@@ -23,7 +23,7 @@
       return view;
     };
     TravelHelper.prototype.run = function() {
-      var fetcher, flight, readyScraper, s, scrapers, view, _i, _j, _len, _len2, _ref, _results;
+      var fetcher, flight, flightNumber, readyScraper, s, scrapers, view, _i, _j, _len, _len2, _ref, _results;
       scrapers = [];
       scrapers.push(new VirginScraper());
       scrapers.push(new QantasScraper());
@@ -34,6 +34,7 @@
           console.log("TravelHelper:: Found ready scraper: " + s.name());
         }
       }
+      console.log("WDE 123".replace(/\s+/, ''));
       if (readyScraper != null) {
         console.log("TravelHelper:: " + readyScraper.name() + " is starting to scrape..");
         view = this.createView(readyScraper);
@@ -50,14 +51,15 @@
         _results = [];
         for (_j = 0, _len2 = _ref.length; _j < _len2; _j++) {
           flight = _ref[_j];
-          ($("input#pickup-address-to-" + flight.origin)).change(function() {
-            return alert("pickup-address-to-" + flight.origin + " called");
+          flightNumber = f.flightNumber.replace(/\s+/, '');
+          ($("input#pickup-address-to-" + flight.origin + "-airport-" + flightNumber)).change(function() {
+            return alert("pickup-address-to-" + flight.origin + "-airport called");
           });
-          ($("input#car-traveltime-to-" + flight.origin)).change(function() {
-            return alert("car-traveltime-to-" + flight.origin + " called");
+          ($("input#car-traveltime-to-" + flight.origin + "-airport-" + flightNumber)).change(function() {
+            return alert("car-traveltime-to-" + flight.origin + "-airport called");
           });
-          _results.push(($("input#destination-address-from-" + flight.destination)).change(function() {
-            return alert("destination-address-from-" + flight.destination + " called");
+          _results.push(($("input#destination-address-from-" + flight.destination + "-airport-" + flightNumber)).change(function() {
+            return alert("destination-address-from-" + flight.destination + "-airport called");
           }));
         }
         return _results;

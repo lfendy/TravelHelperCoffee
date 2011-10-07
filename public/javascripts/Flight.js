@@ -12,7 +12,8 @@
         origin: this.origin,
         destination: this.destination,
         airline: 'Virgin Airlines',
-        flightNumber: this.flightNumber
+        flightNumber: this.flightNumber,
+        flightNumberNoWS: this.flightNumberNoWS
       };
     };
     return Flight;

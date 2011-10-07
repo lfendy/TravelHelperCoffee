@@ -22,6 +22,8 @@ window.TravelHelper = class TravelHelper
         readyScraper = s
         console.log "TravelHelper:: Found ready scraper: " + s.name()
 
+
+    console.log "WDE 123".replace ///\s+///, ''
     if readyScraper?
       console.log "TravelHelper:: " + readyScraper.name() + " is starting to scrape.."
       view = @createView readyScraper
@@ -39,15 +41,15 @@ window.TravelHelper = class TravelHelper
         ($ 'span#mobileNumber').text '(' + ($ 'input#mobileNumber').val() + ')'
 
       for flight in readyScraper.flights()
-        
-        ($ "input#pickup-address-to-" + flight.origin).change ->
-          alert "pickup-address-to-" + flight.origin + " called"
+        flightNumber = f.flightNumber.replace ///\s+///, ''
+        ($ "input#pickup-address-to-" + flight.origin + "-airport-" + flightNumber).change ->
+          alert "pickup-address-to-" + flight.origin + "-airport called"
 
-        ($ "input#car-traveltime-to-" + flight.origin).change ->
-          alert "car-traveltime-to-" + flight.origin + " called"
+        ($ "input#car-traveltime-to-" + flight.origin + "-airport-" + flightNumber).change ->
+          alert "car-traveltime-to-" + flight.origin + "-airport called"
 
-        ($ "input#destination-address-from-" + flight.destination).change ->
-          alert "destination-address-from-" + flight.destination + " called"
+        ($ "input#destination-address-from-" + flight.destination + "-airport-" + flightNumber).change ->
+          alert "destination-address-from-" + flight.destination + "-airport called"
     else
       console.log "TravelHelper:: Does not have scraper ready!"
       ($ 'body').prepend "<p><br /><br /><h1 style='color: red !important; padding: 15px;'>Oops! Text scraper is not ready. Contact TW support!</h1></p>"
