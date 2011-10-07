@@ -16,8 +16,8 @@ window.UITemplate = '
 		{{#flights}}
     	<tr>
 			<td>to <b>{{origin}} Domestic Airport</b> from</td>
-			<td><input id="pickup-address-from-when-going-{{flightNumber}}" type="text" size="35" /></td>
-			<td>will take <input id="car-traveltime-to-when-going-{{flightNumber}}" type="text" size="5" /> minutes</td>
+			<td><input id="pickup-address-from-when-going-{{origin}}" type="text" size="35" /></td>
+			<td>will take <input id="car-traveltime-to-when-going-{{origin}}" type="text" size="5" /> minutes</td>
 		</tr>
         <tr>
             <td>from <b>{{destination}} Domestic Airport</b> to</td>
