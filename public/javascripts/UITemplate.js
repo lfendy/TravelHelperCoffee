@@ -17,12 +17,12 @@
 		{{#flights}}\
     	<tr>\
 			<td>to <b>{{origin}} Domestic Airport</b> from</td>\
-			<td><input onchange="return UtilScraper.get().handleOnChange(\'pickupinfo-to-{{origin}}-airport-{{flightNumberNoWS}}\', \'{{departureTime}}\', $(\'car-traveltime-to-{{origin}}-airport-{{flightNumberNoWS}}\').val())" id="pickup-address-to-{{origin}}-airport-{{flightNumberNoWS}}" type="text" size="35" /></td>\
-			<td>will take <input onchange="return UtilScraper.get().handleOnChange(\'pickupinfo-to-{{origin}}-airport-{{flightNumberNoWS}}\', \'{{departureTime}}\', this.value)" id="car-traveltime-to-{{origin}}-airport-{{flightNumberNoWS}}" type="text" size="5" /> minutes</td>\
+			<td><input onchange="return UtilScraper.get().handleOnChange(\'pickupinfo-origin-{{flightNumberNoWS}}\', \'{{departureTime}}\', $(\'car-traveltime-origin-{{flightNumberNoWS}}\').val())" id="pickup-address-origin-{{flightNumberNoWS}}" type="text" size="35" /></td>\
+			<td>will take <input onchange="return UtilScraper.get().handleOnChange(\'pickupinfo-origin-{{flightNumberNoWS}}\', \'{{departureTime}}\', this.value)" id="car-traveltime-origin-{{flightNumberNoWS}}" type="text" size="5" /> minutes</td>\
 		</tr>\
         <tr>\
             <td>from <b>{{destination}} Domestic Airport</b> to</td>\
-            <td colspan="2"><input onchange="return UtilScraper.get().handleOnChange(\'pickupinfo-from-{{destination}}-airport-{{flightNumberNoWS}}\', \'{{arrivalTime}}\', null)" id="destination-address-from-{{destination}}-airport-{{flightNumberNoWS}}" type="text" size="35" /></td>\
+            <td colspan="2"><input onchange="return UtilScraper.get().handleOnChange(\'pickupinfo-destination-{{flightNumberNoWS}}\', \'{{arrivalTime}}\', null)" id="pickup-address-destination-{{flightNumberNoWS}}" type="text" size="35" /></td>\
         </tr>\
 		{{/flights}}\
 		<tr>\
@@ -48,14 +48,14 @@
     <div id="flights" style="">\
     {{#flights}}\
       \
-	  <div id="pickupinfo-to-{{origin}}-airport-{{flightNumberNoWS}}"></div>\
+	  <div id="pickupinfo-origin-{{flightNumberNoWS}}"></div>\
       \
 	  <strong>Flight Time {{departureTime}} {{formattedDepartureDate}}</strong><br />\
       Flight No: {{airline}} {{flightNumber}}<br />\
       Depart: {{departureDate}} {{departureTime}} - {{origin}} Domestic Airport<br />\
       Arrive: {{arrivalDate}} {{arrivalTime}} - {{destination}} Domestic Airport\
 	  \
- 	  <div id="pickupinfo-from-{{destination}}-airport-{{flightNumberNoWS}}"></div>\
+ 	  <div id="pickupinfo-destination-{{flightNumberNoWS}}"></div>\
       \
 	  <br /><br />\
       \
