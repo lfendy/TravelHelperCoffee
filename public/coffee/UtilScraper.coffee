@@ -36,9 +36,9 @@ window.UtilScraper = class UtilScraper
     targetDatetime = ($ "input#" + direction + "-datetime-" + flightNumber).val()
     targetCarTravelTime = ($ "origin-cartraveltime-" + flightNumber).val()
     targetDiv = "div#" + direction + "-travelinfo-" + flightNumber
+    formattedDatetime = @estimateDatetime targetDatetime, targetCarTravelTime
     #alert "targetCarTravelTime: " + targetCarTravelTime + ", targetAirport: " + targetAirport + ", targetDatetime: " + targetDatetime + ", targetDiv: " + targetDiv
-    ($ targetDiv).html "<strong>To " + targetAirport + " on " + targetDatetime + "</strong><br />From: " + fromAddress + "<br /><br />"
-
+    ($ targetDiv).html "<strong>To " + targetAirport + " on " + formattedDatetime + "</strong><br />From: " + fromAddress + "<br /><br />"
 
   injectHtml: (uiTemplate, view, htmlElement) ->
     inputForm = Mustache.to_html uiTemplate, view

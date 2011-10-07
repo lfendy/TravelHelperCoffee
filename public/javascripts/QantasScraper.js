@@ -68,6 +68,7 @@
       f.departureDate = ($(raw)).find('td').eq(0).text().trim();
       f.formattedDepartureDate = this.makePrettyDate(f.departureDate);
       f.arrivalDate = ($(raw)).find('td').eq(0).text().trim();
+      f.formattedArrivalDate = this.makePrettyDate(f.arrivalDate);
       f.departureTime = ($(raw)).find('td').eq(1).text().trim();
       f.arrivalTime = ($(raw)).find('td').eq(3).text().trim();
       f.origin = ($(raw)).find('td').eq(2).text().trim();

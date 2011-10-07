@@ -40,13 +40,14 @@
       return formattedDate;
     };
     UtilScraper.prototype.handleOnChange = function(direction, flightNumber) {
-      var fromAddress, targetAirport, targetCarTravelTime, targetDatetime, targetDiv;
+      var formattedDatetime, fromAddress, targetAirport, targetCarTravelTime, targetDatetime, targetDiv;
       fromAddress = ($("input#" + direction + "-" + flightNumber)).val();
       targetAirport = ($("input#" + direction + "-airport-" + flightNumber)).val();
       targetDatetime = ($("input#" + direction + "-datetime-" + flightNumber)).val();
       targetCarTravelTime = ($("origin-cartraveltime-" + flightNumber)).val();
       targetDiv = "div#" + direction + "-travelinfo-" + flightNumber;
-      return ($(targetDiv)).html("<strong>To " + targetAirport + " on " + targetDatetime + "</strong><br />From: " + fromAddress + "<br /><br />");
+      formattedDatetime = this.estimateDatetime(targetDatetime, targetCarTravelTime);
+      return ($(targetDiv)).html("<strong>To " + targetAirport + " on " + formattedDatetime + "</strong><br />From: " + fromAddress + "<br /><br />");
     };
     UtilScraper.prototype.injectHtml = function(uiTemplate, view, htmlElement) {
       var inputForm;

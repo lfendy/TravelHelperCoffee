@@ -52,6 +52,7 @@
       f.departureDate = ($(raw)).find('td.flightDate').text();
       f.formattedDepartureDate = this.makePrettyDate(f.departureDate);
       f.arrivalDate = ($(raw)).find('td.flightDate').text();
+      f.formattedArrivalDate = this.makePrettyDate(f.arrivalDate);
       f.departureTime = ($(raw)).find('span.flightTimeTerminus').eq(0).text().replace(' PM', '').replace(' AM', '');
       f.arrivalTime = ($(raw)).find('span.flightTimeTerminus').eq(1).text().replace(' PM', '').replace(' AM', '');
       originClone = ($(raw)).find('td.flightContents').eq(1).clone();

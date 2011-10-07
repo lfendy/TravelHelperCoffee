@@ -18,8 +18,8 @@ window.UITemplate = '
 			<td colspan="3">
 				<input type="hidden" id="origin-airport-{{flightNumberNoWS}}" value="{{origin}} Domestic Airport" />
 				<input type="hidden" id="destination-airport-{{flightNumberNoWS}}" value="{{destination}} Domestic Airport" />
-				<input type="hidden" id="origin-datetime-{{flightNumberNoWS}}" value="{{departureTime}} {{departureDate}}" />
-				<input type="hidden" id="destination-datetime-{{flightNumberNoWS}}" value="{{arrivalTime}} {{arrivalDate}}" />
+				<input type="hidden" id="origin-datetime-{{flightNumberNoWS}}" value="{{departureTime}} {{formattedDepartureDate}}" />
+				<input type="hidden" id="destination-datetime-{{flightNumberNoWS}}" value="{{arrivalTime}} {{formattedArrivalDate}}" />
 			</td>
 		</tr>
 		<tr>

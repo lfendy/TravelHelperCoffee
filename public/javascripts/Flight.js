@@ -6,6 +6,7 @@
       return {
         departureDate: this.departureDate,
         formattedDepartureDate: this.formattedDepartureDate,
+        formattedArrivalDate: this.formattedArrivalDate,
         departureTime: this.departureTime,
         arrivalDate: this.arrivalDate,
         arrivalTime: this.arrivalTime,
