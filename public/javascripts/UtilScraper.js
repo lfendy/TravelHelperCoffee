@@ -28,7 +28,7 @@
         return callback.call(target, json.feed.entry);
       });
     };
-    UtilScraper.prototype.handleChange = function(elementId, departureTime, travelTime) {
+    UtilScraper.prototype.handleOnChange = function(elementId, departureTime, travelTime) {
       return alert(elementId, departureTime, travelTime);
     };
     UtilScraper.prototype.injectHtml = function(uiTemplate, view, htmlElement) {

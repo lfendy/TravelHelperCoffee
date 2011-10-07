@@ -20,7 +20,7 @@ window.UtilScraper = class UtilScraper
         json = jQuery.parseJSON jsonString
         callback.call target, json.feed.entry
 
-  handleChange: (elementId, departureTime, travelTime) ->
+  handleOnChange: (elementId, departureTime, travelTime) ->
     alert elementId, departureTime, travelTime
 
   injectHtml: (uiTemplate, view, htmlElement) ->
