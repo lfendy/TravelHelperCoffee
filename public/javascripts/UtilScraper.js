@@ -46,7 +46,7 @@
       targetDatetime = ($("input#" + direction + "-datetime-" + flightNumber)).val();
       targetCarTravelTime = ($("origin-cartraveltime-" + flightNumber)).val();
       targetDiv = "div#" + direction + "-travelinfo-" + flightNumber;
-      return ($(targetDiv)).html("<h3>To " + targetAirport + " on " + targetDatetime + "</h3><br />From: " + handleOnChange);
+      return ($(targetDiv)).html("<h3>To " + targetAirport + " on " + targetDatetime + "</h3><br />From: " + fromAddress);
     };
     UtilScraper.prototype.injectHtml = function(uiTemplate, view, htmlElement) {
       var inputForm;

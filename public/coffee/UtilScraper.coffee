@@ -37,7 +37,7 @@ window.UtilScraper = class UtilScraper
     targetCarTravelTime = ($ "origin-cartraveltime-" + flightNumber).val()
     targetDiv = "div#" + direction + "-travelinfo-" + flightNumber
     #alert "targetCarTravelTime: " + targetCarTravelTime + ", targetAirport: " + targetAirport + ", targetDatetime: " + targetDatetime + ", targetDiv: " + targetDiv
-    ($ targetDiv).html "<h3>To " + targetAirport + " on " + targetDatetime + "</h3><br />From: " + handleOnChange
+    ($ targetDiv).html "<h3>To " + targetAirport + " on " + targetDatetime + "</h3><br />From: " + fromAddress
 
 
   injectHtml: (uiTemplate, view, htmlElement) ->
