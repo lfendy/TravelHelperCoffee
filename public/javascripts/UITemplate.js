@@ -13,22 +13,21 @@
   <div id="cars-form">\
 	<h2 style="margin-left: 0 !important">Cars</h2>\
 	\
-	<table border="0" width="650px" cellspacing="3" cellpadding="3">\
+	<table border="0" width="580px" cellspacing="1px" cellpadding="2px">\
 		{{#flights}}\
     	<tr>\
 			<td>to <b>{{origin}}</b> from</td>\
-			<td><input id="pickup-address-from-when-going" type="text" size="5" /></td>\
+			<td><input id="pickup-address-from-when-going" type="text" size="35" /></td>\
 			<td>will take <input id="car-traveltime-to-when-going" type="text" size="5" /> minutes</td>\
 		</tr>\
         <tr>\
             <td>from <b>{{destination}}</b> to</td>\
-            <td><input id="pickup-address-from-when-getting-back" type="text" size="5" /></td>\
+            <td><input id="pickup-address-from-when-getting-back" type="text" size="35" /></td>\
             <td>will take <input id="car-traveltime-to-when-getting-back" type="text" size="5" /> minutes</td>\
         </tr>\
 		{{/flights}}\
 		<tr>\
-            <td colspan="3>All cars before flight should arrive <input id="arrive-before-minutes" type="text" size="5" />\
-			 minutes early to airports</td>\
+            <td colspan="3">All cars before flight should arrive <input id="arrive-before-minutes" type="text" size="5" /> minutes early to airports</td>\
         </tr>\
 	</table>\
 \
