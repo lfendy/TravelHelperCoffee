@@ -20,16 +20,24 @@ window.UtilScraper = class UtilScraper
         json = jQuery.parseJSON jsonString
         callback.call target, json.feed.entry
   
-  estimateDatetime: (datetime, minutesToSubstruct) ->
-    true
+  estimateDatetime: (datetimeStr, minutesToSubstructInt) ->
+    estimatedMillis = new Number(minutesToSubstructInt) * 1000 * 60
+    currMilliSeconds = Date.parse datetimeStr
+    console.log currMilliSeconds
+    estimatedNewTime = currMilliSeconds - estimatedMillis
+    date = new Date estimatedNewTime
+    formattedDate = date.getHours() + ":" + date.getMinutes() + " " + days[date.getDay()] + ' ' + date.getDate() + ' ' + months[date.getMonth()] + ' ' + date.getFullYear()
+    console.log formattedDate
+    formattedDate
 
   handleOnChange: (direction, flightNumber) ->
+    fromAddress = ($ direction + "-" + flightNumber).val()
     targetAirport = ($ "input#" + direction + "-airport-" + flightNumber).val()
     targetDatetime = ($ "input#" + direction + "-datetime-" + flightNumber).val()
     targetCarTravelTime = ($ "origin-cartraveltime-" + flightNumber).val()
     targetDiv = "div#" + direction + "-travelinfo-" + flightNumber
     #alert "targetCarTravelTime: " + targetCarTravelTime + ", targetAirport: " + targetAirport + ", targetDatetime: " + targetDatetime + ", targetDiv: " + targetDiv
-    ($ targetDiv).html "To " + targetAirport + " on " + targetDatetime 
+    ($ targetDiv).html "<h3>To " + targetAirport + " on " + targetDatetime + "</h3><br />From: " + handleOnChange
 
 
   injectHtml: (uiTemplate, view, htmlElement) ->

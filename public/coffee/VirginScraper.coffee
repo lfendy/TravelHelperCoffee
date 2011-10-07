@@ -15,11 +15,11 @@ window.VirginScraper = class VirginScraper
 
   makePrettyDate: (scrapedDate) ->
     components = []
-    
+                                                                                                                                                                                  
     if scrapedDate.indexOf('-') != -1 
       components = scrapedDate.split('-')
     else
-      components = scrapedDate.split(' ')	
+      components = scrapedDate.split(' ')   
 
    
     if components[2]? && components[2].length < 4

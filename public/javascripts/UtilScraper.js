@@ -28,16 +28,25 @@
         return callback.call(target, json.feed.entry);
       });
     };
-    UtilScraper.prototype.estimateDatetime = function(datetime, minutesToSubstruct) {
-      return true;
+    UtilScraper.prototype.estimateDatetime = function(datetimeStr, minutesToSubstructInt) {
+      var currMilliSeconds, date, estimatedMillis, estimatedNewTime, formattedDate;
+      estimatedMillis = new Number(minutesToSubstructInt) * 1000 * 60;
+      currMilliSeconds = Date.parse(datetimeStr);
+      console.log(currMilliSeconds);
+      estimatedNewTime = currMilliSeconds - estimatedMillis;
+      date = new Date(estimatedNewTime);
+      formattedDate = date.getHours() + ":" + date.getMinutes() + " " + days[date.getDay()] + ' ' + date.getDate() + ' ' + months[date.getMonth()] + ' ' + date.getFullYear();
+      console.log(formattedDate);
+      return formattedDate;
     };
     UtilScraper.prototype.handleOnChange = function(direction, flightNumber) {
-      var targetAirport, targetCarTravelTime, targetDatetime, targetDiv;
+      var fromAddress, targetAirport, targetCarTravelTime, targetDatetime, targetDiv;
+      fromAddress = ($(direction + "-" + flightNumber)).val();
       targetAirport = ($("input#" + direction + "-airport-" + flightNumber)).val();
       targetDatetime = ($("input#" + direction + "-datetime-" + flightNumber)).val();
       targetCarTravelTime = ($("origin-cartraveltime-" + flightNumber)).val();
       targetDiv = "div#" + direction + "-travelinfo-" + flightNumber;
-      return ($(targetDiv)).html("To " + targetAirport + " on " + targetDatetime);
+      return ($(targetDiv)).html("<h3>To " + targetAirport + " on " + targetDatetime + "</h3><br />From: " + handleOnChange);
     };
     UtilScraper.prototype.injectHtml = function(uiTemplate, view, htmlElement) {
       var inputForm;

@@ -25,7 +25,7 @@
 		</tr>\
 		<tr>\
 			<td>to <b>{{origin}} Domestic Airport</b> from</td>\
-			<td><input onchange="return UtilScraper.get().handleOnChange(\'origin\', \'{{flightNumberNoWS}}\')"  id="" type="text" size="35" /></td>\
+			<td><input onchange="return UtilScraper.get().handleOnChange(\'origin\', \'{{flightNumberNoWS}}\')"  id="origin-{{flightNumberNoWS}}" type="text" size="35" /></td>\
 			<td>will take <input onchange="return UtilScraper.get().handleOnChange(\'origin\', \'{{flightNumberNoWS}}\')" id="origin-cartraveltime-{{flightNumberNoWS}}" type="text" size="5" value="30" /> minutes</td>\
 		</tr>\
         <tr>\
