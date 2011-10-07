@@ -22,8 +22,6 @@ window.TravelHelper = class TravelHelper
         readyScraper = s
         console.log "TravelHelper:: Found ready scraper: " + s.name()
 
-
-    console.log "WDE 123".replace ///\s+///, ''
     if readyScraper?
       console.log "TravelHelper:: " + readyScraper.name() + " is starting to scrape.."
       view = @createView readyScraper
@@ -41,14 +39,17 @@ window.TravelHelper = class TravelHelper
         ($ 'span#mobileNumber').text '(' + ($ 'input#mobileNumber').val() + ')'
 
       for flight in readyScraper.flights()
-        flightNumber = f.flightNumber.replace ///\s+///, ''
-        ($ "input#pickup-address-to-" + flight.origin + "-airport-" + flightNumber).change ->
+        
+        ($ "input#arrive-before").change ->                                                                                     
+          alert "arrive before called"
+ 
+        ($ "input#pickup-address-to-" + flight.origin + "-airport-" + flight.flightNumberNoWS).change ->
           alert "pickup-address-to-" + flight.origin + "-airport called"
 
-        ($ "input#car-traveltime-to-" + flight.origin + "-airport-" + flightNumber).change ->
+        ($ "input#car-traveltime-to-" + flight.origin + "-airport-" + flight.flightNumberNoWS).change ->
           alert "car-traveltime-to-" + flight.origin + "-airport called"
 
-        ($ "input#destination-address-from-" + flight.destination + "-airport-" + flightNumber).change ->
+        ($ "input#destination-address-from-" + flight.destination + "-airport-" + flight.flightNumberNoWS).change ->
           alert "destination-address-from-" + flight.destination + "-airport called"
     else
       console.log "TravelHelper:: Does not have scraper ready!"

@@ -17,12 +17,12 @@
 		{{#flights}}\
     	<tr>\
 			<td>to <b>{{origin}} Domestic Airport</b> from</td>\
-			<td><input id="pickup-address-to-{{origin}}-{{flightNumberNoWS}}" type="text" size="35" /></td>\
-			<td>will take <input id="car-traveltime-to-{{origin}}-{{flightNumberNoWS}}" type="text" size="5" /> minutes</td>\
+			<td><input id="pickup-address-to-{{origin}}-airport-{{flightNumberNoWS}}" type="text" size="35" /></td>\
+			<td>will take <input id="car-traveltime-to-{{origin}}-airport-{{flightNumberNoWS}}" type="text" size="5" /> minutes</td>\
 		</tr>\
         <tr>\
             <td>from <b>{{destination}} Domestic Airport</b> to</td>\
-            <td colspan="2"><input id="destination-address-from-{{destination}}-{{flightNumberNoWS}}" type="text" size="35" /></td>\
+            <td colspan="2"><input id="destination-address-from-{{destination}}-airport-{{flightNumberNoWS}}" type="text" size="35" /></td>\
         </tr>\
 		{{/flights}}\
 		<tr>\
