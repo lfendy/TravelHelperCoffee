@@ -28,8 +28,12 @@
         return callback.call(target, json.feed.entry);
       });
     };
-    UtilScraper.prototype.handleOnChange = function(elementId, departureTime, travelTime) {
-      return alert("element: " + elementId + ", departure time: " + departureTime + ", travel time: " + travelTime);
+    UtilScraper.prototype.handleOnChange = function(direction, flightNumber) {
+      var targetAirport, targetDatetime, targetDiv;
+      targetAirport = ($("input#" + direction + "-airport-" + flightNumber)).val();
+      targetDatetime = ($("input#" + direction + "-datetime-" + flightNumber)).val();
+      targetDiv = "div#" + direction + "-travelinfo-" + flightNumber;
+      return alert("flightNumber: " + flightNumber + ", targetAirport: " + targetAirport + ", targetDatetime: " + targetDatetime + ", targetDiv: " + targetDiv);
     };
     UtilScraper.prototype.injectHtml = function(uiTemplate, view, htmlElement) {
       var inputForm;

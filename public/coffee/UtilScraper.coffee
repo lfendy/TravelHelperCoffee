@@ -19,9 +19,12 @@ window.UtilScraper = class UtilScraper
         jsonString
         json = jQuery.parseJSON jsonString
         callback.call target, json.feed.entry
-
-  handleOnChange: (elementId, departureTime, travelTime) ->
-    alert "element: " + elementId + ", departure time: " + departureTime + ", travel time: " + travelTime
+  
+  handleOnChange: (direction, flightNumber) ->
+    targetAirport = ($ "input#" + direction + "-airport-" + flightNumber).val()
+    targetDatetime = ($ "input#" + direction + "-datetime-" + flightNumber).val()
+    targetDiv = "div#" + direction + "-travelinfo-" + flightNumber
+    alert "flightNumber: " + flightNumber + ", targetAirport: " + targetAirport + ", targetDatetime: " + targetDatetime + ", targetDiv: " + targetDiv
 
   injectHtml: (uiTemplate, view, htmlElement) ->
     inputForm = Mustache.to_html uiTemplate, view

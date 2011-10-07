@@ -16,17 +16,25 @@
 	<table border="0" width="660px" cellspacing="1px" cellpadding="2px">\
 		{{#flights}}\
     	<tr>\
+			<td colspan="3">\
+				<input type="hidden" id="origin-airport-{{flightNumberNoWS}}" value="{{origin}} Domestic Airport" />\
+				<input type="hidden" id="destination-airport-{{flightNumberNoWS}}" value="{{destination}} Domestic Airport" />\
+				<input type="hidden" id="origin-datetime-{{flightNumberNoWS}}" value="{{departureTime}} {{departureDate}}" />\
+				<input type="hidden" id="destination-datetime-{{flightNumberNoWS}}" value="{{arrivalTime}} {{arrivalDate}}" />\
+			</td>\
+		</tr>\
+		<tr>\
 			<td>to <b>{{origin}} Domestic Airport</b> from</td>\
-			<td><input onchange="return UtilScraper.get().handleOnChange(\'pickupinfo-origin-{{flightNumberNoWS}}\', \'{{departureTime}}\', $(\'car-traveltime-origin-{{flightNumberNoWS}}\').val())" id="pickup-address-origin-{{flightNumberNoWS}}" type="text" size="35" /></td>\
-			<td>will take <input onchange="return UtilScraper.get().handleOnChange(\'pickupinfo-origin-{{flightNumberNoWS}}\', \'{{departureTime}}\', this.value)" id="car-traveltime-origin-{{flightNumberNoWS}}" type="text" size="5" /> minutes</td>\
+			<td><input onchange="return UtilScraper.get().handleOnChange(\'origin\', \'{{flightNumberNoWS}}\')"  id="" type="text" size="35" /></td>\
+			<td>will take <input onchange="return UtilScraper.get().handleOnChange(\'origin\', \'{{flightNumberNoWS}}\')" id="origin-cartraveltime-{{flightNumberNoWS}}" type="text" size="5" value="30" /> minutes</td>\
 		</tr>\
         <tr>\
-            <td>from <b>{{destination}} Domestic Airport</b> to</td>\
-            <td colspan="2"><input onchange="return UtilScraper.get().handleOnChange(\'pickupinfo-destination-{{flightNumberNoWS}}\', \'{{arrivalTime}}\', null)" id="pickup-address-destination-{{flightNumberNoWS}}" type="text" size="35" /></td>\
+            <td>from <b id="destination-airport-{{flightNumberNoWS}}">{{destination}} Domestic Airport</b> to</td>\
+            <td colspan="2"><input onchange="" id="" type="text" size="35" /></td>\
         </tr>\
 		{{/flights}}\
 		<tr>\
-            <td colspan="3">All cars before flight should arrive <input onchange="return UtilScraper.get().handleOnChange(this.id, null, null)" id="arrive-before" type="text" size="5" /> minutes early to airports</td>\
+            <td colspan="3">All cars before flight should arrive <input onchange="return UtilScraper.get().handleOnChange(\'origin\', \'{{flightNumberNoWS}}\')" id="arrive-before" type="text" size="5" value="45" /> minutes early to airports</td>\
         </tr>\
 	</table>\
 \
@@ -48,14 +56,14 @@
     <div id="flights" style="">\
     {{#flights}}\
       \
-	  <div id="pickupinfo-origin-{{flightNumberNoWS}}"></div>\
+	  <div id="origin-travelinfo-{{flightNumberNoWS}}"></div>\
       \
 	  <strong>Flight Time {{departureTime}} {{formattedDepartureDate}}</strong><br />\
       Flight No: {{airline}} {{flightNumber}}<br />\
       Depart: {{departureDate}} {{departureTime}} - {{origin}} Domestic Airport<br />\
       Arrive: {{arrivalDate}} {{arrivalTime}} - {{destination}} Domestic Airport\
 	  \
- 	  <div id="pickupinfo-destination-{{flightNumberNoWS}}"></div>\
+ 	  <div id="destination-travelinfo-{{flightNumberNoWS}}"></div>\
       \
 	  <br /><br />\
       \
