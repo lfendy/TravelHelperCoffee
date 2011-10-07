@@ -12,7 +12,7 @@ table tr th {\
 }\
 </style>\
 \
-<table border="0" cellpadding="5px" cellspacing="5px">\
+<table border="0" width="400px" cellpadding="5px" cellspacing="5px">\
 	<tr>\
         <th>City</th><th>Company</th><th>Contact</th><th>Phone</th>\
     </tr>\

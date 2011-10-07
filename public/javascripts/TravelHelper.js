@@ -45,7 +45,7 @@
         return ($('span#mobileNumber')).text('(' + ($('input#mobileNumber')).val() + ')');
       } else {
         console.log("TravelHelper:: Does not have scraper ready!");
-        return ($('body')).prepend("<p><h1>Oops! Text scraper is not ready. Contact TW support!</h1></p>");
+        return ($('body')).prepend("<p><br /><br /><h1 style='font-color: red'>Oops! Text scraper is not ready. Contact TW support!</h1></p>");
       }
     };
     TravelHelper.prototype.carGoogleSpreadsheetAjaxCallback = function(cells) {
@@ -60,6 +60,7 @@
       view = {
         cars: cars
       };
+      ($("p#car-content")).html("");
       return UtilScraper.get().injectHtml(UICarTemplate, view, $("p#car-content"));
     };
     TravelHelper.prototype.getCarGoogleSpreadsheetAsJson = function() {
