@@ -50,17 +50,14 @@
         _results = [];
         for (_j = 0, _len2 = _ref.length; _j < _len2; _j++) {
           flight = _ref[_j];
-          ($("input#pickup-address-" + flight.origin)).change(function() {
-            return alert("pickup-address-" + flight.origin + " called");
+          ($("input#pickup-address-to-" + flight.origin)).change(function() {
+            return alert("pickup-address-to-" + flight.origin + " called");
           });
-          ($("input#car-traveltime-" + flight.origin)).change(function() {
-            return alert("car-traveltime-" + flight.origin + " called");
+          ($("input#car-traveltime-to-" + flight.origin)).change(function() {
+            return alert("car-traveltime-to-" + flight.origin + " called");
           });
-          ($("input#pickup-address-return-" + flight.destination)).change(function() {
-            return alert("pickup-address-return-" + flight.destination + " called");
-          });
-          _results.push(($("input#car-traveltime-return-" + flight.destination)).change(function() {
-            return alert("car-traveltime-return-" + flight.destination + " called");
+          _results.push(($("input#destination-address-from-" + flight.destination)).change(function() {
+            return alert("destination-address-from-" + flight.destination + " called");
           }));
         }
         return _results;

@@ -40,17 +40,14 @@ window.TravelHelper = class TravelHelper
 
       for flight in readyScraper.flights()
         
-        ($ "input#pickup-address-" + flight.origin).change ->
-          alert "pickup-address-" + flight.origin + " called"
+        ($ "input#pickup-address-to-" + flight.origin).change ->
+          alert "pickup-address-to-" + flight.origin + " called"
 
-        ($ "input#car-traveltime-" + flight.origin).change ->
-          alert "car-traveltime-" + flight.origin + " called"
+        ($ "input#car-traveltime-to-" + flight.origin).change ->
+          alert "car-traveltime-to-" + flight.origin + " called"
 
-        ($ "input#pickup-address-return-" + flight.destination).change ->
-          alert "pickup-address-return-" + flight.destination + " called"
-
-        ($ "input#car-traveltime-return-" + flight.destination).change ->
-          alert "car-traveltime-return-" + flight.destination + " called"
+        ($ "input#destination-address-from-" + flight.destination).change ->
+          alert "destination-address-from-" + flight.destination + " called"
     else
       console.log "TravelHelper:: Does not have scraper ready!"
       ($ 'body').prepend "<p><br /><br /><h1 style='color: red !important; padding: 15px;'>Oops! Text scraper is not ready. Contact TW support!</h1></p>"
