@@ -46,21 +46,22 @@
         ($('input#mobileNumber')).change(function() {
           return ($('span#mobileNumber')).text('(' + ($('input#mobileNumber')).val() + ')');
         });
+        ($("input#arrive-before")).change(function() {
+          return alert("arrive before called");
+        });
         _ref = readyScraper.flights();
         _results = [];
         for (_j = 0, _len2 = _ref.length; _j < _len2; _j++) {
           flight = _ref[_j];
-          ($("input#arrive-before")).change(function() {
-            return alert("arrive before called");
-          });
+          console.log("pickup-address-to-" + flight.origin + "-airport-" + flight.flightNumberNoWS);
           ($("input#pickup-address-to-" + flight.origin + "-airport-" + flight.flightNumberNoWS)).change(function() {
-            return alert("pickup-address-to-" + flight.origin + "-airport called");
+            return alert("pickup-address-to-" + flight.origin + "-airport-" + flight.flightNumberNoWS + " called");
           });
           ($("input#car-traveltime-to-" + flight.origin + "-airport-" + flight.flightNumberNoWS)).change(function() {
-            return alert("car-traveltime-to-" + flight.origin + "-airport called");
+            return alert("car-traveltime-to-" + flight.origin + "-airport-" + flight.flightNumberNoWS + " called");
           });
           _results.push(($("input#destination-address-from-" + flight.destination + "-airport-" + flight.flightNumberNoWS)).change(function() {
-            return alert("destination-address-from-" + flight.destination + "-airport called");
+            return alert("destination-address-from-" + flight.destination + "-airport-" + flight.flightNumberNoWS + " called");
           }));
         }
         return _results;
