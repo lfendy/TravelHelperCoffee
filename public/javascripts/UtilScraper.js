@@ -30,13 +30,16 @@
     };
     UtilScraper.prototype.estimateDatetime = function(datetimeStr, minutesToSubstructInt) {
       var currMilliSeconds, date, estimatedMillis, estimatedNewTime, formattedDate;
+      console.log("Got date: " + datetimeStr + " to substract " + minutesToSubstructInt + " minutes from ");
       estimatedMillis = new Number(minutesToSubstructInt) * 1000 * 60;
       currMilliSeconds = Date.parse(datetimeStr);
-      console.log(currMilliSeconds);
+      console.log("Current milliseconds: " + currMilliSeconds);
       estimatedNewTime = currMilliSeconds - estimatedMillis;
+      console.log("Milliseconds after estimation: " + estimatedNewTime);
       date = new Date(estimatedNewTime);
+      console.log("Estimatated new date: " + date);
       formattedDate = date.getHours() + ":" + date.getMinutes() + " " + days[date.getDay()] + ' ' + date.getDate() + ' ' + months[date.getMonth()] + ' ' + date.getFullYear();
-      console.log(formattedDate);
+      console.log("Estimatated date formatted: " + formattedDate);
       return formattedDate;
     };
     UtilScraper.prototype.handleOnChange = function(direction, flightNumber) {
