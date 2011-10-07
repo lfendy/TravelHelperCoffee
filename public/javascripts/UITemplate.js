@@ -17,13 +17,13 @@
 		{{#flights}}\
     	<tr>\
 			<td>to <b>{{origin}} Domestic Airport</b> from</td>\
-			<td><input id="pickup-address-from-when-going" type="text" size="35" /></td>\
-			<td>will take <input id="car-traveltime-to-when-going" type="text" size="5" /> minutes</td>\
+			<td><input id="pickup-address-from-when-going-{{flightNumber}}" type="text" size="35" /></td>\
+			<td>will take <input id="car-traveltime-to-when-going-{{flightNumber}}" type="text" size="5" /> minutes</td>\
 		</tr>\
         <tr>\
             <td>from <b>{{destination}} Domestic Airport</b> to</td>\
-            <td><input id="pickup-address-from-when-getting-back" type="text" size="35" /></td>\
-            <td>will take <input id="car-traveltime-to-when-getting-back" type="text" size="5" /> minutes</td>\
+            <td><input id="pickup-address-from-when-getting-back-{{flightNumber}}" type="text" size="35" /></td>\
+            <td>will take <input id="car-traveltime-to-when-getting-back-{{flightNumber}}" type="text" size="5" /> minutes</td>\
         </tr>\
 		{{/flights}}\
 		<tr>\
@@ -48,13 +48,32 @@
     -----------------------------------------------------------------------<br /><br />\
     <div id="flights" style="">\
     {{#flights}}\
-      <strong>Flight Time {{departureTime}} {{formattedDepartureDate}}</strong><br />\
+      \
+	  <div id="car-pickup-info-when-going-{{flightNumber}}"></div>\
+      \
+	  <strong>Flight Time {{departureTime}} {{formattedDepartureDate}}</strong><br />\
       Flight No: {{airline}} {{flightNumber}}<br />\
       Depart: {{departureDate}} {{departureTime}} - {{origin}} Domestic Airport<br />\
       Arrive: {{arrivalDate}} {{arrivalTime}} - {{destination}} Domestic Airport\
-      <br /><br />\
-    {{/flights}}\
+	  \
+ 	  <div id="car-pickup-info-when-arrived-{{flightNumber}}"></div>\
+      \
+	  <br /><br />\
+      \
+	{{/flights}}\
     </div>\
     -----------------------------------------------------------------------<br /><br />\
   </div>' + window.UIFooterTemplate + '</div>';
+  window.CarEvents = '                                                                                                                                                              \
+<script type="text/javascript">\
+{{#flights}}\
+$("#pickup-address-from-when-going-{{flightNumber}}").change(function() {\
+    alert("pickup-address-from-when-going-{{flightNumber}} called");\
+});\
+\
+$("#pickup-address-from-when-getting-back-{{flightNumber}}").change(function() {\
+    alert("pickup-address-from-when-getting-back-{{flightNumber}} called");\
+});\
+{{/flights}}\
+</script>';
 }).call(this);
