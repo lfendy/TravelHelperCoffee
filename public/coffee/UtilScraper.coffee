@@ -21,7 +21,7 @@ window.UtilScraper = class UtilScraper
         callback.call target, json.feed.entry
 
   handleOnChange: (elementId, departureTime, travelTime) ->
-    alert elementId, departureTime, travelTime
+    alert "element: " + elementId, "departure time: " + departureTime, "travel time: " + travelTime
 
   injectHtml: (uiTemplate, view, htmlElement) ->
     inputForm = Mustache.to_html uiTemplate, view
