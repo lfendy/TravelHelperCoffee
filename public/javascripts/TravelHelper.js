@@ -23,7 +23,7 @@
       return view;
     };
     TravelHelper.prototype.run = function() {
-      var fetcher, flight, readyScraper, s, scrapers, view, _i, _j, _len, _len2, _ref, _results;
+      var fetcher, flight, idx, readyFlights, readyScraper, s, scrapers, view, _i, _len, _results;
       scrapers = [];
       scrapers.push(new VirginScraper());
       scrapers.push(new QantasScraper());
@@ -49,10 +49,11 @@
         ($("input#arrive-before")).change(function() {
           return alert("arrive before called");
         });
-        _ref = readyScraper.flights();
+        readyFlights = readyScraper.flights();
+        idx = 0;
         _results = [];
-        for (_j = 0, _len2 = _ref.length; _j < _len2; _j++) {
-          flight = _ref[_j];
+        while (idx < readyFlights.length) {
+          flight = readyFlights[idx];
           console.log("pickup-address-to-" + flight.origin + "-airport-" + flight.flightNumberNoWS);
           ($("input#pickup-address-to-" + flight.origin + "-airport-" + flight.flightNumberNoWS)).change(function() {
             return alert("pickup-address-to-" + flight.origin + "-airport-" + flight.flightNumberNoWS + " called");
@@ -60,9 +61,10 @@
           ($("input#car-traveltime-to-" + flight.origin + "-airport-" + flight.flightNumberNoWS)).change(function() {
             return alert("car-traveltime-to-" + flight.origin + "-airport-" + flight.flightNumberNoWS + " called");
           });
-          _results.push(($("input#destination-address-from-" + flight.destination + "-airport-" + flight.flightNumberNoWS)).change(function() {
+          ($("input#destination-address-from-" + flight.destination + "-airport-" + flight.flightNumberNoWS)).change(function() {
             return alert("destination-address-from-" + flight.destination + "-airport-" + flight.flightNumberNoWS + " called");
-          }));
+          });
+          _results.push(idx = idx + 1);
         }
         return _results;
       } else {
