@@ -29,7 +29,7 @@
       });
     };
     UtilScraper.prototype.handleOnChange = function(elementId, departureTime, travelTime) {
-      return alert("element: " + elementId, "departure time: " + departureTime, "travel time: " + travelTime);
+      return alert("element: " + elementId + ", departure time: " + departureTime + ", travel time: " + travelTime);
     };
     UtilScraper.prototype.injectHtml = function(uiTemplate, view, htmlElement) {
       var inputForm;
