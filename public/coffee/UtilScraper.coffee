@@ -29,7 +29,10 @@ window.UtilScraper = class UtilScraper
     console.log "Milliseconds after estimation: " + estimatedNewTime
     date = new Date estimatedNewTime
     console.log "Estimatated new date: " + date
-    formattedDate = date.getHours() + ":" + date.getMinutes() + " " + days[date.getDay()] + ' ' + date.getDate() + ' ' + months[date.getMonth()] + ' ' + date.getFullYear()
+    minutes = parseInt(date.getMinutes())
+    if minutes < 10
+      minutes = "0" + minutes
+    formattedDate = date.getHours() + ":" + minutes + " " + days[date.getDay()] + ' ' + date.getDate() + ' ' + months[date.getMonth()] + ' ' + date.getFullYear()
     console.log "Estimatated date formatted: " + formattedDate
     formattedDate
 

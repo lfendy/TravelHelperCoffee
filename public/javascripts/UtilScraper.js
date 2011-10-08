@@ -29,7 +29,7 @@
       });
     };
     UtilScraper.prototype.estimateDatetime = function(datetimeStr, minutesToSubstructInt) {
-      var currMilliSeconds, date, estimatedMillis, estimatedNewTime, formattedDate;
+      var currMilliSeconds, date, estimatedMillis, estimatedNewTime, formattedDate, minutes;
       console.log("Got date: " + datetimeStr + " to substract " + minutesToSubstructInt + " minutes from ");
       estimatedMillis = new Number(minutesToSubstructInt) * 1000 * 60;
       currMilliSeconds = Date.parse(datetimeStr);
@@ -38,7 +38,11 @@
       console.log("Milliseconds after estimation: " + estimatedNewTime);
       date = new Date(estimatedNewTime);
       console.log("Estimatated new date: " + date);
-      formattedDate = date.getHours() + ":" + date.getMinutes() + " " + days[date.getDay()] + ' ' + date.getDate() + ' ' + months[date.getMonth()] + ' ' + date.getFullYear();
+      minutes = parseInt(date.getMinutes());
+      if (minutes < 10) {
+        minutes = "0" + minutes;
+      }
+      formattedDate = date.getHours() + ":" + minutes + " " + days[date.getDay()] + ' ' + date.getDate() + ' ' + months[date.getMonth()] + ' ' + date.getFullYear();
       console.log("Estimatated date formatted: " + formattedDate);
       return formattedDate;
     };
