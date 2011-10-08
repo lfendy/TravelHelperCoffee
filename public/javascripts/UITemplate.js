@@ -81,7 +81,8 @@ table tr th {\
         </tr>\
 		{{/flights}}\
 		<tr>\
-            <td colspan="3">All cars before flight should arrive <input onchange="return UtilScraper.get().handleOnChangeAll()" id="arrive-before" type="text" size="5" value="45" /> minutes early to airports</td>\
+            <td>All cars before flight should arrive</td>\
+			<td colspan="2"><input onchange="return UtilScraper.get().handleOnChangeAll()" id="arrive-before" type="text" size="5" value="45" /> minutes early to airports</td>\
         </tr>\
 	</table>\
 \
