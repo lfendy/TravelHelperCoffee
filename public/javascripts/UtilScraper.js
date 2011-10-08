@@ -22,6 +22,7 @@
       sourceAddress = sourceAddress + ", Australia";
       destinationAddress = destinationAddress + ", Australia";
       url = 'http://maps.google.com/maps?f=d&hl=en&geocode=&time=&date=&ttype=&saddr=' + sourceAddress + '&daddr=' + destinationAddress;
+      console.log(url);
       $.get(url, function(res) {
         return alert(res.responseText);
       });

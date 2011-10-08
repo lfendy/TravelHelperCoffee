@@ -16,6 +16,7 @@ window.UtilScraper = class UtilScraper
     sourceAddress = sourceAddress + ", Australia"
     destinationAddress = destinationAddress + ", Australia"
     url = 'http://maps.google.com/maps?f=d&hl=en&geocode=&time=&date=&ttype=&saddr=' + sourceAddress + '&daddr=' + destinationAddress
+    console.log url
     $.get url, (res) ->
         alert res.responseText
     false
