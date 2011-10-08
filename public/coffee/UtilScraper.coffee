@@ -37,9 +37,13 @@ window.UtilScraper = class UtilScraper
     fromAddress = ($ "input#" + direction + "-" + flightNumber).val()
     targetAirport = ($ "input#" + direction + "-airport-" + flightNumber).val()
     targetDatetime = ($ "input#" + direction + "-datetime-" + flightNumber).val()
-    targetCarTravelTime = ($ "input#origin-cartraveltime-" + flightNumber).val()
     targetDiv = "div#" + direction + "-travelinfo-" + flightNumber
-    formattedDatetime = @estimateDatetime targetDatetime, targetCarTravelTime
+    formattedDatetime = targetDatetime
+
+    if flightNumber?
+      targetCarTravelTime = ($ "input#origin-cartraveltime-" + flightNumber).val()
+      formattedDatetime = @estimateDatetime targetDatetime, targetCarTravelTime
+    
     #alert "targetCarTravelTime: " + targetCarTravelTime + ", targetAirport: " + targetAirport + ", targetDatetime: " + targetDatetime + ", targetDiv: " + targetDiv
     ($ targetDiv).html "<strong>To " + targetAirport + " on " + formattedDatetime + "</strong><br />From: " + fromAddress + "<br /><br />"
 

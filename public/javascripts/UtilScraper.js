@@ -47,9 +47,12 @@
       fromAddress = ($("input#" + direction + "-" + flightNumber)).val();
       targetAirport = ($("input#" + direction + "-airport-" + flightNumber)).val();
       targetDatetime = ($("input#" + direction + "-datetime-" + flightNumber)).val();
-      targetCarTravelTime = ($("input#origin-cartraveltime-" + flightNumber)).val();
       targetDiv = "div#" + direction + "-travelinfo-" + flightNumber;
-      formattedDatetime = this.estimateDatetime(targetDatetime, targetCarTravelTime);
+      formattedDatetime = targetDatetime;
+      if (flightNumber != null) {
+        targetCarTravelTime = ($("input#origin-cartraveltime-" + flightNumber)).val();
+        formattedDatetime = this.estimateDatetime(targetDatetime, targetCarTravelTime);
+      }
       return ($(targetDiv)).html("<strong>To " + targetAirport + " on " + formattedDatetime + "</strong><br />From: " + fromAddress + "<br /><br />");
     };
     UtilScraper.prototype.injectHtml = function(uiTemplate, view, htmlElement) {

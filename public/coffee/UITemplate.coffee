@@ -16,6 +16,7 @@ window.UITemplate = '
 		{{#flights}}
     	<tr>
 			<td colspan="3">
+				<input type="hidden" class="flightNumbers" value="{{flightNumberNoWS}}" />
 				<input type="hidden" id="origin-airport-{{flightNumberNoWS}}" value="{{origin}} Domestic Airport" />
 				<input type="hidden" id="destination-airport-{{flightNumberNoWS}}" value="{{destination}} Domestic Airport" />
 				<input type="hidden" id="origin-datetime-{{flightNumberNoWS}}" value="{{departureTime}} {{formattedDepartureDate}}" />
@@ -33,7 +34,7 @@ window.UITemplate = '
         </tr>
 		{{/flights}}
 		<tr>
-            <td colspan="3">All cars before flight should arrive <input onchange="return UtilScraper.get().handleOnChange(\'origin\', \'{{flightNumberNoWS}}\')" id="arrive-before" type="text" size="5" value="45" /> minutes early to airports</td>
+            <td colspan="3">All cars before flight should arrive <input onchange="return UtilScraper.get().handleOnChangeAll()" id="arrive-before" type="text" size="5" value="45" /> minutes early to airports</td>
         </tr>
 	</table>
 
