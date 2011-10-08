@@ -61,7 +61,7 @@
     UtilScraper.prototype.handleOnChangeAll = function() {
       return ($("input.flightNumbers")).each(function() {
         console.log("Invoking 'onChange' for flight number: " + $(this).val());
-        this.handleOnChange("origin", $(this).val());
+        UtilScraper.get().handleOnChange("origin", $(this).val());
         return true;
       });
     };

@@ -53,7 +53,7 @@ window.UtilScraper = class UtilScraper
   handleOnChangeAll: () ->
     ($ "input.flightNumbers").each ->
       console.log "Invoking 'onChange' for flight number: " + $(this).val()
-      @handleOnChange "origin", $(this).val()
+      UtilScraper.get().handleOnChange "origin", $(this).val()
       true
 
   injectHtml: (uiTemplate, view, htmlElement) ->
