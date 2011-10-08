@@ -43,7 +43,7 @@
       return formattedDate;
     };
     UtilScraper.prototype.handleOnChange = function(direction, flightNumber) {
-      var arriveBeforeTime, formattedDatetime, fromAddress, targetAirport, targetCarTravelTime, targetDatetime, targetDiv;
+      var arriveBeforeTime, formattedDatetime, fromAddress, targetAirport, targetCarTravelTime, targetDatetime, targetDiv, totalMinutes;
       fromAddress = ($("input#" + direction + "-" + flightNumber)).val();
       targetAirport = ($("input#" + direction + "-airport-" + flightNumber)).val();
       targetDatetime = ($("input#" + direction + "-datetime-" + flightNumber)).val();
@@ -52,14 +52,14 @@
       if (flightNumber != null) {
         targetCarTravelTime = ($("input#origin-cartraveltime-" + flightNumber)).val();
         arriveBeforeTime = ($("input#arrive-before")).val();
-        formattedDatetime = this.estimateDatetime(targetDatetime, targetCarTravelTime + arriveBeforeTime);
+        totalMinutes = targetCarTravelTime + arriveBeforeTime;
+        console.log("Total minutes to substract: " + totalMinutes);
+        formattedDatetime = this.estimateDatetime(targetDatetime, totalMinutes);
       }
       return ($(targetDiv)).html("<strong>To " + targetAirport + " on " + formattedDatetime + "</strong><br />From: " + fromAddress + "<br /><br />");
     };
     UtilScraper.prototype.handleOnChangeAll = function() {
-      var flightNumberts;
-      flightNumberts = $("input.flightNumbers");
-      return flightNumbers.each(function() {
+      return ($("input.flightNumbers")).each(function() {
         console.log("Invoking 'onChange' for flight number: " + $(this).val());
         handleOnChange("origin", $(this).val());
         return true;
