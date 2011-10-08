@@ -43,15 +43,17 @@ window.UtilScraper = class UtilScraper
     targetDiv = "div#" + direction + "-travelinfo-" + flightNumber
     formattedDatetime = targetDatetime
 
-    if flightNumber?
+    if direction == "origin"
       targetCarTravelTime = ($ "input#origin-cartraveltime-" + flightNumber).val()
       arriveBeforeTime = ($ "input#arrive-before").val()
       totalMinutes = parseInt(targetCarTravelTime) + parseInt(arriveBeforeTime)
       console.log "Total minutes to substract: " + totalMinutes
       formattedDatetime = @estimateDatetime targetDatetime, totalMinutes
-    
+
+    start = (if direction == "origin" then "To" else "From")
+    end = (if direction == "origin" then "From" else "To")
     #alert "targetCarTravelTime: " + targetCarTravelTime + ", targetAirport: " + targetAirport + ", targetDatetime: " + targetDatetime + ", targetDiv: " + targetDiv
-    ($ targetDiv).html "<strong>To " + targetAirport + " on " + formattedDatetime + "</strong><br />From: " + fromAddress + "<br /><br />"
+    ($ targetDiv).html "<strong>" + start + " " + targetAirport + " on " + formattedDatetime + "</strong><br />" + end + ": " + fromAddress + "<br /><br />"
 
   handleOnChangeAll: () ->
     ($ "input.flightNumbers").each ->

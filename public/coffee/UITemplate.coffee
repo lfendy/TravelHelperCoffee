@@ -76,7 +76,7 @@ table tr th {
 		</tr>
         <tr>
             <td>From <b id="destination-airport-{{flightNumberNoWS}}">{{destination}} Domestic Airport</b> to</td>
-            <td colspan="2"><input onchange="return UtilScraper.get().handleOnChange(\'destination\', null)" id="" type="text" size="35" /></td>
+            <td colspan="2"><input onchange="return UtilScraper.get().handleOnChange(\'destination\', \'{{flightNumberNoWS}}\')" id="" type="text" size="35" /></td>
         </tr>
 		{{/flights}}
 		<tr>

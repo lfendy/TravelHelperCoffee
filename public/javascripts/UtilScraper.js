@@ -47,20 +47,22 @@
       return formattedDate;
     };
     UtilScraper.prototype.handleOnChange = function(direction, flightNumber) {
-      var arriveBeforeTime, formattedDatetime, fromAddress, targetAirport, targetCarTravelTime, targetDatetime, targetDiv, totalMinutes;
+      var arriveBeforeTime, end, formattedDatetime, fromAddress, start, targetAirport, targetCarTravelTime, targetDatetime, targetDiv, totalMinutes;
       fromAddress = ($("input#" + direction + "-" + flightNumber)).val();
       targetAirport = ($("input#" + direction + "-airport-" + flightNumber)).val();
       targetDatetime = ($("input#" + direction + "-datetime-" + flightNumber)).val();
       targetDiv = "div#" + direction + "-travelinfo-" + flightNumber;
       formattedDatetime = targetDatetime;
-      if (flightNumber != null) {
+      if (direction === "origin") {
         targetCarTravelTime = ($("input#origin-cartraveltime-" + flightNumber)).val();
         arriveBeforeTime = ($("input#arrive-before")).val();
         totalMinutes = parseInt(targetCarTravelTime) + parseInt(arriveBeforeTime);
         console.log("Total minutes to substract: " + totalMinutes);
         formattedDatetime = this.estimateDatetime(targetDatetime, totalMinutes);
       }
-      return ($(targetDiv)).html("<strong>To " + targetAirport + " on " + formattedDatetime + "</strong><br />From: " + fromAddress + "<br /><br />");
+      start = (direction === "origin" ? "To" : "From");
+      end = (direction === "origin" ? "From" : "To");
+      return ($(targetDiv)).html("<strong>" + start + " " + targetAirport + " on " + formattedDatetime + "</strong><br />" + end + ": " + fromAddress + "<br /><br />");
     };
     UtilScraper.prototype.handleOnChangeAll = function() {
       return ($("input.flightNumbers")).each(function() {
