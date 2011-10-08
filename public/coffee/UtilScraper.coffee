@@ -43,7 +43,7 @@ window.UtilScraper = class UtilScraper
     if flightNumber?
       targetCarTravelTime = ($ "input#origin-cartraveltime-" + flightNumber).val()
       arriveBeforeTime = ($ "input#arrive-before").val()
-      totalMinutes = targetCarTravelTime + arriveBeforeTime
+      totalMinutes = parseInt(targetCarTravelTime) + parseInt(arriveBeforeTime)
       console.log "Total minutes to substract: " + totalMinutes
       formattedDatetime = @estimateDatetime targetDatetime, totalMinutes
     
