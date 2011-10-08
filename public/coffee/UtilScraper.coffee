@@ -12,6 +12,14 @@ window.UtilScraper = class UtilScraper
   init: (name = "unknown") ->
     console.log "#{name} initialized"
 
+  queryGoogleMap: (sourceAddress, destinationAddress) ->
+    sourceAddress = sourceAddress + ", Australia"
+    destinationAddress = destinationAddress + ", Australia"
+    url = 'http://maps.google.com/maps?f=d&hl=en&geocode=&time=&date=&ttype=&saddr=' + sourceAddress + '&daddr=' + destinationAddress
+    $.get url, (res) ->
+        alert res.responseText
+    false
+
   getGoogleSpreadsheetAsJson: (spreadsheetId, gridId, target, callback) ->
     url = 'http://spreadsheets.google.com/feeds/cells/' + spreadsheetId + '/' + gridId + '/public/basic?alt=json-in-script'
     $.get url, (res) ->

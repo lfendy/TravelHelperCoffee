@@ -81,8 +81,9 @@ table tr th {
 		{{/flights}}
 		<tr>
             <td>All cars before flight should arrive</td>
-			<td colspan="2"><input onchange="return UtilScraper.get().handleOnChangeAll()" id="arrive-before" type="text" size="5" value="45" /> minutes early to airports</td>
-        </tr>
+			<td><input onchange="return UtilScraper.get().handleOnChangeAll()" id="arrive-before" type="text" size="5" value="45" /> minutes early to airports</td>
+        	<td><a href="javascript:void(0)" onclick="return UtilScraper.get().queryGoogleMap($("input#origin-{{flightNumberNoWS}}").val(), $("input#destination-{{flightNumberNoWS}}").val()))">Ask Google about travel time</a>&nbsp;<span id="google-travel-response"></span></td>
+		</tr>
 	</table>
 
 	<div id="car-placeholder">

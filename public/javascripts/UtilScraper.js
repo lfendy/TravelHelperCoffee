@@ -17,6 +17,16 @@
       }
       return console.log("" + name + " initialized");
     };
+    UtilScraper.prototype.queryGoogleMap = function(sourceAddress, destinationAddress) {
+      var url;
+      sourceAddress = sourceAddress + ", Australia";
+      destinationAddress = destinationAddress + ", Australia";
+      url = 'http://maps.google.com/maps?f=d&hl=en&geocode=&time=&date=&ttype=&saddr=' + sourceAddress + '&daddr=' + destinationAddress;
+      $.get(url, function(res) {
+        return alert(res.responseText);
+      });
+      return false;
+    };
     UtilScraper.prototype.getGoogleSpreadsheetAsJson = function(spreadsheetId, gridId, target, callback) {
       var url;
       url = 'http://spreadsheets.google.com/feeds/cells/' + spreadsheetId + '/' + gridId + '/public/basic?alt=json-in-script';
