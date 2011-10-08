@@ -1,6 +1,5 @@
 window.UIFooterTemplate = 
 '<div id="itenary-footer">
-<p>-----------------------------------------------------------------------<br /><br /></p>
 <p>For changes or cancellations outside business hours please contact airlines and drivers directly<br />
 via their website or the following numbers.<br /><br /></p>
 

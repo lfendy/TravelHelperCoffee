@@ -1,17 +1,63 @@
 (function() {
   window.UITemplate = '\
-<div id="travelplanner" align="left" style="text-align: left; margin: 10px; padding: 0px 20px 20px; background: none repeat scroll 0% 0% white; border: 5px dotted grey;">\
+\
+<style type="text/css">\
+h2 {\
+	margin-left: 0 !important;\
+	font-size: 18px;\
+	font-weight: bold;\
+}\
+\
+#car-placeholder table {\
+	border-collapse: collapse;\
+}\
+\
+#car-placeholder tr {\
+	border: 1px gray solid;\
+}\
+\
+#car-placeholder td {\
+	padding: 3px;\
+}\
+\
+table tr th {\
+	color: #000 !important;\
+	font-weight: bold !important;\
+	height: 2em !important;\
+	padding: 2px 4px !important;\
+	text-align: left !important;\
+	white-space: nowrap !important;\
+}\
+\
+#travelplanner {\
+	text-align: left;\
+	margin: 10px;\
+	padding: 0px 20px 20px;\
+	background: none repeat scroll 0% 0% white;\
+	border: 5px dotted grey;\
+}\
+\
+#cars-form,#email,#itenary-footer {\
+	border: 1px #cccccc solid;\
+	background-color: #F2F2F2;\
+	padding: 20px;\
+	margin-bottom: 20px;\
+	width: 70%;\
+}\
+</style>\
+\
+<div id="travelplanner" align="left">\
   <h1>Travel Planner</h1>\
 \
   <div id="contact">\
-    <h2 style="margin-left: 0 !important">Contact Details for {{passengerName}}</h2>\
+    <h2>Contact Details for {{passengerName}}</h2>\
     <span class="formLabel">mobile:</span>\
     <input id="mobileNumber" value="{{mobileNumber}}" />\
     <br /><br />\
   </div>\
 \
   <div id="cars-form">\
-	<h2 style="margin-left: 0 !important">Cars</h2>\
+	<h2>Cars</h2>\
 	\
 	<table border="0" width="660px" cellspacing="1px" cellpadding="2px">\
 		{{#flights}}\
@@ -40,13 +86,13 @@
 	</table>\
 \
 	<div id="car-placeholder">\
-    	<h2 style="margin-left: 0 !important">Contact Drivers</h2>\
+    	<h2>Contact Drivers</h2>\
         <p id="car-content">Waiting for Google to respond..</p>\
     </div>\
   </div>\
 \
   <div id="email">\
-    <h2 style="margin-left: 0 !important">Itinerary</h2>\
+    <h2>Itinerary</h2>\
     <b>Flight Booking Reference: </b> {{reservationNumber}}<br />\
     -----------------------------------------------------------------------<br /><br />\
     Travel Itinerary For:\
@@ -54,7 +100,7 @@
     <span id="passengerName"> {{passengerName}} </span>\
     <span id="mobileNumber"> {{mobileNumber}} </span><br />\
     -----------------------------------------------------------------------<br /><br />\
-    <div id="flights" style="">\
+    <div id="flights">\
     {{#flights}}\
       \
 	  <div id="origin-travelinfo-{{flightNumberNoWS}}"></div>\
@@ -64,12 +110,9 @@
       Depart: {{departureDate}} {{departureTime}} - {{origin}} Domestic Airport<br />\
       Arrive: {{arrivalDate}} {{arrivalTime}} - {{destination}} Domestic Airport\
 	  \
- 	  <div id="destination-travelinfo-{{flightNumberNoWS}}"></div>\
-      \
-	  <br /><br />\
+ 	  <div id="destination-travelinfo-{{flightNumberNoWS}}"></div><br />\
       \
 	{{/flights}}\
     </div>\
-    -----------------------------------------------------------------------<br /><br />\
   </div>' + window.UIFooterTemplate + '</div>';
 }).call(this);
