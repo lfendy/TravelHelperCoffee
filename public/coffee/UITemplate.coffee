@@ -41,7 +41,7 @@ table tr th {
 	background-color: #F2F2F2;
 	padding: 20px;
 	margin-bottom: 20px;
-	width: 98%;
+	width: 90%;
 }
 </style>
 
