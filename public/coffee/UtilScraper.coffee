@@ -77,8 +77,12 @@ window.UtilScraper = class UtilScraper
 
     start = (if direction == "origin" then "To" else "From")
     end = (if direction == "origin" then "From" else "To")
+    journey = (if direction == "origin" then "departure" else "arrival")
     #alert "targetCarTravelTime: " + targetCarTravelTime + ", targetAirport: " + targetAirport + ", targetDatetime: " + targetDatetime + ", targetDiv: " + targetDiv
-    ($ targetDiv).html "<strong>" + start + " " + targetAirport + " on " + formattedDatetime + "</strong><br />" + end + ": " + fromAddress + "<br /><br />"
+    carTransferTime = "<strong>Car Transfer Time (on " + flightNumber + " " + journey + "): " + formattedDatetime + "</strong><br />"
+    carTransferTime = carTransferTime + start + ": " + targetAirport + "<br />"
+    carTransferTime = carTransferTime + end + ": " + fromAddress + "<br /><br />"
+    ($ targetDiv).html carTransferTime
 
   handleOnChangeAll: () ->
     ($ "input.flightNumbers").each ->

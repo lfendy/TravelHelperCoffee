@@ -65,6 +65,7 @@
       var f;
       f = new Flight();
       f.flightNumber = ($(raw)).find('span.flightnumber').text().trim();
+      f.flightNumberNoWS = f.flightNumber.replace(/\s+/, '');
       f.departureDate = ($(raw)).find('td').eq(0).text().trim();
       f.formattedDepartureDate = this.makePrettyDate(f.departureDate);
       f.arrivalDate = ($(raw)).find('td').eq(0).text().trim();
