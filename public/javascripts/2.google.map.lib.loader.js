@@ -7,7 +7,7 @@ newScript1.src = "http://maps.googleapis.com/maps/api/js?sensor=false&time=" + d
 
 var newScript2 = document.createElement('script');   
 newScript2.type = 'text/javascript';
-newScript2.src = "http://maps.gstatic.com/intl/en_us/mapfiles/api-3/6/7/main.js";
+newScript2.src = "http://maps.gstatic.com/intl/en_us/mapfiles/api-3/6/7/main.js?time=" + d.getTime();
    
 headID.appendChild(newScript1);
-//headID.appendChild(newScript2);
+headID.appendChild(newScript2);

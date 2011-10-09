@@ -1,6 +1,12 @@
 window.UITemplate = '
 
 <style type="text/css">
+
+body, td, th, p, ul, input, select {
+    font-family: verdana,helvetica,arial,sans-serif !important;
+    font-size: 12px !important;
+}
+
 h2 {
 	margin-left: 0 !important;
 	font-size: 18px;
