@@ -12,6 +12,6 @@ newScript1.src = "http://maps.googleapis.com/maps/api/js?sensor=false&time=" + d
 //headID.appendChild(newScript1);
 //headID.appendChild(newScript2);
 $(document).ready(function() {
-	$("head").prepend(newScript1);
+	$("head").append(newScript1);
 });
 
