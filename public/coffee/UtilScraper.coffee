@@ -12,14 +12,19 @@ window.UtilScraper = class UtilScraper
   init: (name = "unknown") ->
     console.log "#{name} initialized"
 
-  queryGoogleMap: (sourceAddress, destinationAddress) ->
+  queryGoogleMap: (sourceAddress, destinationAddress, target, callback) ->
     sourceAddress = sourceAddress + ", Australia"
     destinationAddress = destinationAddress + ", Australia"
     url = 'http://maps.google.com/maps?f=d&hl=en&geocode=&time=&date=&ttype=&saddr=' + sourceAddress + '&daddr=' + destinationAddress
+    url = 'http://maps.googleapis.com/maps/api/distancematrix/json?origins=274+Ballarat+road+Footscray+3011+Australia&destinations=12-32+Pecks+road+Sydenham+3037+Australia&mode=driving&language=en-US&sensor=false'
     console.log url
     $.get url, (res) ->
-        alert res.responseText
-    false
+        console.log "About to call callback after GET"
+        callback.call target, res.responseText
+
+    $.getJSON url, (res) ->
+        console.log "About to call callback after JSON"
+        callback.call target, res.responseText
 
   getGoogleSpreadsheetAsJson: (spreadsheetId, gridId, target, callback) ->
     url = 'http://spreadsheets.google.com/feeds/cells/' + spreadsheetId + '/' + gridId + '/public/basic?alt=json-in-script'
@@ -30,14 +35,14 @@ window.UtilScraper = class UtilScraper
         callback.call target, json.feed.entry
   
   estimateDatetime: (datetimeStr, minutesToSubstructInt) ->
-    console.log "Got date: " + datetimeStr + " to substract " + minutesToSubstructInt + " minutes from "
+    #console.log "Got date: " + datetimeStr + " to substract " + minutesToSubstructInt + " minutes from "
     estimatedMillis = new Number(minutesToSubstructInt) * 1000 * 60
     currMilliSeconds = Date.parse datetimeStr
-    console.log "Current milliseconds: " + currMilliSeconds
+    #console.log "Current milliseconds: " + currMilliSeconds
     estimatedNewTime = currMilliSeconds - estimatedMillis
-    console.log "Milliseconds after estimation: " + estimatedNewTime
+    #console.log "Milliseconds after estimation: " + estimatedNewTime
     date = new Date estimatedNewTime
-    console.log "Estimatated new date: " + date
+    #console.log "Estimatated new date: " + date
     minutes = parseInt(date.getMinutes())
     if minutes < 10
       minutes = "0" + minutes
@@ -56,7 +61,7 @@ window.UtilScraper = class UtilScraper
       targetCarTravelTime = ($ "input#origin-cartraveltime-" + flightNumber).val()
       arriveBeforeTime = ($ "input#arrive-before").val()
       totalMinutes = parseInt(targetCarTravelTime) + parseInt(arriveBeforeTime)
-      console.log "Total minutes to substract: " + totalMinutes
+      #console.log "Total minutes to substract: " + totalMinutes
       formattedDatetime = @estimateDatetime targetDatetime, totalMinutes
 
     start = (if direction == "origin" then "To" else "From")
@@ -66,7 +71,7 @@ window.UtilScraper = class UtilScraper
 
   handleOnChangeAll: () ->
     ($ "input.flightNumbers").each ->
-      console.log "Invoking 'onChange' for flight number: " + $(this).val()
+      console.log "Invoking 'handleOnChange' for flight number: " + $(this).val()
       UtilScraper.get().handleOnChange "origin", $(this).val()
       true
 

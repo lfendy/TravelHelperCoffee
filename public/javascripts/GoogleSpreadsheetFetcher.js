@@ -21,6 +21,14 @@
       UtilScraper.get().getGoogleSpreadsheetAsJson('pgZYLtdPRv51beYTHUIrFWg', 'od6', this, this.carGoogleSpreadsheetAjaxCallback);
       return "Alex";
     };
+    GoogleSpreadsheetFetcher.prototype.getTraveltimeFromGoogle = function(from, to) {
+      UtilScraper.get().queryGoogleMap(from, to, this, this.traveltimeFromGoogleAjaxCallback);
+      return "Alex";
+    };
+    GoogleSpreadsheetFetcher.prototype.traveltimeFromGoogleAjaxCallback = function(responseText) {
+      alert(responseText);
+      return console.log(responseText);
+    };
     GoogleSpreadsheetFetcher.prototype.parseCar = function(cells, i) {
       var c, city, company, contact, phone;
       city = cells[i].content.$t;

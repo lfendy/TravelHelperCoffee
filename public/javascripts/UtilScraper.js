@@ -17,16 +17,21 @@
       }
       return console.log("" + name + " initialized");
     };
-    UtilScraper.prototype.queryGoogleMap = function(sourceAddress, destinationAddress) {
+    UtilScraper.prototype.queryGoogleMap = function(sourceAddress, destinationAddress, target, callback) {
       var url;
       sourceAddress = sourceAddress + ", Australia";
       destinationAddress = destinationAddress + ", Australia";
       url = 'http://maps.google.com/maps?f=d&hl=en&geocode=&time=&date=&ttype=&saddr=' + sourceAddress + '&daddr=' + destinationAddress;
+      url = 'http://maps.googleapis.com/maps/api/distancematrix/json?origins=274+Ballarat+road+Footscray+3011+Australia&destinations=12-32+Pecks+road+Sydenham+3037+Australia&mode=driving&language=en-US&sensor=false';
       console.log(url);
       $.get(url, function(res) {
-        return alert(res.responseText);
+        console.log("About to call callback after GET");
+        return callback.call(target, res.responseText);
       });
-      return false;
+      return $.getJSON(url, function(res) {
+        console.log("About to call callback after JSON");
+        return callback.call(target, res.responseText);
+      });
     };
     UtilScraper.prototype.getGoogleSpreadsheetAsJson = function(spreadsheetId, gridId, target, callback) {
       var url;
@@ -41,14 +46,10 @@
     };
     UtilScraper.prototype.estimateDatetime = function(datetimeStr, minutesToSubstructInt) {
       var currMilliSeconds, date, estimatedMillis, estimatedNewTime, formattedDate, minutes;
-      console.log("Got date: " + datetimeStr + " to substract " + minutesToSubstructInt + " minutes from ");
       estimatedMillis = new Number(minutesToSubstructInt) * 1000 * 60;
       currMilliSeconds = Date.parse(datetimeStr);
-      console.log("Current milliseconds: " + currMilliSeconds);
       estimatedNewTime = currMilliSeconds - estimatedMillis;
-      console.log("Milliseconds after estimation: " + estimatedNewTime);
       date = new Date(estimatedNewTime);
-      console.log("Estimatated new date: " + date);
       minutes = parseInt(date.getMinutes());
       if (minutes < 10) {
         minutes = "0" + minutes;
@@ -68,7 +69,6 @@
         targetCarTravelTime = ($("input#origin-cartraveltime-" + flightNumber)).val();
         arriveBeforeTime = ($("input#arrive-before")).val();
         totalMinutes = parseInt(targetCarTravelTime) + parseInt(arriveBeforeTime);
-        console.log("Total minutes to substract: " + totalMinutes);
         formattedDatetime = this.estimateDatetime(targetDatetime, totalMinutes);
       }
       start = (direction === "origin" ? "To" : "From");
@@ -77,7 +77,7 @@
     };
     UtilScraper.prototype.handleOnChangeAll = function() {
       return ($("input.flightNumbers")).each(function() {
-        console.log("Invoking 'onChange' for flight number: " + $(this).val());
+        console.log("Invoking 'handleOnChange' for flight number: " + $(this).val());
         UtilScraper.get().handleOnChange("origin", $(this).val());
         return true;
       });

@@ -18,6 +18,14 @@ window.GoogleSpreadsheetFetcher = class GoogleSpreadsheetFetcher
   getCarGoogleSpreadsheetAsJson: () ->
     UtilScraper.get().getGoogleSpreadsheetAsJson 'pgZYLtdPRv51beYTHUIrFWg', 'od6', this, @carGoogleSpreadsheetAjaxCallback
     "Alex"
+  
+  getTraveltimeFromGoogle: (from, to) ->
+    UtilScraper.get().queryGoogleMap from, to, this, @traveltimeFromGoogleAjaxCallback
+    "Alex"
+
+  traveltimeFromGoogleAjaxCallback: (responseText) ->
+    alert responseText
+    console.log responseText
 
   parseCar: (cells, i) ->
     city = cells[i].content.$t

@@ -23,3 +23,4 @@ describe "UtilScraper", ->
   it "should substract minutes from given date string (6)", ->                                                                                                                    
     util = UtilScraper.get()
     (expect util.estimateDatetime('7:15 Saturday 8 October 2011', 90)).toEqual "5:45 Saturday 8 October 2011"
+
