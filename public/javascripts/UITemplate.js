@@ -74,7 +74,7 @@ table tr th {\
 			<td>To <b>{{origin}} Domestic Airport</b> from</td>\
 			<td><input onchange="return UtilScraper.get().handleOnChange(\'origin\', \'{{flightNumberNoWS}}\')"  id="origin-{{flightNumberNoWS}}" type="text" size="35" /></td>\
 			<td>will take <input onchange="return UtilScraper.get().handleOnChange(\'origin\', \'{{flightNumberNoWS}}\')" id="origin-cartraveltime-{{flightNumberNoWS}}" type="text" size="5" value="30" /> mins</td>\
-			<td><a href="javascript:void(0)" onclick="return UtilScraper.get().queryGoogleMap($(\'input#origin-{{flightNumberNoWS}}\').val(), $(\'input#destination-{{flightNumberNoWS}}\').val(), \'span#google-response-{{flightNumberNoWS}}\');">Time it!</a>&nbsp;&nbsp;&nbsp;<b><span id="google-response-{{flightNumberNoWS}}"></span></b></td>\
+			<td width="250px"><input value="Get travel time" onclick="return UtilScraper.get().queryGoogleMap($(\'input#origin-{{flightNumberNoWS}}\').val(), $(\'input#destination-{{flightNumberNoWS}}\').val(), \'span#google-response-{{flightNumberNoWS}}\');" type="button" id="btn-traveltime-{{flightNumberNoWS}}" />&nbsp;&nbsp;<b><span id="google-response-{{flightNumberNoWS}}"></span></b></td>\
 		</tr>\
         <tr>\
             <td>From <b id="destination-airport-{{flightNumberNoWS}}">{{destination}} Domestic Airport</b> to</td>\
