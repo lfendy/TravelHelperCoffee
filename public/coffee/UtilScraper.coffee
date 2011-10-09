@@ -12,24 +12,36 @@ window.UtilScraper = class UtilScraper
   init: (name = "unknown") ->
     console.log "#{name} initialized"
 
-  queryGoogleMap: (sourceAddress, destinationAddress, target, callback) ->
-    sourceAddress = sourceAddress + ", Australia"
-    destinationAddress = destinationAddress + ", Australia"
-    #url = 'http://maps.google.com/maps?f=d&hl=en&geocode=&time=&date=&ttype=&saddr=' + sourceAddress + '&daddr=' + destinationAddress
-    url = 'http://maps.googleapis.com/maps/api/distancematrix/json?origins=274+Ballarat+road+Footscray+3011+Australia&destinations=12-32+Pecks+road+Sydenham+3037+Australia&mode=driving&language=en-US&sensor=false'
-    console.log url
-    $.get url, (res) ->
-        console.log "About to call callback after GET"
-        callback.call target, res.responseText
+  queryGoogleMap: (sourceAddress, destinationAddress, targetDiv) ->
+    ($ targetDiv).html "Wait.."
+    service = new google.maps.DistanceMatrixService
+    service.getDistanceMatrix 
+      origins: [ sourceAddress ]
+      destinations: [ destinationAddress ]
+      travelMode: google.maps.TravelMode.DRIVING
+      unitSystem: google.maps.UnitSystem.METRIC
+      avoidHighways: false
+      avoidTolls: false
+      , (response, status) ->
+          UtilScraper.get().parseGoogleMapMatrix response, status, targetDiv
 
-    $.getJSON url, (res) ->
-        console.log "About to call callback after JSON"
-        callback.call target, res.responseText
+  parseGoogleMapMatrix: (response, status, targetDiv) ->
+    unless status == google.maps.DistanceMatrixStatus.OK
+      alert "Error was when trying to query Google maps: " + status
+      ($ targetDiv).html "Oops! :("
+    else
+      console.log response
+      elements = response.rows[0].elements
+      result = elements[0].distance.text + "->" + elements[0].duration.text
+      console.log result
+      ($ targetDiv).html result
+      
 
   getGoogleSpreadsheetAsJson: (spreadsheetId, gridId, target, callback) ->
     url = 'http://spreadsheets.google.com/feeds/cells/' + spreadsheetId + '/' + gridId + '/public/basic?alt=json-in-script'
     $.get url, (res) ->
-        jsonString = res.responseText.substring(res.responseText.indexOf("{"), res.responseText.lastIndexOf("}") + 1)
+        #alert res
+        jsonString = res.substring(res.indexOf("{"), res.lastIndexOf("}") + 1)
         jsonString
         json = jQuery.parseJSON jsonString
         callback.call target, json.feed.entry

@@ -20,7 +20,7 @@ window.GoogleSpreadsheetFetcher = class GoogleSpreadsheetFetcher
     "Alex"
   
   getTraveltimeFromGoogle: (from, to) ->
-    UtilScraper.get().queryGoogleMap from, to, this, @traveltimeFromGoogleAjaxCallback
+    UtilScraper.get().queryGoogleMap from, to, 'span#destination'
     "Alex"
 
   traveltimeFromGoogleAjaxCallback: (responseText) ->

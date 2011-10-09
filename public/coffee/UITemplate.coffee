@@ -58,7 +58,7 @@ table tr th {
   <div id="cars-form">
 	<h2>Cars</h2>
 	
-	<table border="0" width="660px" cellspacing="1px" cellpadding="2px">
+	<table border="0" width="95%" cellspacing="1px" cellpadding="2px">
 		{{#flights}}
     	<tr>
 			<td colspan="4">
@@ -73,7 +73,7 @@ table tr th {
 			<td>To <b>{{origin}} Domestic Airport</b> from</td>
 			<td><input onchange="return UtilScraper.get().handleOnChange(\'origin\', \'{{flightNumberNoWS}}\')"  id="origin-{{flightNumberNoWS}}" type="text" size="35" /></td>
 			<td>will take <input onchange="return UtilScraper.get().handleOnChange(\'origin\', \'{{flightNumberNoWS}}\')" id="origin-cartraveltime-{{flightNumberNoWS}}" type="text" size="5" value="30" /> minutes</td>
-			<td><a href="javascript:void(0)" onclick="fetcher = new GoogleSpreadsheetFetcher(); return fetcher.getTraveltimeFromGoogle($(\'input#origin-{{flightNumberNoWS}}\').val(), $(\'input#destination-{{flightNumberNoWS}}\').val());">Google travel time</a>&nbsp;<span id="google-travel-response"></span></td>
+			<td><a href="javascript:void(0)" onclick="return UtilScraper.get().queryGoogleMap($(\'input#origin-{{flightNumberNoWS}}\').val(), $(\'input#destination-{{flightNumberNoWS}}\').val(), \'span#google-response-{{flightNumberNoWS}}\');">Google travel time</a>&nbsp;<span id="google-response-{{flightNumberNoWS}}"></span></td>
 		</tr>
         <tr>
             <td>From <b id="destination-airport-{{flightNumberNoWS}}">{{destination}} Domestic Airport</b> to</td>

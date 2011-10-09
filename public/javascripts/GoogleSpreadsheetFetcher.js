@@ -22,7 +22,7 @@
       return "Alex";
     };
     GoogleSpreadsheetFetcher.prototype.getTraveltimeFromGoogle = function(from, to) {
-      UtilScraper.get().queryGoogleMap(from, to, this, this.traveltimeFromGoogleAjaxCallback);
+      UtilScraper.get().queryGoogleMap(from, to, 'span#destination');
       return "Alex";
     };
     GoogleSpreadsheetFetcher.prototype.traveltimeFromGoogleAjaxCallback = function(responseText) {

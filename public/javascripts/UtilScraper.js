@@ -17,27 +17,40 @@
       }
       return console.log("" + name + " initialized");
     };
-    UtilScraper.prototype.queryGoogleMap = function(sourceAddress, destinationAddress, target, callback) {
-      var url;
-      sourceAddress = sourceAddress + ", Australia";
-      destinationAddress = destinationAddress + ", Australia";
-      url = 'http://maps.googleapis.com/maps/api/distancematrix/json?origins=274+Ballarat+road+Footscray+3011+Australia&destinations=12-32+Pecks+road+Sydenham+3037+Australia&mode=driving&language=en-US&sensor=false';
-      console.log(url);
-      $.get(url, function(res) {
-        console.log("About to call callback after GET");
-        return callback.call(target, res.responseText);
+    UtilScraper.prototype.queryGoogleMap = function(sourceAddress, destinationAddress, targetDiv) {
+      var service;
+      ($(targetDiv)).html("Wait..");
+      service = new google.maps.DistanceMatrixService;
+      return service.getDistanceMatrix({
+        origins: [sourceAddress],
+        destinations: [destinationAddress],
+        travelMode: google.maps.TravelMode.DRIVING,
+        unitSystem: google.maps.UnitSystem.METRIC,
+        avoidHighways: false,
+        avoidTolls: false
+      }, function(response, status) {
+        return UtilScraper.get().parseGoogleMapMatrix(response, status, targetDiv);
       });
-      return $.getJSON(url, function(res) {
-        console.log("About to call callback after JSON");
-        return callback.call(target, res.responseText);
-      });
+    };
+    UtilScraper.prototype.parseGoogleMapMatrix = function(response, status, targetDiv) {
+      var elements, result;
+      if (status !== google.maps.DistanceMatrixStatus.OK) {
+        alert("Error was when trying to query Google maps: " + status);
+        return ($(targetDiv)).html("Oops! :(");
+      } else {
+        console.log(response);
+        elements = response.rows[0].elements;
+        result = elements[0].distance.text + "->" + elements[0].duration.text;
+        console.log(result);
+        return ($(targetDiv)).html(result);
+      }
     };
     UtilScraper.prototype.getGoogleSpreadsheetAsJson = function(spreadsheetId, gridId, target, callback) {
       var url;
       url = 'http://spreadsheets.google.com/feeds/cells/' + spreadsheetId + '/' + gridId + '/public/basic?alt=json-in-script';
       return $.get(url, function(res) {
         var json, jsonString;
-        jsonString = res.responseText.substring(res.responseText.indexOf("{"), res.responseText.lastIndexOf("}") + 1);
+        jsonString = res.substring(res.indexOf("{"), res.lastIndexOf("}") + 1);
         jsonString;
         json = jQuery.parseJSON(jsonString);
         return callback.call(target, json.feed.entry);
