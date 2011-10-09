@@ -40,7 +40,6 @@ window.UtilScraper = class UtilScraper
   getGoogleSpreadsheetAsJson: (spreadsheetId, gridId, target, callback) ->
     url = 'http://spreadsheets.google.com/feeds/cells/' + spreadsheetId + '/' + gridId + '/public/basic?alt=json-in-script'
     $.get url, (res) ->
-        alert res
         jsonString = res.substring(res.indexOf("{"), res.lastIndexOf("}") + 1)
         jsonString
         json = jQuery.parseJSON jsonString

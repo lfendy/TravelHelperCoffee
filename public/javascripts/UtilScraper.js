@@ -50,7 +50,6 @@
       url = 'http://spreadsheets.google.com/feeds/cells/' + spreadsheetId + '/' + gridId + '/public/basic?alt=json-in-script';
       return $.get(url, function(res) {
         var json, jsonString;
-        alert(res);
         jsonString = res.substring(res.indexOf("{"), res.lastIndexOf("}") + 1);
         jsonString;
         json = jQuery.parseJSON(jsonString);
