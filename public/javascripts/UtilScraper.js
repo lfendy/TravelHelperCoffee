@@ -18,13 +18,11 @@
       return console.log("" + name + " initialized");
     };
     UtilScraper.prototype.queryGoogleMap2 = function(sourceAddress, destinationAddress, targetDiv) {
-      var service;
       ($("span#" + targetDiv)).html("Wait..");
       sourceAddress = sourceAddress + ", Australia";
       destinationAddress = destinationAddress + ", Australia";
       console.log(google);
       console.log(google.maps);
-      service = new google.maps.DistanceMatrixService();
       return service.getDistanceMatrix({
         origins: [sourceAddress],
         destinations: [destinationAddress],

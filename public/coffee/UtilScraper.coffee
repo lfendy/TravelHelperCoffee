@@ -20,7 +20,7 @@ window.UtilScraper = class UtilScraper
     console.log google
     console.log google.maps
 
-    service = new google.maps.DistanceMatrixService()
+    #service = new google.maps.DistanceMatrixService()
     service.getDistanceMatrix 
       origins: [ sourceAddress ]
       destinations: [ destinationAddress ]
