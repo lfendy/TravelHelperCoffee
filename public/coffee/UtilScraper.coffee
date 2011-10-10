@@ -44,8 +44,8 @@ window.UtilScraper = class UtilScraper
   parseGoogleMapMatrix: (jsonObj, targetDiv) ->
     console.log "Got JSON : " + jsonObj + " and target element: " + targetDiv
     unless jsonObj.status == "OK" || jsonObj.status == google.maps.DistanceMatrixStatus.OK
-      console.log "Error was when trying to query Google distance matrix: " + jsonObj.status
-      ($ "span#" + targetDiv).html "Oops! Boo boo :("
+      #console.log "Error was when trying to query Google distance matrix: " + jsonObj.status
+      #($ "span#" + targetDiv).html "Oops! Boo boo :("
     else
       
 
@@ -76,7 +76,7 @@ window.UtilScraper = class UtilScraper
           res = res.responseText
         jsonString = res.substring(res.indexOf("{"), res.lastIndexOf("}") + 1)
         json = jQuery.parseJSON jsonString
-        console.log "Got JSON string from Google spreadsheet: " + jsonString
+        console.log "Parsed JSON string from Google spreadsheet as object: " + json
         UtilScraper.get().carGoogleSpreadsheetAjaxCallback json.feed.entry
 
 
