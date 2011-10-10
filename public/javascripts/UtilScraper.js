@@ -21,8 +21,6 @@
       ($("span#" + targetDiv)).html("Wait..");
       sourceAddress = sourceAddress + ", Australia";
       destinationAddress = destinationAddress + ", Australia";
-      console.log(matrix);
-      console.log(matrix.maps);
       return matrix.getDistanceMatrix({
         origins: [sourceAddress],
         destinations: [destinationAddress],
@@ -43,17 +41,17 @@
         return false;
       });
     };
-    UtilScraper.prototype.parseGoogleMapMatrix = function(json, targetDiv) {
+    UtilScraper.prototype.parseGoogleMapMatrix = function(jsonObj, targetDiv) {
       var elements, result;
-      console.log("Got JSON : " + json + " and target element: " + targetDiv);
-      if (!(json.status === "OK" || json.status === google.maps.DistanceMatrixStatus.OK)) {
-        console.log("Error was when trying to query Google distance matrix: " + json.status);
+      console.log("Got JSON : " + jsonObj + " and target element: " + targetDiv);
+      if (!(jsonObj.status === "OK" || jsonObj.status === google.maps.DistanceMatrixStatus.OK)) {
+        console.log("Error was when trying to query Google distance matrix: " + jsonObj.status);
         ($("span#" + targetDiv)).html("Oops! Boo boo :(");
       } else {
 
       }
-      console.log("Got JSON object from Google distance matrix: " + json);
-      elements = json.rows[0].elements;
+      console.log("Got JSON object from Google distance matrix: " + jsonObj);
+      elements = jsonObj.rows[0].elements;
       result = elements[0].distance.text + "->" + elements[0].duration.text;
       console.log(result);
       return ($("span#" + targetDiv)).html(result);
