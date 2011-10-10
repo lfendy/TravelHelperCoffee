@@ -23,14 +23,14 @@
       destinationAddress = destinationAddress + ", Australia";
       console.log(google);
       console.log(google.maps);
-      return service.getDistanceMatrix({
+      return matrix.getDistanceMatrix({
         origins: [sourceAddress],
         destinations: [destinationAddress],
         travelMode: google.maps.TravelMode.DRIVING,
         avoidHighways: false,
         avoidTolls: false
       }, function(json) {
-        return UtilScraper.get().parseGoogleMapMatrix(json);
+        return UtilScraper.get().parseGoogleMapMatrix(json, targetDiv);
       });
     };
     UtilScraper.prototype.queryGoogleMap = function(sourceAddress, destinationAddress, targetDiv) {
@@ -46,8 +46,8 @@
     UtilScraper.prototype.parseGoogleMapMatrix = function(json, targetDiv) {
       var elements, result;
       console.log("Got target element: " + targetDiv);
-      if (json.status !== "OK") {
-        alert("Error was when trying to query Google maps: " + status);
+      if (!(json.status !== "OK" && json.status !== google.maps.DistanceMatrixStatus.OK)) {
+        alert("Error was when trying to query Google distance matrix");
         return ($("span#" + targetDiv)).html("Oops! :(");
       } else {
         console.log("JSON: " + json);

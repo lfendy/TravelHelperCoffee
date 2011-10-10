@@ -21,13 +21,13 @@ window.UtilScraper = class UtilScraper
     console.log google.maps
 
     #service = new google.maps.DistanceMatrixService()
-    service.getDistanceMatrix 
+    matrix.getDistanceMatrix 
       origins: [ sourceAddress ]
       destinations: [ destinationAddress ]
       travelMode: google.maps.TravelMode.DRIVING
       avoidHighways: false
       avoidTolls: false, (json) ->
-        UtilScraper.get().parseGoogleMapMatrix json
+        UtilScraper.get().parseGoogleMapMatrix json, targetDiv
     
   queryGoogleMap: (sourceAddress, destinationAddress, targetDiv) ->
     ($ "span#" + targetDiv).html "Wait.."
@@ -46,8 +46,8 @@ window.UtilScraper = class UtilScraper
 
   parseGoogleMapMatrix: (json, targetDiv) ->
     console.log "Got target element: " + targetDiv
-    unless json.status == "OK"
-      alert "Error was when trying to query Google maps: " + status
+    unless json.status != "OK" && json.status != google.maps.DistanceMatrixStatus.OK
+      alert "Error was when trying to query Google distance matrix"
       ($ "span#" + targetDiv).html "Oops! :("
     else
       console.log "JSON: " + json
