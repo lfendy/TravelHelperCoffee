@@ -6,6 +6,12 @@
       util.queryGoogleMap("12-32 Pecks road, Sydenham 30307", "6 Rosstown road, Carnegie 3163");
       return (expect("true")).toEqual("true");
     });
+    it("should perfom sanity check using API to get some output (2)", function() {
+      var util;
+      util = UtilScraper.get();
+      util.queryGoogleMap2("12-32 Pecks road, Sydenham 30307", "6 Rosstown road, Carnegie 3163");
+      return (expect("true")).toEqual("true");
+    });
     it("should substract minutes from given date string", function() {
       var util;
       util = UtilScraper.get();

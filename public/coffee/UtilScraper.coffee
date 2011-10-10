@@ -11,7 +11,35 @@ window.UtilScraper = class UtilScraper
 
   init: (name = "unknown") ->
     console.log "#{name} initialized"
+  
+  queryGoogleMap2: (sourceAddress, destinationAddress, targetDiv) ->
+    ($ "span#" + targetDiv).html "Wait.."
+    sourceAddress = sourceAddress + ", Australia"
+    destinationAddress = destinationAddress + ", Australia"
+    
+    headID = document.getElementsByTagName("head")[0]                                                                                                                          
+    d = new Date()
+    newScript1 = document.createElement 'script'
+    newScript1.type = 'text/javascript'
+    newScript1.src = "http://maps.googleapis.com/maps/api/js?sensor=false&time=" + d.getTime()
 
+    newScript2 = document.createElement 'script'  
+    newScript2.type = 'text/javascript'
+    newScript2.src = "http://maps.gstatic.com/intl/en_us/mapfiles/api-3/6/7/main.js"
+   
+    headID.appendChild newScript1
+    headID.appendChild newScript2 
+
+
+    service = new google.maps.DistanceMatrixService()
+    service.getDistanceMatrix 
+      origins: [ sourceAddress ]
+      destinations: [ destinationAddress ]
+      travelMode: google.maps.TravelMode.DRIVING
+      avoidHighways: false
+      avoidTolls: false, (json) ->
+        UtilScraper.get().parseGoogleMapMatrix json
+    
   queryGoogleMap: (sourceAddress, destinationAddress, targetDiv) ->
     ($ "span#" + targetDiv).html "Wait.."
     sourceAddress = sourceAddress + ", Australia"
