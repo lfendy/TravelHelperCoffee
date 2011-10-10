@@ -79,8 +79,8 @@ table tr th {\
 		</tr>\
 		<tr>\
 			<td>To <b>{{origin}} Domestic Airport</b> from</td>\
-			<td><input onchange="return UtilScraper.get().handleOnChange(\'origin\', \'{{flightNumberNoWS}}\')"  id="origin-{{flightNumberNoWS}}" type="text" size="35" /></td>\
-			<td>will take <input onchange="  if ($(this).val() != null && $(this).val() != \'\') { $(\'input#btn-traveltime-{{flightNumberNoWS}}\').removeAttr(\'disabled\'); }  else { $(\'input#btn-traveltime-{{flightNumberNoWS}}\').attr(\'disabled\', \'disabled\'); } return UtilScraper.get().handleOnChange(\'origin\', \'{{flightNumberNoWS}}\')" id="origin-cartraveltime-{{flightNumberNoWS}}" type="text" size="5" value="30" /> mins</td>\
+			<td><input onchange="if ($(this).val() != null && $(this).val() != \'\') { $(\'input#btn-traveltime-{{flightNumberNoWS}}\').removeAttr(\'disabled\'); }  else { $(\'input#btn-traveltime-{{flightNumberNoWS}}\').attr(\'disabled\', \'disabled\'); }  return UtilScraper.get().handleOnChange(\'origin\', \'{{flightNumberNoWS}}\')"  id="origin-{{flightNumberNoWS}}" type="text" size="35" /></td>\
+			<td>will take <input onchange="return UtilScraper.get().handleOnChange(\'origin\', \'{{flightNumberNoWS}}\')" id="origin-cartraveltime-{{flightNumberNoWS}}" type="text" size="5" value="30" /> mins</td>\
 			<td width="250px"><input disabled="disabled" value="Get travel time" onclick="return UtilScraper.get().queryGoogleDistanceMatrix($(\'input#origin-{{flightNumberNoWS}}\').val(), $(\'input#origin-airport-{{flightNumberNoWS}}\').val(), \'google-response-{{flightNumberNoWS}}\');" type="button" id="btn-traveltime-{{flightNumberNoWS}}" />&nbsp;&nbsp;<b><span id="google-response-{{flightNumberNoWS}}"></span></b></td>\
 		</tr>\
         <tr>\
