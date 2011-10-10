@@ -52,14 +52,6 @@ table tr th {\
 }\
 </style>\
 \
-<script>\
-\
-function dummyCallback(data) {\
-	alert("Got response: " + data);\
-}\
-\
-</script>\
-\
 \
 <div id="travelplanner" align="left">\
   <h1>Travel Planner</h1>\

@@ -37,6 +37,9 @@ window.UtilScraper = class UtilScraper
       ($ targetDiv).html result
       
 
+  dummyCallback: (data) ->
+    alert "Got response: " + data
+
   getGoogleSpreadsheetAsJson: (spreadsheetId, gridId, target, callback) ->
     url = 'http://spreadsheets.google.com/feeds/cells/' + spreadsheetId + '/' + gridId + '/public/basic?alt=json-in-script'
     $.get url, (res) ->

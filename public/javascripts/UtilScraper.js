@@ -45,6 +45,9 @@
         return ($(targetDiv)).html(result);
       }
     };
+    UtilScraper.prototype.dummyCallback = function(data) {
+      return alert("Got response: " + data);
+    };
     UtilScraper.prototype.getGoogleSpreadsheetAsJson = function(spreadsheetId, gridId, target, callback) {
       var url;
       url = 'http://spreadsheets.google.com/feeds/cells/' + spreadsheetId + '/' + gridId + '/public/basic?alt=json-in-script';
