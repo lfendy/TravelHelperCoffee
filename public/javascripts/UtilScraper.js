@@ -17,12 +17,10 @@
       }
       return console.log("" + name + " initialized");
     };
-    UtilScraper.prototype.queryGoogleMap2 = function(sourceAddress, destinationAddress, targetDiv) {
+    UtilScraper.prototype.queryGoogleDistanceMatrix = function(sourceAddress, destinationAddress, targetDiv) {
       ($("span#" + targetDiv)).html("Wait..");
       sourceAddress = sourceAddress + ", Australia";
       destinationAddress = destinationAddress + ", Australia";
-      console.log(google);
-      console.log(google.maps);
       return matrix.getDistanceMatrix({
         origins: [sourceAddress],
         destinations: [destinationAddress],
@@ -46,11 +44,11 @@
     UtilScraper.prototype.parseGoogleMapMatrix = function(json, targetDiv) {
       var elements, result;
       console.log("Got target element: " + targetDiv);
-      if (!(json.status !== "OK" && json.status !== google.maps.DistanceMatrixStatus.OK)) {
-        alert("Error was when trying to query Google distance matrix");
-        return ($("span#" + targetDiv)).html("Oops! :(");
+      if (!(json.status === "OK" || json.status === google.maps.DistanceMatrixStatus.OK)) {
+        alert("Error was when trying to query Google distance matrix: " + json.status);
+        return ($("span#" + targetDiv)).html("Oops! Boo boo :(");
       } else {
-        console.log("JSON: " + json);
+        console.log("Got JSON object from Google distance matrix: " + json);
         elements = json.rows[0].elements;
         result = elements[0].distance.text + "->" + elements[0].duration.text;
         console.log(result);

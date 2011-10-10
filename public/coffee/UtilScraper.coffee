@@ -12,15 +12,11 @@ window.UtilScraper = class UtilScraper
   init: (name = "unknown") ->
     console.log "#{name} initialized"
   
-  queryGoogleMap2: (sourceAddress, destinationAddress, targetDiv) ->
+  queryGoogleDistanceMatrix: (sourceAddress, destinationAddress, targetDiv) ->
     ($ "span#" + targetDiv).html "Wait.."
     sourceAddress = sourceAddress + ", Australia"
     destinationAddress = destinationAddress + ", Australia"
     
-    console.log google
-    console.log google.maps
-
-    #service = new google.maps.DistanceMatrixService()
     matrix.getDistanceMatrix 
       origins: [ sourceAddress ]
       destinations: [ destinationAddress ]
@@ -28,7 +24,8 @@ window.UtilScraper = class UtilScraper
       avoidHighways: false
       avoidTolls: false, (json) ->
         UtilScraper.get().parseGoogleMapMatrix json, targetDiv
-    
+   
+  #Was used for testing and now deprecated (Still works though) 
   queryGoogleMap: (sourceAddress, destinationAddress, targetDiv) ->
     ($ "span#" + targetDiv).html "Wait.."
     sourceAddress = sourceAddress + ", Australia"
@@ -46,11 +43,11 @@ window.UtilScraper = class UtilScraper
 
   parseGoogleMapMatrix: (json, targetDiv) ->
     console.log "Got target element: " + targetDiv
-    unless json.status != "OK" && json.status != google.maps.DistanceMatrixStatus.OK
-      alert "Error was when trying to query Google distance matrix"
-      ($ "span#" + targetDiv).html "Oops! :("
+    unless json.status == "OK" || json.status == google.maps.DistanceMatrixStatus.OK
+      alert "Error was when trying to query Google distance matrix: " + json.status
+      ($ "span#" + targetDiv).html "Oops! Boo boo :("
     else
-      console.log "JSON: " + json
+      console.log "Got JSON object from Google distance matrix: " + json
       elements = json.rows[0].elements
       result = elements[0].distance.text + "->" + elements[0].duration.text
       console.log result
