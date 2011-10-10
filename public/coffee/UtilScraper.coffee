@@ -16,7 +16,10 @@ window.UtilScraper = class UtilScraper
     ($ "span#" + targetDiv).html "Wait.."
     sourceAddress = sourceAddress + ", Australia"
     destinationAddress = destinationAddress + ", Australia"
-    
+   
+    console.log matrix
+    console.log matrix.maps
+ 
     matrix.getDistanceMatrix 
       origins: [ sourceAddress ]
       destinations: [ destinationAddress ]
@@ -42,9 +45,9 @@ window.UtilScraper = class UtilScraper
         false
 
   parseGoogleMapMatrix: (json, targetDiv) ->
-    console.log "Got target element: " + targetDiv
+    console.log "Got JSON : " + json + " and target element: " + targetDiv
     unless json.status == "OK" || json.status == google.maps.DistanceMatrixStatus.OK
-      alert "Error was when trying to query Google distance matrix: " + json.status
+      console.log "Error was when trying to query Google distance matrix: " + json.status
       ($ "span#" + targetDiv).html "Oops! Boo boo :("
     else
       console.log "Got JSON object from Google distance matrix: " + json
