@@ -19,7 +19,7 @@
     };
     UtilScraper.prototype.queryGoogleMap = function(sourceAddress, destinationAddress, targetDiv) {
       var url;
-      ($(targetDiv)).html("Wait..");
+      ($("span#" + targetDiv)).html("Wait..");
       sourceAddress = sourceAddress + ", Australia";
       destinationAddress = destinationAddress + ", Australia";
       url = 'http://kickme.in/travel.php?callback=?&sourceAddress=' + sourceAddress + '&destinationAddress=' + destinationAddress + '&target=' + targetDiv;
@@ -29,15 +29,16 @@
     };
     UtilScraper.prototype.parseGoogleMapMatrix = function(json, targetDiv) {
       var elements, result;
+      console.log("Got target element: " + targetDiv);
       if (json.status !== "OK") {
         alert("Error was when trying to query Google maps: " + status);
-        return ($(targetDiv)).html("Oops! :(");
+        return ($("span#" + targetDiv)).html("Oops! :(");
       } else {
         console.log("JSON: " + json);
         elements = json.rows[0].elements;
         result = elements[0].distance.text + "->" + elements[0].duration.text;
         console.log(result);
-        return ($(targetDiv)).html(result);
+        return ($("span#" + targetDiv)).html(result);
       }
     };
     UtilScraper.prototype.parseCar = function(cells, i) {

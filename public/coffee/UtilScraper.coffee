@@ -13,7 +13,7 @@ window.UtilScraper = class UtilScraper
     console.log "#{name} initialized"
 
   queryGoogleMap: (sourceAddress, destinationAddress, targetDiv) ->
-    ($ targetDiv).html "Wait.."
+    ($ "span#" + targetDiv).html "Wait.."
     sourceAddress = sourceAddress + ", Australia"
     destinationAddress = destinationAddress + ", Australia"
     
@@ -28,15 +28,16 @@ window.UtilScraper = class UtilScraper
         false
 
   parseGoogleMapMatrix: (json, targetDiv) ->
+    console.log "Got target element: " + targetDiv
     unless json.status == "OK"
       alert "Error was when trying to query Google maps: " + status
-      ($ targetDiv).html "Oops! :("
+      ($ "span#" + targetDiv).html "Oops! :("
     else
       console.log "JSON: " + json
       elements = json.rows[0].elements
       result = elements[0].distance.text + "->" + elements[0].duration.text
       console.log result
-      ($ targetDiv).html result
+      ($ "span#" + targetDiv).html result
       
 
   parseCar: (cells, i) ->
