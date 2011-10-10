@@ -75,8 +75,8 @@ window.UtilScraper = class UtilScraper
         if res.responseText?
           res = res.responseText
         jsonString = res.substring(res.indexOf("{"), res.lastIndexOf("}") + 1)
-        jsonString
         json = jQuery.parseJSON jsonString
+        console.log "Got JSON string from Google spreadsheet: " + jsonString
         UtilScraper.get().carGoogleSpreadsheetAjaxCallback json.feed.entry
 
 
