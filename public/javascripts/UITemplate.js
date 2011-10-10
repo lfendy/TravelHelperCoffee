@@ -71,8 +71,8 @@ table tr th {\
     	<tr>\
 			<td colspan="4">\
 				<input type="hidden" class="flightNumbers" value="{{flightNumberNoWS}}" />\
-				<input type="hidden" id="origin-airport-{{flightNumberNoWS}}" value="{{origin}} Domestic Airport" />\
-				<input type="hidden" id="destination-airport-{{flightNumberNoWS}}" value="{{destination}} Domestic Airport" />\
+				<input type="hidden" id="origin-airport-{{flightNumberNoWS}}" value="{{origin}} International Airport" />\
+				<input type="hidden" id="destination-airport-{{flightNumberNoWS}}" value="{{destination}} International Airport" />\
 				<input type="hidden" id="origin-datetime-{{flightNumberNoWS}}" value="{{departureTime}} {{formattedDepartureDate}}" />\
 				<input type="hidden" id="destination-datetime-{{flightNumberNoWS}}" value="{{arrivalTime}} {{formattedArrivalDate}}" />\
 			</td>\
