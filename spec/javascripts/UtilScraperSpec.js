@@ -1,5 +1,11 @@
 (function() {
   describe("UtilScraper", function() {
+    it("should perfom sanity check using JSON-P to get some output", function() {
+      var util;
+      util = UtilScraper.get();
+      util.queryGoogleMap("12-32 Pecks road, Sydenham 30307", "6 Rosstown road, Carnegie 3163");
+      return (expect("true")).toEqual("true");
+    });
     it("should substract minutes from given date string", function() {
       var util;
       util = UtilScraper.get();

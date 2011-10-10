@@ -14,49 +14,74 @@ window.UtilScraper = class UtilScraper
 
   queryGoogleMap: (sourceAddress, destinationAddress, targetDiv) ->
     ($ targetDiv).html "Wait.."
-    service = new google.maps.DistanceMatrixService
-    service.getDistanceMatrix 
-      origins: [ sourceAddress ]
-      destinations: [ destinationAddress ]
-      travelMode: google.maps.TravelMode.DRIVING
-      unitSystem: google.maps.UnitSystem.METRIC
-      avoidHighways: false
-      avoidTolls: false
-      , (response, status) ->
-          UtilScraper.get().parseGoogleMapMatrix response, status, targetDiv
+    sourceAddress = sourceAddress + ", Australia"
+    destinationAddress = destinationAddress + ", Australia"
+    
+    #Trying to use JSON with padding (JSON-P) here, to bypass the ajax cross-domain restriction: http://en.wikipedia.org/wiki/JSONP, the 
+    # original Google distance matrix API does not support it (adding 'callback=?' to URL). 
+    # Therefore I had to use my own server in the middle. Yeah... it is doggy... But using a bookmarklet kind of limits the options.
+    # Better solution is required here, as http://kickme.in is a temporary fix.
+    # http://maps.googleapis.com/maps/api/distancematrix/json?origins=&destinations=&mode=driving&sensor=false  <-- Google API used on http://kickme.in
+    
+    url = 'http://kickme.in/travel.php?callback=?&sourceAddress=' + sourceAddress + '&destinationAddress=' + destinationAddress + '&target=' + targetDiv;
+    $.getJSON url, (json) ->
+        false
 
-  parseGoogleMapMatrix: (response, status, targetDiv) ->
-    unless status == google.maps.DistanceMatrixStatus.OK
+  parseGoogleMapMatrix: (json, targetDiv) ->
+    unless json.status == "OK"
       alert "Error was when trying to query Google maps: " + status
       ($ targetDiv).html "Oops! :("
     else
-      console.log response
-      elements = response.rows[0].elements
+      console.log "JSON: " + json
+      elements = json.rows[0].elements
       result = elements[0].distance.text + "->" + elements[0].duration.text
       console.log result
       ($ targetDiv).html result
       
 
-  dummyCallback: (data) ->
-    alert "Got response: " + data
-
+  parseCar: (cells, i) ->
+    city = cells[i].content.$t
+    company = cells[i + 1].content.$t
+    contact = cells[i + 2].content.$t
+    phone = cells[i + 3].content.$t
+    c = new Car()
+    c.city = city
+    c.company = company
+    c.contact = contact
+    c.phone = phone
+    console.log city + ' | ' + company + ' | ' + contact + ' | ' + phone                                                                                                          
+    c  
+ 
   getGoogleSpreadsheetAsJson: (spreadsheetId, gridId, target, callback) ->
     url = 'http://spreadsheets.google.com/feeds/cells/' + spreadsheetId + '/' + gridId + '/public/basic?alt=json-in-script'
     $.get url, (res) ->
+        if res.responseText?
+          res = res.responseText
         jsonString = res.substring(res.indexOf("{"), res.lastIndexOf("}") + 1)
         jsonString
         json = jQuery.parseJSON jsonString
-        callback.call target, json.feed.entry
+        UtilScraper.get().carGoogleSpreadsheetAjaxCallback json.feed.entry
+
+
+  carGoogleSpreadsheetAjaxCallback: (cells) ->
+    cars = []                                                                                                                                                                     
+    
+    i = 4
+    while i < cells.length
+      cars.push @parseCar cells, i
+      i = i + 4
+    console.log cars
+    view =
+      cars: cars     
+    ($ "p#car-content").html ""
+    UtilScraper.get().injectHtml UICarTemplate, view, ($ "p#car-content")
+
   
   estimateDatetime: (datetimeStr, minutesToSubstructInt) ->
-    #console.log "Got date: " + datetimeStr + " to substract " + minutesToSubstructInt + " minutes from "
     estimatedMillis = new Number(minutesToSubstructInt) * 1000 * 60
     currMilliSeconds = Date.parse datetimeStr
-    #console.log "Current milliseconds: " + currMilliSeconds
     estimatedNewTime = currMilliSeconds - estimatedMillis
-    #console.log "Milliseconds after estimation: " + estimatedNewTime
     date = new Date estimatedNewTime
-    #console.log "Estimatated new date: " + date
     minutes = parseInt(date.getMinutes())
     if minutes < 10
       minutes = "0" + minutes
@@ -81,7 +106,6 @@ window.UtilScraper = class UtilScraper
     start = (if direction == "origin" then "To" else "From")
     end = (if direction == "origin" then "From" else "To")
     journey = (if direction == "origin" then "departure" else "arrival")
-    #alert "targetCarTravelTime: " + targetCarTravelTime + ", targetAirport: " + targetAirport + ", targetDatetime: " + targetDatetime + ", targetDiv: " + targetDiv
     carTransferTime = "<strong>Car Transfer Time (on " + flightNumber + " " + journey + "): " + formattedDatetime + "</strong><br />"
     carTransferTime = carTransferTime + start + ": " + targetAirport + "<br />"
     carTransferTime = carTransferTime + end + ": " + fromAddress + "<br /><br />"

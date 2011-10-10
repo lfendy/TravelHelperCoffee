@@ -1,4 +1,10 @@
 describe "UtilScraper", ->
+
+  #Not a valid testcase
+  it "should perfom sanity check using JSON-P to get some output", ->
+    util = UtilScraper.get()
+    util.queryGoogleMap("12-32 Pecks road, Sydenham 30307", "6 Rosstown road, Carnegie 3163");
+    (expect "true").toEqual "true"
   
   it "should substract minutes from given date string", ->
     util = UtilScraper.get()

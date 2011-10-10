@@ -18,46 +18,70 @@
       return console.log("" + name + " initialized");
     };
     UtilScraper.prototype.queryGoogleMap = function(sourceAddress, destinationAddress, targetDiv) {
-      var service;
+      var url;
       ($(targetDiv)).html("Wait..");
-      service = new google.maps.DistanceMatrixService;
-      return service.getDistanceMatrix({
-        origins: [sourceAddress],
-        destinations: [destinationAddress],
-        travelMode: google.maps.TravelMode.DRIVING,
-        unitSystem: google.maps.UnitSystem.METRIC,
-        avoidHighways: false,
-        avoidTolls: false
-      }, function(response, status) {
-        return UtilScraper.get().parseGoogleMapMatrix(response, status, targetDiv);
+      sourceAddress = sourceAddress + ", Australia";
+      destinationAddress = destinationAddress + ", Australia";
+      url = 'http://kickme.in/travel.php?callback=?&sourceAddress=' + sourceAddress + '&destinationAddress=' + destinationAddress + '&target=' + targetDiv;
+      return $.getJSON(url, function(json) {
+        return false;
       });
     };
-    UtilScraper.prototype.parseGoogleMapMatrix = function(response, status, targetDiv) {
+    UtilScraper.prototype.parseGoogleMapMatrix = function(json, targetDiv) {
       var elements, result;
-      if (status !== google.maps.DistanceMatrixStatus.OK) {
+      if (json.status !== "OK") {
         alert("Error was when trying to query Google maps: " + status);
         return ($(targetDiv)).html("Oops! :(");
       } else {
-        console.log(response);
-        elements = response.rows[0].elements;
+        console.log("JSON: " + json);
+        elements = json.rows[0].elements;
         result = elements[0].distance.text + "->" + elements[0].duration.text;
         console.log(result);
         return ($(targetDiv)).html(result);
       }
     };
-    UtilScraper.prototype.dummyCallback = function(data) {
-      return alert("Got response: " + data);
+    UtilScraper.prototype.parseCar = function(cells, i) {
+      var c, city, company, contact, phone;
+      city = cells[i].content.$t;
+      company = cells[i + 1].content.$t;
+      contact = cells[i + 2].content.$t;
+      phone = cells[i + 3].content.$t;
+      c = new Car();
+      c.city = city;
+      c.company = company;
+      c.contact = contact;
+      c.phone = phone;
+      console.log(city + ' | ' + company + ' | ' + contact + ' | ' + phone);
+      return c;
     };
     UtilScraper.prototype.getGoogleSpreadsheetAsJson = function(spreadsheetId, gridId, target, callback) {
       var url;
       url = 'http://spreadsheets.google.com/feeds/cells/' + spreadsheetId + '/' + gridId + '/public/basic?alt=json-in-script';
       return $.get(url, function(res) {
         var json, jsonString;
+        if (res.responseText != null) {
+          res = res.responseText;
+        }
         jsonString = res.substring(res.indexOf("{"), res.lastIndexOf("}") + 1);
         jsonString;
         json = jQuery.parseJSON(jsonString);
-        return callback.call(target, json.feed.entry);
+        return UtilScraper.get().carGoogleSpreadsheetAjaxCallback(json.feed.entry);
       });
+    };
+    UtilScraper.prototype.carGoogleSpreadsheetAjaxCallback = function(cells) {
+      var cars, i, view;
+      cars = [];
+      i = 4;
+      while (i < cells.length) {
+        cars.push(this.parseCar(cells, i));
+        i = i + 4;
+      }
+      console.log(cars);
+      view = {
+        cars: cars
+      };
+      ($("p#car-content")).html("");
+      return UtilScraper.get().injectHtml(UICarTemplate, view, $("p#car-content"));
     };
     UtilScraper.prototype.estimateDatetime = function(datetimeStr, minutesToSubstructInt) {
       var currMilliSeconds, date, estimatedMillis, estimatedNewTime, formattedDate, minutes;
