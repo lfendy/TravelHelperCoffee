@@ -48,14 +48,15 @@
       console.log("Got JSON : " + json + " and target element: " + targetDiv);
       if (!(json.status === "OK" || json.status === google.maps.DistanceMatrixStatus.OK)) {
         console.log("Error was when trying to query Google distance matrix: " + json.status);
-        return ($("span#" + targetDiv)).html("Oops! Boo boo :(");
+        ($("span#" + targetDiv)).html("Oops! Boo boo :(");
       } else {
-        console.log("Got JSON object from Google distance matrix: " + json);
-        elements = json.rows[0].elements;
-        result = elements[0].distance.text + "->" + elements[0].duration.text;
-        console.log(result);
-        return ($("span#" + targetDiv)).html(result);
+
       }
+      console.log("Got JSON object from Google distance matrix: " + json);
+      elements = json.rows[0].elements;
+      result = elements[0].distance.text + "->" + elements[0].duration.text;
+      console.log(result);
+      return ($("span#" + targetDiv)).html(result);
     };
     UtilScraper.prototype.parseCar = function(cells, i) {
       var c, city, company, contact, phone;

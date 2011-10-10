@@ -50,11 +50,13 @@ window.UtilScraper = class UtilScraper
       console.log "Error was when trying to query Google distance matrix: " + json.status
       ($ "span#" + targetDiv).html "Oops! Boo boo :("
     else
-      console.log "Got JSON object from Google distance matrix: " + json
-      elements = json.rows[0].elements
-      result = elements[0].distance.text + "->" + elements[0].duration.text
-      console.log result
-      ($ "span#" + targetDiv).html result
+      
+
+    console.log "Got JSON object from Google distance matrix: " + json
+    elements = json.rows[0].elements
+    result = elements[0].distance.text + "->" + elements[0].duration.text
+    console.log result
+    ($ "span#" + targetDiv).html result
       
 
   parseCar: (cells, i) ->
