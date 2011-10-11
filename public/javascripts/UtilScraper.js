@@ -37,16 +37,6 @@
         return UtilScraper.get().parseGoogleMapMatrix(json, targetDiv);
       });
     };
-    UtilScraper.prototype.queryGoogleMap = function(sourceAddress, destinationAddress, targetDiv) {
-      var url;
-      ($("span#" + targetDiv)).html("Wait..");
-      sourceAddress = sourceAddress + ", Australia";
-      destinationAddress = destinationAddress + ", Australia";
-      url = 'http://kickme.in/travel.php?callback=?&sourceAddress=' + sourceAddress + '&destinationAddress=' + destinationAddress + '&target=' + targetDiv;
-      return $.getJSON(url, function(json) {
-        return false;
-      });
-    };
     UtilScraper.prototype.parseGoogleMapMatrix = function(jsonObj, targetDiv) {
       var elements, result;
       console.log("Got JSON : " + jsonObj + " and target element: " + targetDiv);
@@ -74,7 +64,7 @@
       console.log(city + ' | ' + company + ' | ' + contact + ' | ' + phone);
       return c;
     };
-    UtilScraper.prototype.getGoogleSpreadsheetAsJson = function(spreadsheetId, gridId, target, callback) {
+    UtilScraper.prototype.getGoogleSpreadsheetAsJson = function(spreadsheetId, gridId, callback) {
       var url;
       url = 'http://spreadsheets.google.com/feeds/cells/' + spreadsheetId + '/' + gridId + '/public/basic?alt=json-in-script';
       return $.get(url, function(res) {
@@ -85,7 +75,7 @@
         jsonString = res.substring(res.indexOf("{"), res.lastIndexOf("}") + 1);
         json = jQuery.parseJSON(jsonString);
         console.log("Parsed JSON string from Google spreadsheet as object: " + json);
-        return UtilScraper.get().carGoogleSpreadsheetAjaxCallback(json.feed.entry);
+        return eval(callback + "(" + json.feed.entry + ")");
       });
     };
     UtilScraper.prototype.carGoogleSpreadsheetAjaxCallback = function(cells) {

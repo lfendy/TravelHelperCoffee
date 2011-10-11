@@ -120,7 +120,7 @@ span.red {\
     <div id="flights">\
     {{#flights}}\
       \
-	  <div id="origin-travelinfo-{{flightNumberNoWS}}"></div>\
+	  <div class="step" id="origin-travelinfo-{{flightNumberNoWS}}"></div>\
       \
 	  <strong>Flight Time <span class="green">{{departureTime}} {{formattedDepartureDate}}</span></strong><br />\
       Flight No: {{airline}} {{flightNumber}}<br />\
@@ -128,7 +128,6 @@ span.red {\
       Arrive: {{arrivalDate}} {{arrivalTime}} - {{destination}} International Airport\
 	  <br /><br />\
 	  <div id="accomodation-info"></div>\
-      <br /><br />\
  	  <div id="destination-travelinfo-{{flightNumberNoWS}}"></div>\
       \
 	{{/flights}}\

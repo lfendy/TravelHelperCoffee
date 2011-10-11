@@ -28,7 +28,7 @@ window.TravelHelper = class TravelHelper
       #inject ui
       UtilScraper.get().injectHtml UITemplate, view, ($ "body")
      
-      UtilScraper.get().getGoogleSpreadsheetAsJson 'pgZYLtdPRv51beYTHUIrFWg', 'od6'
+      UtilScraper.get().getGoogleSpreadsheetAsJson 'pgZYLtdPRv51beYTHUIrFWg', 'od6', 'UtilScraper.get().carGoogleSpreadsheetAjaxCallback'
       
       #bind listeners
       ($ 'input#mobileNumber').bind 'focusout', ->

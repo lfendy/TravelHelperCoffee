@@ -38,7 +38,7 @@
         console.log("TravelHelper:: " + readyScraper.name() + " is starting to scrape..");
         view = this.createView(readyScraper);
         UtilScraper.get().injectHtml(UITemplate, view, $("body"));
-        UtilScraper.get().getGoogleSpreadsheetAsJson('pgZYLtdPRv51beYTHUIrFWg', 'od6');
+        UtilScraper.get().getGoogleSpreadsheetAsJson('pgZYLtdPRv51beYTHUIrFWg', 'od6', 'UtilScraper.get().carGoogleSpreadsheetAjaxCallback');
         ($('input#mobileNumber')).bind('focusout', function() {
           return ($('span#mobileNumber')).text('(' + ($('input#mobileNumber')).val() + ')');
         });

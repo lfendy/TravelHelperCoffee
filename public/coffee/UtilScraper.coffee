@@ -31,22 +31,6 @@ window.UtilScraper = class UtilScraper
       avoidTolls: false, (json) ->
         UtilScraper.get().parseGoogleMapMatrix json, targetDiv
    
-  #Was used for testing and now deprecated (Still works though) 
-  queryGoogleMap: (sourceAddress, destinationAddress, targetDiv) ->
-    ($ "span#" + targetDiv).html "Wait.."
-    sourceAddress = sourceAddress + ", Australia"
-    destinationAddress = destinationAddress + ", Australia"
-    
-    #Trying to use JSON with padding (JSON-P) here, to bypass the ajax cross-domain restriction: http://en.wikipedia.org/wiki/JSONP, the 
-    # original Google distance matrix API does not support it (adding 'callback=?' to URL). 
-    # Therefore I had to use my own server in the middle. Yeah... it is doggy... But using a bookmarklet kind of limits the options.
-    # Better solution is required here, as http://kickme.in is a temporary fix.
-    # http://maps.googleapis.com/maps/api/distancematrix/json?origins=&destinations=&mode=driving&sensor=false  <-- Google API used on http://kickme.in
-    
-    url = 'http://kickme.in/travel.php?callback=?&sourceAddress=' + sourceAddress + '&destinationAddress=' + destinationAddress + '&target=' + targetDiv;
-    $.getJSON url, (json) ->
-        false
-
   parseGoogleMapMatrix: (jsonObj, targetDiv) ->
     console.log "Got JSON : " + jsonObj + " and target element: " + targetDiv
     unless jsonObj.status == "OK" || jsonObj.status == google.maps.DistanceMatrixStatus.OK
@@ -76,7 +60,7 @@ window.UtilScraper = class UtilScraper
     console.log city + ' | ' + company + ' | ' + contact + ' | ' + phone                                                                                                          
     c  
  
-  getGoogleSpreadsheetAsJson: (spreadsheetId, gridId, target, callback) ->
+  getGoogleSpreadsheetAsJson: (spreadsheetId, gridId, callback) ->
     url = 'http://spreadsheets.google.com/feeds/cells/' + spreadsheetId + '/' + gridId + '/public/basic?alt=json-in-script'
     $.get url, (res) ->
         if res.responseText?
@@ -84,7 +68,7 @@ window.UtilScraper = class UtilScraper
         jsonString = res.substring(res.indexOf("{"), res.lastIndexOf("}") + 1)
         json = jQuery.parseJSON jsonString
         console.log "Parsed JSON string from Google spreadsheet as object: " + json
-        UtilScraper.get().carGoogleSpreadsheetAjaxCallback json.feed.entry
+        eval callback + "(" + json.feed.entry + ")"
 
 
   carGoogleSpreadsheetAjaxCallback: (cells) ->
