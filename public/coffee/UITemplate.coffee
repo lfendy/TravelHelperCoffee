@@ -49,6 +49,14 @@ table tr th {
 	margin-bottom: 20px;
 	width: 90%;
 }
+
+span.green {
+	color: green;
+}
+
+span.red {
+	color: red;
+}
 </style>
 
 
@@ -113,11 +121,13 @@ table tr th {
       
 	  <div id="origin-travelinfo-{{flightNumberNoWS}}"></div>
       
-	  <strong>Flight Time {{departureTime}} {{formattedDepartureDate}}</strong><br />
+	  <strong>Flight Time <span class="green">{{departureTime}} {{formattedDepartureDate}}</span></strong><br />
       Flight No: {{airline}} {{flightNumber}}<br />
       Depart: {{departureDate}} {{departureTime}} - {{origin}} International Airport<br />
       Arrive: {{arrivalDate}} {{arrivalTime}} - {{destination}} International Airport
 	  <br /><br />
+	  <div id="accomodation-info"></div>
+      <br /><br />
  	  <div id="destination-travelinfo-{{flightNumberNoWS}}"></div>
       
 	{{/flights}}

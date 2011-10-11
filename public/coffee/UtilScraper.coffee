@@ -119,8 +119,10 @@ window.UtilScraper = class UtilScraper
     targetDatetime = ($ "input#" + direction + "-datetime-" + flightNumber).val()
     targetDiv = "div#" + direction + "-travelinfo-" + flightNumber
     formattedDatetime = targetDatetime
+    spanClass = "none"
 
     if direction == "origin"
+      spanClass = "red"
       targetCarTravelTime = ($ "input#origin-cartraveltime-" + flightNumber).val()
       arriveBeforeTime = ($ "input#arrive-before").val()
       totalMinutes = parseInt(targetCarTravelTime) + parseInt(arriveBeforeTime)
@@ -130,7 +132,7 @@ window.UtilScraper = class UtilScraper
     start = (if direction == "origin" then "To" else "From")
     end = (if direction == "origin" then "From" else "To")
     journey = (if direction == "origin" then "departure" else "arrival")
-    carTransferTime = "<strong>Car Transfer Time (on " + flightNumber + " " + journey + "): " + formattedDatetime + "</strong><br />"
+    carTransferTime = "<strong>Car Transfer Time (on " + flightNumber + " " + journey + "): <span class='" + spanClass + "'>" + formattedDatetime + "</span></strong><br />"
     carTransferTime = carTransferTime + start + ": " + targetAirport + " International Airport<br />"
     carTransferTime = carTransferTime + end + ": " + fromAddress + "<br /><br />"
     ($ targetDiv).html carTransferTime
