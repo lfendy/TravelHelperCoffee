@@ -61,4 +61,6 @@ window.QantasScraper = class QantasScraper
     f.arrivalTime   = ($ raw).find('td').eq(3).text().trim()
     f.origin        = ($ raw).find('td').eq(2).text().trim()
     f.destination   = ($ raw).find('td').eq(4).text().trim()
+    f.origin        = f.origin.replace ///\s+///, '_'
+    f.destination        = f.destination.replace ///\s+///, '_'
     f 

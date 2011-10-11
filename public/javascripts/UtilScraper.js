@@ -21,6 +21,12 @@
       ($("span#" + targetDiv)).html("Wait..");
       sourceAddress = sourceAddress + ", Australia";
       destinationAddress = destinationAddress + ", Australia";
+      if (!(typeof matrix !== "undefined" && matrix !== null)) {
+        ($("span#" + targetDiv)).html("Oops! Boo boo :(");
+        return false;
+      } else {
+        console.log("Checking distance between [" + sourceAddress + "] and [" + destinationAddress + "]");
+      }
       return matrix.getDistanceMatrix({
         origins: [sourceAddress],
         destinations: [destinationAddress],
@@ -51,7 +57,8 @@
       elements = jsonObj.rows[0].elements;
       result = elements[0].distance.text + "->" + elements[0].duration.text;
       console.log(result);
-      return ($("span#" + targetDiv)).html(result);
+      ($("span#" + targetDiv)).html(result);
+      return result;
     };
     UtilScraper.prototype.parseCar = function(cells, i) {
       var c, city, company, contact, phone;

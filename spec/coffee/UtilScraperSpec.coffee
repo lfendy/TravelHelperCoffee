@@ -1,14 +1,13 @@
 describe "UtilScraper", ->
 
-  #Not a valid testcase
-  it "should perfom sanity check using JSON-P to get some output", ->
+  it "should perfom sanity check using API to get some output (1)", ->
     util = UtilScraper.get()
-    util.queryGoogleMap("12-32 Pecks road, Sydenham 30307", "6 Rosstown road, Carnegie 3163");
+    util.queryGoogleDistanceMatrix("50 McElhone Street, Woolloomooloo 2011", window.airportAddresses["Sydney"], "some-div-id");
     (expect "true").toEqual "true"
 
-  it "should perfom sanity check using API to get some output (2)", ->
+  it "should perfom sanity check using API to get some output (2)", ->                                                                                                            
     util = UtilScraper.get()
-    util.queryGoogleMap2("12-32 Pecks road, Sydenham 30307", "6 Rosstown road, Carnegie 3163");
+    util.queryGoogleDistanceMatrix("274 Ballarat Road, Footscray 3011", window.airportAddresses["Melbourne"], "some-div-id");
     (expect "true").toEqual "true"
 
   

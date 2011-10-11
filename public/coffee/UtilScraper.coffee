@@ -16,7 +16,13 @@ window.UtilScraper = class UtilScraper
     ($ "span#" + targetDiv).html "Wait.."
     sourceAddress = sourceAddress + ", Australia"
     destinationAddress = destinationAddress + ", Australia"
-   
+    
+    if not matrix?
+       ($ "span#" + targetDiv).html "Oops! Boo boo :("
+       return false
+    else
+       console.log "Checking distance between [" + sourceAddress + "] and [" + destinationAddress + "]"
+    
     matrix.getDistanceMatrix 
       origins: [ sourceAddress ]
       destinations: [ destinationAddress ]
@@ -54,6 +60,7 @@ window.UtilScraper = class UtilScraper
     result = elements[0].distance.text + "->" + elements[0].duration.text
     console.log result
     ($ "span#" + targetDiv).html result
+    result
       
 
   parseCar: (cells, i) ->

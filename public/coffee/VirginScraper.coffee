@@ -61,7 +61,9 @@ window.VirginScraper = class VirginScraper
     originClone.find('span.flightTimeTerminus').remove()
     destinationClone.find('span.flightTimeTerminus').remove()
     f.origin        = originClone.text().trim()
+    f.origin        = f.origin.replace ///\s+///, '_' 
     f.destination   = destinationClone.text().trim()
+    f.destination        = f.destination.replace ///\s+///, '_'
     f
 
 
