@@ -68,6 +68,10 @@ select {\
     width: 180px !important;\
     height: 27px !important;\
 }\
+\
+select#payment-status {\
+    width: 80px !important;                                                                                                                                                      \
+}\
 </style>\
 \
 \
@@ -84,15 +88,15 @@ select {\
   <div id="hotels-form">\
     <h2>Accomodation</h2>\
     \
-    <table border="0" width="95%" cellspacing="1px" cellpadding="2px">\
+    <table border="0" width="60%" cellspacing="1px" cellpadding="2px">\
 		<tr>\
-            <td>From: </td><td><input id="from-stay" onchange="" type="text" size="35" value="" /></td><td colspan="2">&nbsp;</td>\
+            <td>From: </td><td><input id="from-stay" onchange="" type="text" size="35" value="" /></td>\
 		</tr>\
  		<tr>\
-            <td>To: </td><td><input id="to-stay" onchange="" type="text" size="35" value="" /></td><td colspan="2">&nbsp;</td>\
+            <td>To: </td><td><input id="to-stay" onchange="" type="text" size="35" value="" /></td>\
         </tr>\
        <tr>\
-            <td>At: </td><td><span id="hotel-content">Waiting for Google to respond..</span></td><td colspan="3">&nbsp;</td>\
+            <td>At: </td><td><span id="hotel-content">Waiting for Google to respond..</span></td>\
         </tr>\
 		<tr>\
             <td>Room type: </td><td>\
@@ -103,16 +107,13 @@ select {\
 					</select></td><td colspan="2">&nbsp;</td>\
         </tr>\
 		<tr>\
-            <td>Rate: </td><td>$<input id="rate" onchange="" type="text" size="35" value="" /></td>\
-			<td> per night - </td>\
-    		<td>\
-                    <select id="payment-status">\
+            <td>Rate: $ </td><td><input id="rate" onchange="" type="text" size="5" value="" />&nbsp;per night -&nbsp;<select id="payment-status">\
                         <option value="not-paid">Not paid</option>\
                         <option value="paid">Paid</option>\
                     </select></td>\
         </tr>\
 		<tr>\
-            <td>Reservation #: </td><td><input id="reservation" onchange="" type="text" size="35" value="" /></td><td colspan="2">&nbsp;</td>\
+            <td>Reservation #: </td><td><input id="reservation" onchange="" type="text" size="35" value="" /></td>\
         </tr>\
  	</table>\
   </div>\
