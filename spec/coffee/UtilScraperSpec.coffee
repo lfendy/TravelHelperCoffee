@@ -1,10 +1,17 @@
 describe "UtilScraper", ->
 
+  #Not a valid test
+  it "should perfom sanity check using Google spreadsheet to get hotel output", ->
+    UtilScraper.get().getGoogleSpreadsheetAsJson('pgZYLtdPRv50AK70fqJkQSw', 'od6', (result) -> UtilScraper.get().hotelGoogleSpreadsheetAjaxCallback(result));
+    (expect "true").toEqual "true"
+
+  #Not a valid test
   it "should perfom sanity check using API to get some output (1)", ->
     util = UtilScraper.get()
     util.queryGoogleDistanceMatrix("50 McElhone Street, Woolloomooloo 2011", window.airportAddresses["Sydney"], "some-div-id");
     (expect "true").toEqual "true"
 
+  #Not a valid test
   it "should perfom sanity check using API to get some output (2)", ->                                                                                                            
     util = UtilScraper.get()
     util.queryGoogleDistanceMatrix("274 Ballarat Road, Footscray 3011", window.airportAddresses["Melbourne"], "some-div-id");

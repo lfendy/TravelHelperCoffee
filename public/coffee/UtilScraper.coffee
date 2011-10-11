@@ -66,8 +66,9 @@ window.UtilScraper = class UtilScraper
         if res.responseText?
           res = res.responseText
         jsonString = res.substring(res.indexOf("{"), res.lastIndexOf("}") + 1)
-        console.log "Evaluating: " + callback + "('" + jsonString + "')"
-        eval callback + "('" + jsonString + "')"
+        #console.log "Evaluating: " + callback + "('" + jsonString + "')"
+        console.log "callback: " + callback
+        callback jsonString
 
 
   carGoogleSpreadsheetAjaxCallback: (jsonString) ->
@@ -87,6 +88,31 @@ window.UtilScraper = class UtilScraper
     UtilScraper.get().injectHtml UICarTemplate, view, ($ "p#car-content")
 
   
+  hotelGoogleSpreadsheetAjaxCallback: (jsonString, hostingCity) ->
+    console.log "Hosting city is: " + hostingCity
+    json = jQuery.parseJSON jsonString
+    console.log "Parsed JSON string from Google hotel spreadsheet as object: " + json
+    cells = json.feed.entry
+    hotels = []
+    console.log hostingCity
+    i = 4
+    while i < cells.length
+      hotels.push @parseHotel cells, i
+      i = i + 4 
+
+  parseHotel: (cells, i) ->
+    city = cells[i].content.$t
+    hotel = cells[i + 1].content.$t
+    address = cells[i + 2].content.$t
+    phone = cells[i + 3].content.$t
+    h = new Hotel()
+    h.city = city
+    h.hotel = hotel
+    h.address = address
+    h.phone = phone
+    console.log city + ' | ' + hotel + ' | ' + address + ' | ' + phone
+    h
+
   estimateDatetime: (datetimeStr, minutesToSubstructInt) ->
     estimatedMillis = new Number(minutesToSubstructInt) * 1000 * 60
     currMilliSeconds = Date.parse datetimeStr

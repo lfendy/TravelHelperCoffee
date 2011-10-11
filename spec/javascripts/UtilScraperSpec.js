@@ -1,5 +1,11 @@
 (function() {
   describe("UtilScraper", function() {
+    it("should perfom sanity check using Google spreadsheet to get hotel output", function() {
+      UtilScraper.get().getGoogleSpreadsheetAsJson('pgZYLtdPRv50AK70fqJkQSw', 'od6', function(result) {
+        return UtilScraper.get().hotelGoogleSpreadsheetAjaxCallback(result);
+      });
+      return (expect("true")).toEqual("true");
+    });
     it("should perfom sanity check using API to get some output (1)", function() {
       var util;
       util = UtilScraper.get();

@@ -73,8 +73,8 @@
           res = res.responseText;
         }
         jsonString = res.substring(res.indexOf("{"), res.lastIndexOf("}") + 1);
-        console.log("Evaluating: " + callback + "('" + jsonString + "')");
-        return eval(callback + "('" + jsonString + "')");
+        console.log("callback: " + callback);
+        return callback(jsonString);
       });
     };
     UtilScraper.prototype.carGoogleSpreadsheetAjaxCallback = function(jsonString) {
@@ -94,6 +94,36 @@
       };
       ($("p#car-content")).html("");
       return UtilScraper.get().injectHtml(UICarTemplate, view, $("p#car-content"));
+    };
+    UtilScraper.prototype.hotelGoogleSpreadsheetAjaxCallback = function(jsonString, hostingCity) {
+      var cells, hotels, i, json, _results;
+      console.log("Hosting city is: " + hostingCity);
+      json = jQuery.parseJSON(jsonString);
+      console.log("Parsed JSON string from Google hotel spreadsheet as object: " + json);
+      cells = json.feed.entry;
+      hotels = [];
+      console.log(hostingCity);
+      i = 4;
+      _results = [];
+      while (i < cells.length) {
+        hotels.push(this.parseHotel(cells, i));
+        _results.push(i = i + 4);
+      }
+      return _results;
+    };
+    UtilScraper.prototype.parseHotel = function(cells, i) {
+      var address, city, h, hotel, phone;
+      city = cells[i].content.$t;
+      hotel = cells[i + 1].content.$t;
+      address = cells[i + 2].content.$t;
+      phone = cells[i + 3].content.$t;
+      h = new Hotel();
+      h.city = city;
+      h.hotel = hotel;
+      h.address = address;
+      h.phone = phone;
+      console.log(city + ' | ' + hotel + ' | ' + address + ' | ' + phone);
+      return h;
     };
     UtilScraper.prototype.estimateDatetime = function(datetimeStr, minutesToSubstructInt) {
       var currMilliSeconds, date, estimatedMillis, estimatedNewTime, formattedDate, minutes;

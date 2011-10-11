@@ -192,6 +192,7 @@ describe "VirginScraper", ->
 
       v = new VirginScraper()
       @flights = v.flights()
+      @city = v.hostingCity()
 
     it "should scrape each 'passengerDetailsFrame' to flights", ->
       (expect @flights.length).toEqual 2
@@ -199,5 +200,3 @@ describe "VirginScraper", ->
     it "should return Flight objects", ->
       ((expect flight instanceof Flight).toEqual true) for flight in @flights
 
-
-      

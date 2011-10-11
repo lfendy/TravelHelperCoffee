@@ -38,7 +38,12 @@
         console.log("TravelHelper:: " + readyScraper.name() + " is starting to scrape..");
         view = this.createView(readyScraper);
         UtilScraper.get().injectHtml(UITemplate, view, $("body"));
-        UtilScraper.get().getGoogleSpreadsheetAsJson('pgZYLtdPRv51beYTHUIrFWg', 'od6', 'UtilScraper.get().carGoogleSpreadsheetAjaxCallback');
+        UtilScraper.get().getGoogleSpreadsheetAsJson('pgZYLtdPRv51beYTHUIrFWg', 'od6', function(result) {
+          return UtilScraper.get().carGoogleSpreadsheetAjaxCallback(result);
+        });
+        UtilScraper.get().getGoogleSpreadsheetAsJson('pgZYLtdPRv50AK70fqJkQSw', 'od6', function(result) {
+          return UtilScraper.get().hotelGoogleSpreadsheetAjaxCallback(result, readyScraper.hostingCity());
+        });
         ($('input#mobileNumber')).bind('focusout', function() {
           return ($('span#mobileNumber')).text('(' + ($('input#mobileNumber')).val() + ')');
         });

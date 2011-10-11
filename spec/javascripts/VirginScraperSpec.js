@@ -189,7 +189,8 @@ Adult\
                      <div class="passengerDetailsFrame">\
                      </div>');
         v = new VirginScraper();
-        return this.flights = v.flights();
+        this.flights = v.flights();
+        return this.city = v.hostingCity();
       });
       it("should scrape each 'passengerDetailsFrame' to flights", function() {
         return (expect(this.flights.length)).toEqual(2);

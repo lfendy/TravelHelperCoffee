@@ -66,6 +66,14 @@ window.VirginScraper = class VirginScraper
     f.destination        = f.destination.replace ///\s+///, '_'
     f
 
+  hostingCity: () ->
+    for raw in ($ 'div.passengerDetailsFrame')
+      originClone      = ($ raw).find('td.flightContents').eq(1).clone()
+      originClone.find('span.flightTimeTerminus').remove()
+      hostingCity = originClone.text().trim()
+      hostingCity = hostingCity.replace ///\s+///, '_'
+      break;
+    hostingCity
 
   flights: () ->
     result = (@parseFlight raw) for raw in ($ 'div.passengerDetailsFrame')
