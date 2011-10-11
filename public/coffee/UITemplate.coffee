@@ -59,12 +59,13 @@ span.red {
 }
 
 select {
-    border: none !important;
+    border: 1px solid black !important;
     color: #373D3F !important;
     font-family: Tahoma,Verdana,Arial,Helvetica,sans-serif !important;
     font-size: 100% !important;
     padding: 3px !important;
     width: 180px !important;
+    height: none !important;
 }
 </style>
 
