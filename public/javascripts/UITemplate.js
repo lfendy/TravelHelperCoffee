@@ -107,7 +107,7 @@ select#payment-status {\
 					</select></td><td colspan="2">&nbsp;</td>\
         </tr>\
 		<tr>\
-            <td>Rate: $ </td><td><input id="rate" onchange="" type="text" size="5" value="" />&nbsp;per night -&nbsp;<select id="payment-status">\
+            <td>Rate: $ </td><td><input id="rate" onchange="" type="text" maxlength="6" size="10" value="" />&nbsp;per night -&nbsp;<select id="payment-status">\
                         <option value="not-paid">Not paid</option>\
                         <option value="paid">Paid</option>\
                     </select></td>\
