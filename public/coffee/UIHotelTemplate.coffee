@@ -1,24 +1,8 @@
-window.UICarTemplate = '
+window.UIHotelTemplate = '
 
-<style type="text/css">
-table tr th {
-    color: #000 !important;
-    font-weight: bold !important;
-    height: 2em !important;
-    padding: 2px 4px !important;
-    text-align: left !important;
-    white-space: nowrap !important;                                                                                                                                               
-}
-</style>
-
-<table border="0" width="400px" cellpadding="5px" cellspacing="5px">
-	<tr>
-        <th>City</th><th>Company</th><th>Contact</th><th>Phone</th>
-    </tr>
-	{{#hotels}}
-	<tr>
-		<td>{{city}}</td><td>{{hotel}}</td><td>{{address}}</td><td>{{phone}}</td>
-	</tr>
+	<select id="hotel-select">
+    {{#hotels}}
+		<option value="{{address}}">{{hotel}}</option>
 	{{/hotels}}
-</table>
+    </select>
 '
