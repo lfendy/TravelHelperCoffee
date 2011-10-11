@@ -131,7 +131,7 @@ window.UtilScraper = class UtilScraper
     end = (if direction == "origin" then "From" else "To")
     journey = (if direction == "origin" then "departure" else "arrival")
     carTransferTime = "<strong>Car Transfer Time (on " + flightNumber + " " + journey + "): " + formattedDatetime + "</strong><br />"
-    carTransferTime = carTransferTime + start + ": " + targetAirport + "<br />"
+    carTransferTime = carTransferTime + start + ": " + targetAirport + " International Airport<br />"
     carTransferTime = carTransferTime + end + ": " + fromAddress + "<br /><br />"
     ($ targetDiv).html carTransferTime
 

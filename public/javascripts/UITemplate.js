@@ -116,8 +116,8 @@ table tr th {\
       \
 	  <strong>Flight Time {{departureTime}} {{formattedDepartureDate}}</strong><br />\
       Flight No: {{airline}} {{flightNumber}}<br />\
-      Depart: {{departureDate}} {{departureTime}} - {{origin}} Domestic Airport<br />\
-      Arrive: {{arrivalDate}} {{arrivalTime}} - {{destination}} Domestic Airport\
+      Depart: {{departureDate}} {{departureTime}} - {{origin}} International Airport<br />\
+      Arrive: {{arrivalDate}} {{arrivalTime}} - {{destination}} International Airport\
 	  <br /><br />\
  	  <div id="destination-travelinfo-{{flightNumberNoWS}}"></div>\
       \
