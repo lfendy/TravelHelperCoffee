@@ -66,7 +66,8 @@ window.UtilScraper = class UtilScraper
         if res.responseText?
           res = res.responseText
         jsonString = res.substring(res.indexOf("{"), res.lastIndexOf("}") + 1)
-        eval callback + "(" + jsonString + ")"
+        console.log "Evaluating: " + callback + "('" + jsonString + "')"
+        eval callback + "('" + jsonString + "')"
 
 
   carGoogleSpreadsheetAjaxCallback: (jsonString) ->

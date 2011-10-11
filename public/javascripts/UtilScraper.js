@@ -73,7 +73,8 @@
           res = res.responseText;
         }
         jsonString = res.substring(res.indexOf("{"), res.lastIndexOf("}") + 1);
-        return eval(callback + "(" + jsonString + ")");
+        console.log("Evaluating: " + callback + "('" + jsonString + "')");
+        return eval(callback + "('" + jsonString + "')");
       });
     };
     UtilScraper.prototype.carGoogleSpreadsheetAjaxCallback = function(jsonString) {
