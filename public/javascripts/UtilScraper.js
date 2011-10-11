@@ -96,7 +96,7 @@
       return UtilScraper.get().injectHtml(UICarTemplate, view, $("p#car-content"));
     };
     UtilScraper.prototype.hotelGoogleSpreadsheetAjaxCallback = function(jsonString, hostingCity) {
-      var cells, hotel, hotels, i, json;
+      var cells, hotel, hotels, i, json, view;
       console.log("Hosting city is: " + hostingCity);
       json = jQuery.parseJSON(jsonString);
       console.log("Parsed JSON string from Google hotel spreadsheet as object: " + json);
@@ -111,7 +111,11 @@
         }
         i = i + 4;
       }
-      return console.log("Filtered hotels based on the hosting city: " + hotels);
+      console.log("Filtered hotels based on the hosting city: " + hotels);
+      view = {
+        hotels: hotels
+      };
+      return UtilScraper.get().injectHtml(UIHotelTemplate, view, $("div.accomodation-info"));
     };
     UtilScraper.prototype.parseHotel = function(cells, i) {
       var address, city, h, hotel, phone;
