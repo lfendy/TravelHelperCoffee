@@ -57,6 +57,15 @@ span.green {
 span.red {
 	color: red;
 }
+
+select {
+    border: none !important;
+    color: #373D3F !important;
+    font-family: Tahoma,Verdana,Arial,Helvetica,sans-serif !important;
+    font-size: 100% !important;
+    padding: 3px !important;
+    width: 180px !important;
+}
 </style>
 
 
@@ -72,6 +81,7 @@ span.red {
 
   <div id="hotels-form">
     <h2>Accomodation</h2>
+    <p>&nbsp;</p>
     <p id="hotel-content">Waiting for Google to respond..</p>
   </div>
 
