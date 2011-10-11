@@ -66,13 +66,13 @@
       return f;
     };
     VirginScraper.prototype.hostingCity = function() {
-      var hostingCity, originClone, raw, _i, _len, _ref;
+      var destinationClone, hostingCity, raw, _i, _len, _ref;
       _ref = $('div.passengerDetailsFrame');
       for (_i = 0, _len = _ref.length; _i < _len; _i++) {
         raw = _ref[_i];
-        originClone = ($(raw)).find('td.flightContents').eq(1).clone();
-        originClone.find('span.flightTimeTerminus').remove();
-        hostingCity = originClone.text().trim();
+        destinationClone = ($(raw)).find('td.flightContents').eq(2).clone();
+        destinationClone.find('span.flightTimeTerminus').remove();
+        hostingCity = destinationClone.text().trim();
         hostingCity = hostingCity.replace(/\s+/, '_');
         break;
       }
