@@ -91,6 +91,9 @@ select {\
  		<tr>\
             <td>To: </td><td><input id="to-stay" onchange="" type="text" size="35" value="" /></td><td colspan="2">&nbsp;</td>\
         </tr>\
+       <tr>\
+            <td>At: </td><td><span id="hotel-content">Waiting for Google to respond..</span></td><td colspan="3">&nbsp;</td>\
+        </tr>\
 		<tr>\
             <td>Room type: </td><td>\
 					<select id="room-types">\
@@ -112,7 +115,6 @@ select {\
             <td>Reservation #: </td><td><input id="reservation" onchange="" type="text" size="35" value="" /></td><td colspan="2">&nbsp;</td>\
         </tr>\
  	</table>\
-    <p id="hotel-content">Waiting for Google to respond..</p>\
   </div>\
 \
   <div id="cars-form">\
