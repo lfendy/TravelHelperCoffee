@@ -104,7 +104,8 @@ window.UtilScraper = class UtilScraper
     console.log "Filtered hotels based on the hosting city: " + hotels
     view =
       hotels: hotels
-    UtilScraper.get().injectHtml UIHotelTemplate, view, ($ "div.accomodation-info")
+    ($ "p#hotel-content").html ""
+    UtilScraper.get().injectHtml UIHotelTemplate, view, ($ "p#hotel-content")
 
   parseHotel: (cells, i) ->
     city = cells[i].content.$t

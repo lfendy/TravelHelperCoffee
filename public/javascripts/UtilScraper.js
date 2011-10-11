@@ -115,7 +115,8 @@
       view = {
         hotels: hotels
       };
-      return UtilScraper.get().injectHtml(UIHotelTemplate, view, $("div.accomodation-info"));
+      ($("p#hotel-content")).html("");
+      return UtilScraper.get().injectHtml(UIHotelTemplate, view, $("p#hotel-content"));
     };
     UtilScraper.prototype.parseHotel = function(cells, i) {
       var address, city, h, hotel, phone;

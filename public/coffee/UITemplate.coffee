@@ -42,7 +42,7 @@ table tr th {
 	border: 5px dotted grey;
 }
 
-#cars-form,#email,#itenary-footer {
+#cars-form,#email,#itenary-footer, #hotels-form {
 	border: 1px #cccccc solid;
 	background-color: #F2F2F2;
 	padding: 20px;
@@ -68,6 +68,11 @@ span.red {
     <span class="formLabel">mobile:</span>
     <input id="mobileNumber" value="{{mobileNumber}}" />
     <br /><br />
+  </div>
+
+  <div id="hotels-form">
+    <h2>Accomodation</h2>
+    <p id="hotel-content">Waiting for Google to respond..</p>
   </div>
 
   <div id="cars-form">
