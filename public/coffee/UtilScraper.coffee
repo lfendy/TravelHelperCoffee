@@ -97,8 +97,11 @@ window.UtilScraper = class UtilScraper
     console.log hostingCity
     i = 4
     while i < cells.length
-      hotels.push @parseHotel cells, i
-      i = i + 4 
+      hotel = @parseHotel cells, i
+      if hotel.city == hostingCity
+        hotels.push hotel
+      i = i + 4
+    console.log "Filtered hotels based on the hosting city: " + hotels
 
   parseHotel: (cells, i) ->
     city = cells[i].content.$t
