@@ -82,7 +82,35 @@ select {
 
   <div id="hotels-form">
     <h2>Accomodation</h2>
-    <p>&nbsp;</p>
+    
+    <table border="0" width="95%" cellspacing="1px" cellpadding="2px">
+		<tr>
+            <td>From: </td><td><input id="from-stay" onchange="" type="text" size="35" value="" /></td><td colspan="2">&nbsp;</td>
+		</tr>
+ 		<tr>
+            <td>To: </td><td><input id="to-stay" onchange="" type="text" size="35" value="" /></td><td colspan="2">&nbsp;</td>
+        </tr>
+		<tr>
+            <td>Room type: </td><td>
+					<select id="room-types">
+						<option value="1-bedroom">1 Bedroom</option>
+						<option value="2-bedroom">2 Bedroom</option>
+						<option value="studio">Studio</option>
+					</select></td><td colspan="2">&nbsp;</td>
+        </tr>
+		<tr>
+            <td>Rate: </td><td>$<input id="rate" onchange="" type="text" size="35" value="" /></td>
+			<td> per night - </td>
+    		<td>
+                    <select id="payment-status">
+                        <option value="not-paid">Not paid</option>
+                        <option value="paid">Paid</option>
+                    </select></td>
+        </tr>
+		<tr>
+            <td>Reservation #: </td><td><input id="reservation" onchange="" type="text" size="35" value="" /></td><td colspan="2">&nbsp;</td>
+        </tr>
+ 	</table>
     <p id="hotel-content">Waiting for Google to respond..</p>
   </div>
 
