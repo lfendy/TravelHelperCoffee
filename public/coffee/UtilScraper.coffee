@@ -147,7 +147,10 @@ window.UtilScraper = class UtilScraper
     str = str + "Address:&nbsp;" + ($ "select#hotel-select").val() + "<br />"
     str = str + "Check In:&nbsp;" + ($ "input#from-stay").val() + "<br />"
     str = str + "Check Out:&nbsp;" + ($ "input#to-stay").val() + "<br />"
-    str = str + "Rate:&nbsp;" + ($ "input#to-stay").val() + " per night" + ($ "select#payment-status").val() + "<br />"
+    pay = ($ "select#payment-status").val();
+    if pay?
+      pay = "<strong>" + pay + "</strong>"
+    str = str + "Rate:&nbsp;" + ($ "input#rate").val() + " per night" + pay + "<br />"
     str = str + "Reservation No:&nbsp;" + ($ "input#reservation").val() + "<br /><br />"
     ($ "div.accomodation-info:eq(0)").html str
 

@@ -157,12 +157,16 @@
       return formattedDate;
     };
     UtilScraper.prototype.handleAccommodationOnChange = function() {
-      var str;
+      var pay, str;
       str = "<strong>Accommodation at " + ($("select#hotel-select option:selected")).text() + "</strong><br />";
       str = str + "Address:&nbsp;" + ($("select#hotel-select")).val() + "<br />";
       str = str + "Check In:&nbsp;" + ($("input#from-stay")).val() + "<br />";
       str = str + "Check Out:&nbsp;" + ($("input#to-stay")).val() + "<br />";
-      str = str + "Rate:&nbsp;" + ($("input#to-stay")).val() + " per night" + ($("select#payment-status")).val() + "<br />";
+      pay = ($("select#payment-status")).val();
+      if (pay != null) {
+        pay = "<strong>" + pay + "</strong>";
+      }
+      str = str + "Rate:&nbsp;" + ($("input#rate")).val() + " per night" + pay + "<br />";
       str = str + "Reservation No:&nbsp;" + ($("input#reservation")).val() + "<br /><br />";
       return ($("div.accomodation-info:eq(0)")).html(str);
     };
