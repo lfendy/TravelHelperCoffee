@@ -1,5 +1,6 @@
 window.UIHotelTemplate = '
-
+    
+    <h2>Accommodation</h2>
     <table border="0" width="60%" cellspacing="1px" cellpadding="2px">
         <tr>
             <td>From: </td><td><input id="from-stay" onchange="" type="text" size="35" value="" /></td>
@@ -12,7 +13,7 @@ window.UIHotelTemplate = '
 			<span id="hotel-content">
 				<select id="hotel-select">
     				{{#hotels}}
-        				<option value="{{address}}_{{phone}}">{{hotel}}</option>
+        				<option value="{{address}}">{{hotel}} | {{phone}}</option>
     				{{/hotels}}
     			</select>
 			</span></td>

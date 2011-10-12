@@ -65,7 +65,7 @@ select {\
     font-family: Tahoma,Verdana,Arial,Helvetica,sans-serif !important;\
     font-size: 100% !important;\
     padding: 3px !important;\
-    width: 180px !important;\
+    width: 234px !important;\
     height: 27px !important;\
 }\
 \
@@ -86,7 +86,7 @@ select#payment-status {\
   </div>\
 \
   <div id="hotels-form">\
-    <h2>Accomodation</h2>\
+    <p id="hotel-content">Waiting for Google to respond..</p>\
     \
   </div>\
 \

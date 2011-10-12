@@ -115,6 +115,7 @@
       view = {
         hotels: hotels
       };
+      ($("div#hotels-form")).html("");
       return UtilScraper.get().injectHtml(UIHotelTemplate, view, $("div#hotels-form"));
     };
     UtilScraper.prototype.parseHotel = function(cells, i) {
@@ -124,6 +125,7 @@
       address = cells[i + 2].content.$t;
       phone = cells[i + 3].content.$t;
       phone = phone.replace("'", "");
+      phone = phone.replace(/\s+/, '');
       phone = UtilScraper.get().trim(phone);
       h = new Hotel();
       h.city = city;
