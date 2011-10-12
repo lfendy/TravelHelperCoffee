@@ -113,7 +113,7 @@ select#payment-status {\
                     </select></td>\
         </tr>\
 		<tr>\
-            <td>Reservation #: </td><td><input id="reservation" onchange="$(\'div.accomodation-info:eq(1)\').html($(this).val())" type="text" size="35" value="" /></td>\
+            <td>Reservation #: </td><td><input id="reservation" onchange="$(\'div.accomodation-info:eq(0)\').html($(this).val() + \'<br /><br />\')" type="text" size="35" value="" /></td>\
         </tr>\
  	</table>\
   </div>\
