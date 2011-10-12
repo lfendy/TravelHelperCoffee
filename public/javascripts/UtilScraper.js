@@ -156,6 +156,16 @@
       console.log("Estimatated date formatted: " + formattedDate);
       return formattedDate;
     };
+    UtilScraper.prototype.handleAccommodationOnChange = function() {
+      var str;
+      str = "<strong>Accommodation at " + ($("select#hotel-select option:selected")).text() + "</strong><br />";
+      str = str + "Address:&nbsp;" + ($("select#hotel-select")).val() + "<br />";
+      str = str + "Check In:&nbsp;" + ($("input#from-stay")).val() + "<br />";
+      str = str + "Check Out:&nbsp;" + ($("input#to-stay")).val() + "<br />";
+      str = str + "Rate:&nbsp;" + ($("input#to-stay")).val() + " per night" + ($("select#payment-status")).val() + "<br />";
+      str = str + "Reservation No:&nbsp;" + ($("input#reservation")).val() + "<br /><br />";
+      return ($("div.accomodation-info:eq(0)")).html(str);
+    };
     UtilScraper.prototype.handleOnChange = function(direction, flightNumber) {
       var arriveBeforeTime, carTransferTime, end, formattedDatetime, fromAddress, journey, spanClass, start, targetAirport, targetCarTravelTime, targetDatetime, targetDiv, totalMinutes;
       fromAddress = ($("input#" + direction + "-" + flightNumber)).val();

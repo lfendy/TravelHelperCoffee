@@ -28,13 +28,14 @@
                     </select></td><td colspan="2">&nbsp;</td>\
         </tr>\
         <tr>\
-            <td>Rate: $ </td><td><input id="rate" onchange="" type="text" maxlength="6" size="10" value="" />&nbsp;per night -&nbsp;<select id="payment-status">\
-                        <option value="not-paid">Not paid</option>\
-                        <option value="paid">Paid</option>                                                                                                                        \
+            <td>Rate: $ </td><td><input id="rate" onchange="" type="text" maxlength="6" size="10" value="" />&nbsp;per night -&nbsp;\
+					<select onchange="$(\'input#reservation\').trigger(\'change\');" id="payment-status">\
+                        <option value=" - Please pay on Departure">Not paid</option>\
+                        <option value="">Paid</option>                                                                                                                        \
                     </select></td>\
         </tr>\
         <tr>\
-            <td>Reservation #: </td><td><input id="reservation" onchange="$(\'div.accomodation-info:eq(0)\').html($(this).val() + \'<br /><br />\')" type="text" size="35" value="" /></td>\
+            <td>Reservation #: </td><td><input id="reservation" onchange="return UtilScraper.get().handleAccommodationOnChange()" type="text" size="35" value="" /></td>\
         </tr>\
     </table>';
 }).call(this);

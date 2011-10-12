@@ -142,6 +142,15 @@ window.UtilScraper = class UtilScraper
     console.log "Estimatated date formatted: " + formattedDate
     formattedDate
 
+  handleAccommodationOnChange: () ->
+    str = "<strong>Accommodation at " + ($ "select#hotel-select option:selected").text() + "</strong><br />"
+    str = str + "Address:&nbsp;" + ($ "select#hotel-select").val() + "<br />"
+    str = str + "Check In:&nbsp;" + ($ "input#from-stay").val() + "<br />"
+    str = str + "Check Out:&nbsp;" + ($ "input#to-stay").val() + "<br />"
+    str = str + "Rate:&nbsp;" + ($ "input#to-stay").val() + " per night" + ($ "select#payment-status").val() + "<br />"
+    str = str + "Reservation No:&nbsp;" + ($ "input#reservation").val() + "<br /><br />"
+    ($ "div.accomodation-info:eq(0)").html str
+
   handleOnChange: (direction, flightNumber) ->
     fromAddress = ($ "input#" + direction + "-" + flightNumber).val()
     targetAirport = ($ "input#" + direction + "-airport-" + flightNumber).val()
