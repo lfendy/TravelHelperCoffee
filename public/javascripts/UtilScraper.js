@@ -115,8 +115,7 @@
       view = {
         hotels: hotels
       };
-      ($("span#hotel-content")).html("");
-      return UtilScraper.get().injectHtml(UIHotelTemplate, view, $("span#hotel-content"));
+      return UtilScraper.get().injectHtml(UIHotelTemplate, view, $("div#hotels-form"));
     };
     UtilScraper.prototype.parseHotel = function(cells, i) {
       var address, city, h, hotel, phone;
@@ -124,6 +123,8 @@
       hotel = cells[i + 1].content.$t;
       address = cells[i + 2].content.$t;
       phone = cells[i + 3].content.$t;
+      phone = phone.replace("'", "");
+      phone = UtilScraper.get().trim(phone);
       h = new Hotel();
       h.city = city;
       h.hotel = hotel;
@@ -131,6 +132,13 @@
       h.phone = phone;
       console.log(city + ' | ' + hotel + ' | ' + address + ' | ' + phone);
       return h;
+    };
+    UtilScraper.prototype.trim = function(s) {
+      s = s.replace(/^\&nbsp;/, '');
+      s = s.replace(/\&nbsp;$/, '');
+      s = s.replace(/^\s*/, '');
+      s = s.replace(/\s*$/, '');
+      return s;
     };
     UtilScraper.prototype.estimateDatetime = function(datetimeStr, minutesToSubstructInt) {
       var currMilliSeconds, date, estimatedMillis, estimatedNewTime, formattedDate, minutes;

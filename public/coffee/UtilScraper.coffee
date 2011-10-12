@@ -104,14 +104,15 @@ window.UtilScraper = class UtilScraper
     console.log "Filtered hotels based on the hosting city: " + hotels
     view =
       hotels: hotels
-    ($ "span#hotel-content").html ""
-    UtilScraper.get().injectHtml UIHotelTemplate, view, ($ "span#hotel-content")
+    UtilScraper.get().injectHtml UIHotelTemplate, view, ($ "div#hotels-form")
 
   parseHotel: (cells, i) ->
     city = cells[i].content.$t
     hotel = cells[i + 1].content.$t
     address = cells[i + 2].content.$t
     phone = cells[i + 3].content.$t
+    phone = phone.replace "'", ""
+    phone = UtilScraper.get().trim phone
     h = new Hotel()
     h.city = city
     h.hotel = hotel
@@ -119,6 +120,13 @@ window.UtilScraper = class UtilScraper
     h.phone = phone
     console.log city + ' | ' + hotel + ' | ' + address + ' | ' + phone
     h
+
+  trim: (s) ->
+    s = s.replace ///^\&nbsp;///, ''
+    s = s.replace ///\&nbsp;$///, ''
+    s = s.replace ///^\s*///, ''
+    s = s.replace ///\s*$///, ''
+    s
 
   estimateDatetime: (datetimeStr, minutesToSubstructInt) ->
     estimatedMillis = new Number(minutesToSubstructInt) * 1000 * 60
