@@ -24,7 +24,7 @@
     it("should substract minutes from given date string", function() {
       var util;
       util = UtilScraper.get();
-      return (expect(util.estimateDatetime('12:10 Sat 08 Oct 2011', 30))).toEqual("11:40 Saturday 8 October 2011");
+      return (expect(util.estimateDatetime('12:10 Sat 08 Oct 2011', 30))).toEqual("11:40AM Saturday 8 October 2011");
     });
     it("should substract minutes from given date string (2)", function() {
       var util;
@@ -44,12 +44,17 @@
     it("should substract minutes from given date string (5)", function() {
       var util;
       util = UtilScraper.get();
-      return (expect(util.estimateDatetime('7:15 Sat 08 Oct 2011', 90))).toEqual("5:45 Saturday 8 October 2011");
+      return (expect(util.estimateDatetime('7:15 Sat 08 Oct 2011', 90))).toEqual("5:45AM Saturday 8 October 2011");
     });
-    return it("should substract minutes from given date string (6)", function() {
+    it("should substract minutes from given date string (6)", function() {
       var util;
       util = UtilScraper.get();
-      return (expect(util.estimateDatetime('7:15 Saturday 8 October 2011', 90))).toEqual("5:45 Saturday 8 October 2011");
+      return (expect(util.estimateDatetime('7:15 Saturday 8 October 2011', 90))).toEqual("5:45AM Saturday 8 October 2011");
+    });
+    return it("should substract minutes from given date string (7)", function() {
+      var util;
+      util = UtilScraper.get();
+      return (expect(util.estimateDatetime('18:00 Friday 14 October 2011', 90))).toEqual("16:30 Friday 14 October 2011");
     });
   });
 }).call(this);

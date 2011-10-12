@@ -206,10 +206,10 @@
         return (expect(this.flight.arrivalDate)).toEqual('20/06/2011');
       });
       it("should return correct departure time", function() {
-        return (expect(this.flight.departureTime)).toEqual('6:00 AM');
+        return (expect(this.flight.departureTime)).toEqual('6:00');
       });
       it("should return correct arrival time", function() {
-        return (expect(this.flight.arrivalTime)).toEqual('7:30 AM');
+        return (expect(this.flight.arrivalTime)).toEqual('7:30');
       });
       it("should return correct origin", function() {
         return (expect(this.flight.origin)).toEqual('Sydney');

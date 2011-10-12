@@ -54,8 +54,8 @@ window.VirginScraper = class VirginScraper
     f.formattedDepartureDate = @makePrettyDate f.departureDate
     f.arrivalDate   = ($ raw).find('td.flightDate').text()
     f.formattedArrivalDate = @makePrettyDate f.arrivalDate
-    f.departureTime = ($ raw).find('span.flightTimeTerminus').eq(0).text()
-    f.arrivalTime   = ($ raw).find('span.flightTimeTerminus').eq(1).text()
+    f.departureTime = ($ raw).find('span.flightTimeTerminus').eq(0).text().replace('am','').replace('pm','').replace('AM','').replace('PM','').trim()
+    f.arrivalTime   = ($ raw).find('span.flightTimeTerminus').eq(1).text().replace('am','').replace('pm','').replace('AM','').replace('PM','').trim()
     originClone      = ($ raw).find('td.flightContents').eq(1).clone()
     destinationClone = ($ raw).find('td.flightContents').eq(2).clone()
     originClone.find('span.flightTimeTerminus').remove()

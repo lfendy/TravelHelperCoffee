@@ -70,8 +70,8 @@
       f.formattedDepartureDate = this.makePrettyDate(f.departureDate);
       f.arrivalDate = ($(raw)).find('td').eq(0).text().trim();
       f.formattedArrivalDate = this.makePrettyDate(f.arrivalDate);
-      f.departureTime = ($(raw)).find('td').eq(1).text().trim();
-      f.arrivalTime = ($(raw)).find('td').eq(3).text().trim();
+      f.departureTime = ($(raw)).find('td').eq(1).text().trim().replace('am', '').replace('pm', '').replace('AM', '').replace('PM', '').trim();
+      f.arrivalTime = ($(raw)).find('td').eq(3).text().trim().replace('am', '').replace('pm', '').replace('AM', '').replace('PM', '').trim();
       f.origin = ($(raw)).find('td').eq(2).text().trim();
       f.destination = ($(raw)).find('td').eq(4).text().trim();
       f.origin = f.origin.replace(/\s+/, '_');

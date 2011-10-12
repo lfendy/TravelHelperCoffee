@@ -22,7 +22,7 @@ describe "UtilScraper", ->
   
   it "should substract minutes from given date string", ->
     util = UtilScraper.get()
-    (expect util.estimateDatetime('12:10 Sat 08 Oct 2011', 30)).toEqual "11:40 Saturday 8 October 2011"
+    (expect util.estimateDatetime('12:10 Sat 08 Oct 2011', 30)).toEqual "11:40AM Saturday 8 October 2011"
 
   it "should substract minutes from given date string (2)", ->
     util = UtilScraper.get()
@@ -38,9 +38,13 @@ describe "UtilScraper", ->
 
   it "should substract minutes from given date string (5)", ->                                                                                                                    
     util = UtilScraper.get()
-    (expect util.estimateDatetime('7:15 Sat 08 Oct 2011', 90)).toEqual "5:45 Saturday 8 October 2011"
+    (expect util.estimateDatetime('7:15 Sat 08 Oct 2011', 90)).toEqual "5:45AM Saturday 8 October 2011"
 
   it "should substract minutes from given date string (6)", ->                                                                                                                    
     util = UtilScraper.get()
-    (expect util.estimateDatetime('7:15 Saturday 8 October 2011', 90)).toEqual "5:45 Saturday 8 October 2011"
+    (expect util.estimateDatetime('7:15 Saturday 8 October 2011', 90)).toEqual "5:45AM Saturday 8 October 2011"
+
+  it "should substract minutes from given date string (7)", ->                                                                                                                    
+    util = UtilScraper.get()
+    (expect util.estimateDatetime('18:00 Friday 14 October 2011', 90)).toEqual "16:30 Friday 14 October 2011"
 

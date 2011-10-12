@@ -27,7 +27,7 @@ window.UIHotelTemplate = '
                     </select></td><td colspan="2">&nbsp;</td>
         </tr>
         <tr>
-            <td>Rate: $ </td><td><input id="rate" onchange="" type="text" maxlength="6" size="10" value="" />per night -
+            <td>Rate: $ </td><td><input id="rate" onchange="" type="text" maxlength="6" size="10" value="" />&nbsp;per night -
 					<select onchange="$(\'input#reservation\').trigger(\'change\');" id="payment-status">
                         <option value=" - Please pay on Departure">Not paid</option>
                         <option value="">Paid</option>                                                                                                                        

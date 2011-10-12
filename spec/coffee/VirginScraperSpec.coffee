@@ -231,10 +231,10 @@ describe "VirginScraper", ->
       (expect @flight.arrivalDate).toEqual '20/06/2011'
 
     it "should return correct departure time", ->
-      (expect @flight.departureTime).toEqual '6:00 AM'
+      (expect @flight.departureTime).toEqual '6:00'
 
     it "should return correct arrival time", ->
-      (expect @flight.arrivalTime).toEqual '7:30 AM'
+      (expect @flight.arrivalTime).toEqual '7:30'
 
     it "should return correct origin", ->
       (expect @flight.origin).toEqual 'Sydney'

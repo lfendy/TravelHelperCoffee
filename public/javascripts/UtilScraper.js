@@ -144,14 +144,22 @@
       return s;
     };
     UtilScraper.prototype.estimateDatetime = function(datetimeStr, minutesToSubstructInt) {
-      var currMilliSeconds, date, estimatedMillis, estimatedNewTime, formattedDate, minutes;
+      var currMilliSeconds, date, estimatedMillis, estimatedNewTime, formattedDate, hours, minutes;
       estimatedMillis = new Number(minutesToSubstructInt) * 1000 * 60;
+      console.log("Got [" + datetimeStr + "] to do estimation on");
       currMilliSeconds = Date.parse(datetimeStr);
+      console.log("Parsed [" + datetimeStr + "] into milli seconds: " + currMilliSeconds);
       estimatedNewTime = currMilliSeconds - estimatedMillis;
       date = new Date(estimatedNewTime);
       minutes = parseInt(date.getMinutes());
+      hours = parseInt(date.getHours());
       if (minutes < 10) {
         minutes = "0" + minutes;
+      }
+      if (hours < 12) {
+        minutes = minutes + "AM";
+      } else {
+        minutes = minutes + "";
       }
       formattedDate = date.getHours() + ":" + minutes + " " + days[date.getDay()] + ' ' + date.getDate() + ' ' + months[date.getMonth()] + ' ' + date.getFullYear();
       console.log("Estimatated date formatted: " + formattedDate);
