@@ -166,14 +166,14 @@ select#payment-status {
     <div id="flights">
     {{#flights}}
       
-	  <div class="step" id="origin-travelinfo-{{flightNumberNoWS}}"></div>
+	  <div id="origin-travelinfo-{{flightNumberNoWS}}"></div>
       
 	  <strong>Flight Time <span class="green">{{departureTime}} {{formattedDepartureDate}}</span></strong><br />
       Flight No: {{airline}} {{flightNumber}}<br />
       Depart: {{departureDate}} {{departureTime}} - {{origin}} International Airport<br />
       Arrive: {{arrivalDate}} {{arrivalTime}} - {{destination}} International Airport
 	  <br /><br />
-	  <div id="accomodation-info"></div>
+	  <div class="accomodation-info"></div>
  	  <div id="destination-travelinfo-{{flightNumberNoWS}}"></div>
       
 	{{/flights}}
