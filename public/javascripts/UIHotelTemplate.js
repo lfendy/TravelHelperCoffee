@@ -4,10 +4,10 @@
     <h2>Accommodation</h2>\
     <table border="0" width="60%" cellspacing="1px" cellpadding="2px">\
         <tr>\
-            <td>From: </td><td><input id="from-stay" onchange="" type="text" size="35" value="" />{{stayFrom}}</td>\
+            <td>From: </td><td><input id="from-stay" onchange="" type="text" size="35" value="{{stayFrom}}" /></td>\
         </tr>\
         <tr>\
-            <td>To: </td><td><input id="to-stay" onchange="" type="text" size="35" value="" />{{stayTo}}</td>\
+            <td>To: </td><td><input id="to-stay" onchange="" type="text" size="35" value="{{stayTo}}" /></td>\
         </tr>\
        <tr>\
             <td>At: </td><td>\

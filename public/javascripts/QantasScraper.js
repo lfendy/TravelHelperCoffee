@@ -78,6 +78,20 @@
       f.destination = f.destination.replace(/\s+/, '_');
       return f;
     };
+    QantasScraper.prototype.accommodation = function() {
+      var a, destinationClone, hostingCity, raw;
+      a = new Accommodation();
+      raw = $('tr.tr_first:eq(0)');
+      console.log("Raw: " + raw);
+      destinationClone = ($(raw)).find('td').eq(4).text().trim();
+      hostingCity = destinationClone.replace(/\s+/, '_');
+      console.log("Scraped hosting city: " + hostingCity);
+      a.hostingCity = hostingCity;
+      a.stayFrom = ($(raw)).find('td').eq(0).text().trim();
+      raw = $('tr.tr_first:eq(1)');
+      a.stayTo = ($(raw)).find('td').eq(0).text().trim();
+      return a;
+    };
     return QantasScraper;
   })();
 }).call(this);
