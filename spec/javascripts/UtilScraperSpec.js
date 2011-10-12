@@ -1,8 +1,11 @@
 (function() {
   describe("UtilScraper", function() {
     it("should perfom sanity check using Google spreadsheet to get hotel output", function() {
+      var ac, v;
+      v = new VirginScraper();
+      ac = v.accommodation();
       UtilScraper.get().getGoogleSpreadsheetAsJson('pgZYLtdPRv50AK70fqJkQSw', 'od6', function(result) {
-        return UtilScraper.get().hotelGoogleSpreadsheetAjaxCallback(result);
+        return UtilScraper.get().hotelGoogleSpreadsheetAjaxCallback(result, ac);
       });
       return (expect("true")).toEqual("true");
     });

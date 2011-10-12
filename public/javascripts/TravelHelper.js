@@ -23,7 +23,7 @@
       return view;
     };
     TravelHelper.prototype.run = function() {
-      var readyScraper, s, scrapers, view, _i, _len;
+      var ac, readyScraper, s, scrapers, view, _i, _len;
       scrapers = [];
       scrapers.push(new VirginScraper());
       scrapers.push(new QantasScraper());
@@ -41,8 +41,9 @@
         UtilScraper.get().getGoogleSpreadsheetAsJson('pgZYLtdPRv51beYTHUIrFWg', 'od6', function(result) {
           return UtilScraper.get().carGoogleSpreadsheetAjaxCallback(result);
         });
+        ac = readyScraper.accommodation();
         UtilScraper.get().getGoogleSpreadsheetAsJson('pgZYLtdPRv50AK70fqJkQSw', 'od6', function(result) {
-          return UtilScraper.get().hotelGoogleSpreadsheetAjaxCallback(result, readyScraper.hostingCity());
+          return UtilScraper.get().hotelGoogleSpreadsheetAjaxCallback(result, ac);
         });
         ($('input#mobileNumber')).bind('focusout', function() {
           return ($('span#mobileNumber')).text('(' + ($('input#mobileNumber')).val() + ')');

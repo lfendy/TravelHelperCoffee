@@ -75,6 +75,58 @@ Adult
         .replace('##ORIGIN##',flight.origin)
         .replace('##DESTINATION##',flight.destination)
 
+
+htmlElementWithTwoFlightDetails = () ->
+  '          <div class="passengerDetailsFrame">
+                <fieldset class="passengerDetailsField">
+                  <legend class="intneraryFrameTitle"><span class="redFont">Departing Flight</span></legend>
+                  <table>
+                    <tr>
+                      <td class="flightDate">1-Jan-2011</td>
+                      <td class="flightStations">Origin</td>
+                      <td class="flightStations">Destination</td>
+                      <td class="flightFare" style="text-align: left">Fare Rules</td>
+                      <td class="flightPassengers"></td>
+                      <td class="flightFare"></td>
+                    </tr>
+                    <tr>
+                      <td class="flightContents"><a href="http://www.virginblue.com.au/" class="operatedByLink"><div class="OpByVB"></div></a>QV896</td>
+                      <td class="flightContents"><span class="flightTimeTerminus">11:00</span>Melbourne</td>
+                      <td class="flightContents"><span class="flightTimeTerminus">21:00</span>Brisbane</td>
+                      <td class="flightFareContents"><div>1 Adult</div>
+                      </td>
+                      <td class="flightFareContents"><strong>$189.00</strong></td>
+                    </tr>
+                  </table>
+                </fieldset>                                                                                                                                                       
+              </div>
+              <div class="passengerDetailsFrame">
+                <fieldset class="passengerDetailsField">
+                  <legend class="intneraryFrameTitle"><span class="redFont">Returning Flight</span></legend>
+                  <table>
+                    <tr>
+                      <td class="flightDate">10-Jan-2011</td>
+                      <td class="flightStations">Origin</td>
+                      <td class="flightStations">Destination</td>
+                      <td class="flightFare" style="text-align: left">Fare Rules</td>
+                      <td class="flightPassengers"></td>
+                      <td class="flightFare"></td>
+                    </tr>
+                    <tr>
+                      <td class="flightContents"><a href="http://www.virginblue.com.au/" class="operatedByLink"><div class="OpByVB"></div></a>QV123</td>
+                      <td class="flightContents"><span class="flightTimeTerminus">16:30</span>Brisbane</td>
+                      <td class="flightContents"><span class="flightTimeTerminus">23:45</span>Melbourne</td>
+                      <td class="flightFareContents"><div>1 Adult</div>                                                                                                           
+                      </td>
+                      <td class="flightFareContents"><strong>$199.00</strong></td>
+                    </tr>
+                  </table>
+                </fieldset>                                                                                                                                                       
+              </div>
+       '
+
+
+
 htmlElementWithReservationNumber = (number) ->
   '<td class="reservationnumber">##NUMBER##
     <input id="reservationnumber" type="hidden" value="E1E95Y"></td>'.replace('##NUMBER##',number)
@@ -105,6 +157,9 @@ setupMobileNumber = (mobileNumber) ->
 
 setupFlightDetails = (flight) ->
   injectElement htmlElementWithFlightDetails flight
+
+setupAccommodationInfo = () ->
+  injectElement htmlElementWithTwoFlightDetails
 
 setupReservationNumber = (number) ->
   injectElement htmlElementWithReservationNumber number
@@ -141,6 +196,14 @@ describe "VirginScraper", ->
     v = new VirginScraper()
     (expect v.reservationNumber()).toEqual 'E1E95Y'
 
+  it "should populate scraped data to Accommodation", ->
+    setupAccommodationInfo
+    v = new VirginScraper()
+    ac = v.accommodation()
+    (expect ac.hostingCity).toEqual 'Brisbane'
+    (expect ac.stayFrom).toEqual '1-Jan-2011'
+    (expect ac.stayTo).toEqual '10-Jan-2011'
+
   it "should populate scraped data to Passenger", ->
     v = new VirginScraper()
     p = v.passenger()
@@ -171,10 +234,10 @@ describe "VirginScraper", ->
       (expect @flight.arrivalDate).toEqual '20/06/2011'
 
     it "should return correct departure time", ->
-      (expect @flight.departureTime).toEqual '6:00'
+      (expect @flight.departureTime).toEqual '6:00 AM'
 
     it "should return correct arrival time", ->
-      (expect @flight.arrivalTime).toEqual '7:30'
+      (expect @flight.arrivalTime).toEqual '7:30 AM'
 
     it "should return correct origin", ->
       (expect @flight.origin).toEqual 'Sydney'
@@ -192,7 +255,7 @@ describe "VirginScraper", ->
 
       v = new VirginScraper()
       @flights = v.flights()
-      @city = v.hostingCity()
+      @city = v.accommodation().hostingCity
 
     it "should scrape each 'passengerDetailsFrame' to flights", ->
       (expect @flights.length).toEqual 2

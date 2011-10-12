@@ -145,8 +145,9 @@ select#payment-status {
       Depart: {{departureDate}} {{departureTime}} - {{origin}} International Airport<br />
       Arrive: {{arrivalDate}} {{arrivalTime}} - {{destination}} International Airport
 	  <br /><br />
-	  <div class="accomodation-info"></div>
  	  <div id="destination-travelinfo-{{flightNumberNoWS}}"></div>
+      
+	  <div class="accomodation-info"></div>
       
 	{{/flights}}
     </div>

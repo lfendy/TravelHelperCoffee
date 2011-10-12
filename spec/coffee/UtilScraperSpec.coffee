@@ -2,7 +2,9 @@ describe "UtilScraper", ->
 
   #Not a valid test
   it "should perfom sanity check using Google spreadsheet to get hotel output", ->
-    UtilScraper.get().getGoogleSpreadsheetAsJson('pgZYLtdPRv50AK70fqJkQSw', 'od6', (result) -> UtilScraper.get().hotelGoogleSpreadsheetAjaxCallback(result));
+    v = new VirginScraper()
+    ac = v.accommodation()
+    UtilScraper.get().getGoogleSpreadsheetAsJson('pgZYLtdPRv50AK70fqJkQSw', 'od6', (result) -> UtilScraper.get().hotelGoogleSpreadsheetAjaxCallback(result, ac));
     (expect "true").toEqual "true"
 
   #Not a valid test

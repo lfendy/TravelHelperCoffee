@@ -29,7 +29,8 @@ window.TravelHelper = class TravelHelper
       UtilScraper.get().injectHtml UITemplate, view, ($ "body")
      
       UtilScraper.get().getGoogleSpreadsheetAsJson 'pgZYLtdPRv51beYTHUIrFWg', 'od6', (result) -> UtilScraper.get().carGoogleSpreadsheetAjaxCallback(result)
-      UtilScraper.get().getGoogleSpreadsheetAsJson 'pgZYLtdPRv50AK70fqJkQSw', 'od6', (result) -> UtilScraper.get().hotelGoogleSpreadsheetAjaxCallback(result, readyScraper.hostingCity())
+      ac = readyScraper.accommodation()
+      UtilScraper.get().getGoogleSpreadsheetAsJson 'pgZYLtdPRv50AK70fqJkQSw', 'od6', (result) -> UtilScraper.get().hotelGoogleSpreadsheetAjaxCallback(result, ac)
       
       #bind listeners
       ($ 'input#mobileNumber').bind 'focusout', ->

@@ -4,10 +4,10 @@
     <h2>Accommodation</h2>\
     <table border="0" width="60%" cellspacing="1px" cellpadding="2px">\
         <tr>\
-            <td>From: </td><td><input id="from-stay" onchange="" type="text" size="35" value="" /></td>\
+            <td>From: </td><td><input id="from-stay" onchange="" type="text" size="35" value="" />{{stayFrom}}</td>\
         </tr>\
         <tr>\
-            <td>To: </td><td><input id="to-stay" onchange="" type="text" size="35" value="" /></td>\
+            <td>To: </td><td><input id="to-stay" onchange="" type="text" size="35" value="" />{{stayTo}}</td>\
         </tr>\
        <tr>\
             <td>At: </td><td>\
@@ -28,7 +28,7 @@
                     </select></td><td colspan="2">&nbsp;</td>\
         </tr>\
         <tr>\
-            <td>Rate: $ </td><td><input id="rate" onchange="" type="text" maxlength="6" size="10" value="" />&nbsp;per night -&nbsp;\
+            <td>Rate: $ </td><td><input id="rate" onchange="" type="text" maxlength="6" size="10" value="" />per night -\
 					<select onchange="$(\'input#reservation\').trigger(\'change\');" id="payment-status">\
                         <option value=" - Please pay on Departure">Not paid</option>\
                         <option value="">Paid</option>                                                                                                                        \

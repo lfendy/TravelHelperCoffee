@@ -88,22 +88,23 @@ window.UtilScraper = class UtilScraper
     UtilScraper.get().injectHtml UICarTemplate, view, ($ "p#car-content")
 
   
-  hotelGoogleSpreadsheetAjaxCallback: (jsonString, hostingCity) ->
-    console.log "Hosting city is: " + hostingCity
+  hotelGoogleSpreadsheetAjaxCallback: (jsonString, accommodation) ->
+    console.log "Hosting city is: " + accommodation.hostingCity + " from: " + accommodation.stayFrom + " to: " + accommodation.stayTo
     json = jQuery.parseJSON jsonString
     console.log "Parsed JSON string from Google hotel spreadsheet as object: " + json
     cells = json.feed.entry
     hotels = []
-    console.log hostingCity
     i = 4
     while i < cells.length
       hotel = @parseHotel cells, i
-      if hotel.city == hostingCity
+      if hotel.city == accommodation.hostingCity
         hotels.push hotel
       i = i + 4
     console.log "Filtered hotels based on the hosting city: " + hotels
     view =
       hotels: hotels
+      stayFrom: accommodation.stayFrom
+      stayTo: accommodation.stayTo
     ($ "div#hotels-form").html ""
     UtilScraper.get().injectHtml UIHotelTemplate, view, ($ "div#hotels-form")
 

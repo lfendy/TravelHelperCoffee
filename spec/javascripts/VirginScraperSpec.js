@@ -1,5 +1,5 @@
 (function() {
-  var htmlElementWithFlightDetails, htmlElementWithMobileNumber, htmlElementWithPageTitle, htmlElementWithPassengerName, htmlElementWithReservationNumber, injectElement, setupFlightDetails, setupMobileNumber, setupPassengerName, setupReservationNumber, setupWebpageTitle;
+  var htmlElementWithFlightDetails, htmlElementWithMobileNumber, htmlElementWithPageTitle, htmlElementWithPassengerName, htmlElementWithReservationNumber, htmlElementWithTwoFlightDetails, injectElement, setupAccommodationInfo, setupFlightDetails, setupMobileNumber, setupPassengerName, setupReservationNumber, setupWebpageTitle;
   injectElement = function(element) {
     return jasmine.getFixtures().set(element);
   };
@@ -70,6 +70,55 @@ Adult\
               </div>\
        '.replace('##FLIGHT_DATE##', flight.departureDate).replace('##FLIGHT_NUMBER##', flight.flightNumber).replace('##DEPARTURE_TIME##', flight.departureTime).replace('##ARRIVAL_TIME##', flight.arrivalTime).replace('##ORIGIN##', flight.origin).replace('##DESTINATION##', flight.destination);
   };
+  htmlElementWithTwoFlightDetails = function() {
+    return '          <div class="passengerDetailsFrame">\
+                <fieldset class="passengerDetailsField">\
+                  <legend class="intneraryFrameTitle"><span class="redFont">Departing Flight</span></legend>\
+                  <table>\
+                    <tr>\
+                      <td class="flightDate">1-Jan-2011</td>\
+                      <td class="flightStations">Origin</td>\
+                      <td class="flightStations">Destination</td>\
+                      <td class="flightFare" style="text-align: left">Fare Rules</td>\
+                      <td class="flightPassengers"></td>\
+                      <td class="flightFare"></td>\
+                    </tr>\
+                    <tr>\
+                      <td class="flightContents"><a href="http://www.virginblue.com.au/" class="operatedByLink"><div class="OpByVB"></div></a>QV896</td>\
+                      <td class="flightContents"><span class="flightTimeTerminus">11:00</span>Melbourne</td>\
+                      <td class="flightContents"><span class="flightTimeTerminus">21:00</span>Brisbane</td>\
+                      <td class="flightFareContents"><div>1 Adult</div>\
+                      </td>\
+                      <td class="flightFareContents"><strong>$189.00</strong></td>\
+                    </tr>\
+                  </table>\
+                </fieldset>                                                                                                                                                       \
+              </div>\
+              <div class="passengerDetailsFrame">\
+                <fieldset class="passengerDetailsField">\
+                  <legend class="intneraryFrameTitle"><span class="redFont">Returning Flight</span></legend>\
+                  <table>\
+                    <tr>\
+                      <td class="flightDate">10-Jan-2011</td>\
+                      <td class="flightStations">Origin</td>\
+                      <td class="flightStations">Destination</td>\
+                      <td class="flightFare" style="text-align: left">Fare Rules</td>\
+                      <td class="flightPassengers"></td>\
+                      <td class="flightFare"></td>\
+                    </tr>\
+                    <tr>\
+                      <td class="flightContents"><a href="http://www.virginblue.com.au/" class="operatedByLink"><div class="OpByVB"></div></a>QV123</td>\
+                      <td class="flightContents"><span class="flightTimeTerminus">16:30</span>Brisbane</td>\
+                      <td class="flightContents"><span class="flightTimeTerminus">23:45</span>Melbourne</td>\
+                      <td class="flightFareContents"><div>1 Adult</div>                                                                                                           \
+                      </td>\
+                      <td class="flightFareContents"><strong>$199.00</strong></td>\
+                    </tr>\
+                  </table>\
+                </fieldset>                                                                                                                                                       \
+              </div>\
+       ';
+  };
   htmlElementWithReservationNumber = function(number) {
     return '<td class="reservationnumber">##NUMBER##\
     <input id="reservationnumber" type="hidden" value="E1E95Y"></td>'.replace('##NUMBER##', number);
@@ -100,6 +149,9 @@ Adult\
   };
   setupFlightDetails = function(flight) {
     return injectElement(htmlElementWithFlightDetails(flight));
+  };
+  setupAccommodationInfo = function() {
+    return injectElement(htmlElementWithTwoFlightDetails);
   };
   setupReservationNumber = function(number) {
     return injectElement(htmlElementWithReservationNumber(number));
@@ -137,6 +189,14 @@ Adult\
       v = new VirginScraper();
       return (expect(v.reservationNumber())).toEqual('E1E95Y');
     });
+    it("should populate scraped data to Accommodation", function() {
+      setupAccommodationInfo;      var ac, v;
+      v = new VirginScraper();
+      ac = v.accommodation();
+      (expect(ac.hostingCity)).toEqual('Brisbane');
+      (expect(ac.stayFrom)).toEqual('1-Jan-2011');
+      return (expect(ac.stayTo)).toEqual('10-Jan-2011');
+    });
     it("should populate scraped data to Passenger", function() {
       var p, v;
       v = new VirginScraper();
@@ -169,10 +229,10 @@ Adult\
         return (expect(this.flight.arrivalDate)).toEqual('20/06/2011');
       });
       it("should return correct departure time", function() {
-        return (expect(this.flight.departureTime)).toEqual('6:00');
+        return (expect(this.flight.departureTime)).toEqual('6:00 AM');
       });
       it("should return correct arrival time", function() {
-        return (expect(this.flight.arrivalTime)).toEqual('7:30');
+        return (expect(this.flight.arrivalTime)).toEqual('7:30 AM');
       });
       it("should return correct origin", function() {
         return (expect(this.flight.origin)).toEqual('Sydney');
@@ -190,7 +250,7 @@ Adult\
                      </div>');
         v = new VirginScraper();
         this.flights = v.flights();
-        return this.city = v.hostingCity();
+        return this.city = v.accommodation().hostingCity;
       });
       it("should scrape each 'passengerDetailsFrame' to flights", function() {
         return (expect(this.flights.length)).toEqual(2);

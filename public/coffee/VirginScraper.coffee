@@ -54,8 +54,8 @@ window.VirginScraper = class VirginScraper
     f.formattedDepartureDate = @makePrettyDate f.departureDate
     f.arrivalDate   = ($ raw).find('td.flightDate').text()
     f.formattedArrivalDate = @makePrettyDate f.arrivalDate
-    f.departureTime = ($ raw).find('span.flightTimeTerminus').eq(0).text().replace(' PM','').replace(' AM','')
-    f.arrivalTime   = ($ raw).find('span.flightTimeTerminus').eq(1).text().replace(' PM','').replace(' AM','')
+    f.departureTime = ($ raw).find('span.flightTimeTerminus').eq(0).text()
+    f.arrivalTime   = ($ raw).find('span.flightTimeTerminus').eq(1).text()
     originClone      = ($ raw).find('td.flightContents').eq(1).clone()
     destinationClone = ($ raw).find('td.flightContents').eq(2).clone()
     originClone.find('span.flightTimeTerminus').remove()
@@ -66,14 +66,23 @@ window.VirginScraper = class VirginScraper
     f.destination        = f.destination.replace ///\s+///, '_'
     f
 
-  hostingCity: () ->
-    for raw in ($ 'div.passengerDetailsFrame')
-      destinationClone      = ($ raw).find('td.flightContents').eq(2).clone()
-      destinationClone.find('span.flightTimeTerminus').remove()
-      hostingCity = destinationClone.text().trim()
-      hostingCity = hostingCity.replace ///\s+///, '_'
-      break;
-    hostingCity
+  accommodation: () ->
+    a = new Accommodation()
+    
+    raw = ($ 'div.passengerDetailsFrame:eq(0)')
+    console.log "Raw: " + raw
+    destinationClone      = ($ raw).find('td.flightContents').eq(2).clone()
+    destinationClone.find('span.flightTimeTerminus').remove()
+    hostingCity = destinationClone.text().trim()
+    hostingCity = hostingCity.replace ///\s+///, '_'
+    console.log "Scraped hosting city: " + hostingCity
+    a.hostingCity = hostingCity
+    a.stayFrom = ($ raw).find('td.flightDate').text()
+
+    raw = ($ 'div.passengerDetailsFrame:eq(1)')
+    a.stayTo = ($ raw).find('td.flightDate').text()
+    a
+
 
   flights: () ->
     result = (@parseFlight raw) for raw in ($ 'div.passengerDetailsFrame')
