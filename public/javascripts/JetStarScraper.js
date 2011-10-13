@@ -9,7 +9,7 @@
         console.log('JetStarScraper:: JetStarScraper is ready for action');
         return true;
       } else {
-        console.log('JetStarScraper:: JetStarScraper is NOT ready for action, the target page is not Qantas');
+        console.log('JetStarScraper:: JetStarScraper is NOT ready for action, the target page is not JetStar');
         return false;
       }
     };
