@@ -48,6 +48,7 @@ window.VirginScraper = class VirginScraper
 
   parseFlight: (raw) ->
     f = new Flight()
+    f.airline = "Virgin Airlines"
     f.flightNumber  = ($ raw).find('td.flightContents').eq(0).text()
     f.flightNumberNoWS = f.flightNumber.replace ///\s+///, ''
     f.departureDate = ($ raw).find('td.flightDate').text()

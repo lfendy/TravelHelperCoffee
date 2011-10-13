@@ -1,4 +1,5 @@
-#javascript:(function(){document.body.appendChild(document.createElement('script')).src='** your external file URL here **';})();
+#javascript:(function(){document.getElementsByTagName('body')[0].appendChild(document.createElement('script')).src='<--your external url here-->/TravelHelper.min.js?time='+(new%20Date()).getTime();})();
+
 window.TravelHelper = class TravelHelper
   constructor: () ->
 
@@ -16,6 +17,7 @@ window.TravelHelper = class TravelHelper
     scrapers = []
     scrapers.push new VirginScraper()
     scrapers.push new QantasScraper()
+    scrapers.push new JetStarScraper()
 
     for s in scrapers
       if s.isReady()

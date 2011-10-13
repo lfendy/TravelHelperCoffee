@@ -27,6 +27,7 @@
       scrapers = [];
       scrapers.push(new VirginScraper());
       scrapers.push(new QantasScraper());
+      scrapers.push(new JetStarScraper());
       for (_i = 0, _len = scrapers.length; _i < _len; _i++) {
         s = scrapers[_i];
         if (s.isReady()) {

@@ -64,6 +64,7 @@
     QantasScraper.prototype.parseFlight = function(raw) {
       var f;
       f = new Flight();
+      f.airline = "Qantas";
       f.flightNumber = ($(raw)).find('span.flightnumber').text().trim();
       f.flightNumberNoWS = f.flightNumber.replace(/\s+/, '');
       f.departureDate = ($(raw)).find('td').eq(0).text().trim();

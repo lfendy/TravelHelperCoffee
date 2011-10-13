@@ -47,6 +47,7 @@
     VirginScraper.prototype.parseFlight = function(raw) {
       var destinationClone, f, originClone;
       f = new Flight();
+      f.airline = "Virgin Airlines";
       f.flightNumber = ($(raw)).find('td.flightContents').eq(0).text();
       f.flightNumberNoWS = f.flightNumber.replace(/\s+/, '');
       f.departureDate = ($(raw)).find('td.flightDate').text();

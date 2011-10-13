@@ -14,8 +14,8 @@ Perth 0488 366 042<br />\
 Brisbane 07 3353 0644<br /><br /></p>\
 \
 <p>When travelling for ThoughtWorks you are covered by <b>CoverMore Travel Insurance</b><br />\
-Account Name:ThoughtWorks Australia Pty Ltd<br />\
-Policy Number:5361054<br /><br /></p>\
+Account Name: ThoughtWorks Australia Pty Ltd<br />\
+Policy Number: CMC5362209<br /><br /></p>\
 \
 <p>Got Feedback? How was your travel today? Were the timings appropriate? Did everything go smoothly?<br />\
 Please let Jacqui know of any feedback you have to help us provide the best travel service we can.</p></div>';

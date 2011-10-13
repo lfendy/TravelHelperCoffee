@@ -12,7 +12,7 @@
         arrivalTime: this.arrivalTime,
         origin: this.origin,
         destination: this.destination,
-        airline: 'Virgin Airlines',
+        airline: this.airline,
         flightNumber: this.flightNumber,
         flightNumberNoWS: this.flightNumberNoWS
       };
