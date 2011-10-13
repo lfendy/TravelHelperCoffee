@@ -9,7 +9,7 @@ Purpose of script:
 . to add car bookings and travel times
 . to export relevant info to a different google spreadsheet
 
-Notes for dev:
+Notes for dev, when running the following commands under the project root directory:
 . 'rake' by default will run minify_js and produce TravelHelper.min.js
 . 'rake jasmine' will run jasmine server for testing
 . 'guard' is set up to compile .coffee files to .js
@@ -17,10 +17,11 @@ Notes for dev:
 
 Dependencies:
 -------------
-Rake
-Bundler
-Juicer        - minify js files 
-Coffee Script - compile .coffee to .js
-Guard         - watches coffee files changes, auto-compile
-Jasmine       - JS BDD
-Mustache      - templating engine
+rake
+bundler
+juicer        	- files packager
+yui_compressor  - JS/CSS minifier used by packager (run juicer install yui_compressor after installing the juicer)
+Coffee Script 	- little language that compiles into JS
+guard         	- watches coffee files changes, auto-compile them to JS
+jasmine       	- JS BDD
+mustache      	- templating engine
