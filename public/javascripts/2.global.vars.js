@@ -7,6 +7,7 @@ window.airportAddresses.Brisbane = "Casuarina Street Brisbane Airport QLD 4007";
 window.airportAddresses.Perth = "2 George Wiencke Dr, Perth WA 6105";
 window.airportAddresses.Canberra = "Canberra International Airport ACT 2609";
 window.airportAddresses.Gold_Coast = "1 Eastern Ave Bilinga QLD 4225";
+window.airportAddresses.Avalon = "80 Beach Rd, Avalon VIC 3212";
 window.shortMonths = ["Jan", "Feb", "Mar", "Apr", "May", "Jun", "Jul", "Aug", "Sep", "Oct", "Nov", "Dec"];
 window.months = ["January", "February", "March", "April", "May", "June", "July", "August", "September", "October", "November", "December"];
 window.days = ["Sunday", "Monday", "Tuesday", "Wednesday", "Thursday", "Friday", "Saturday"];
