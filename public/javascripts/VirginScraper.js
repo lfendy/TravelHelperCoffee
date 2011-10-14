@@ -4,7 +4,7 @@
     function VirginScraper() {}
     VirginScraper.prototype.isReady = function() {
       var index;
-      index = ($(document)).text().toLowerCase().indexOf("Your booking");
+      index = ($(document)).text().toLowerCase().indexOf("virgin");
       if (index !== -1) {
         console.log('VirginScraper:: VirginScraper is ready for action');
         return true;

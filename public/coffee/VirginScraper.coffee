@@ -2,7 +2,7 @@ window.VirginScraper = class VirginScraper
   constructor: () -> 
 
   isReady: () ->
-    index = ($ document).text().toLowerCase().indexOf("Your booking")
+    index = ($ document).text().toLowerCase().indexOf("virgin")
     if index != -1
       console.log('VirginScraper:: VirginScraper is ready for action')
       true
