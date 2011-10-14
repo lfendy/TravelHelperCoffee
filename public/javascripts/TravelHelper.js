@@ -54,7 +54,7 @@
         });
       } else {
         console.log("TravelHelper:: Does not have scraper ready!");
-        return ($('body')).prepend("<p><br /><br /><br /><br /><h1 style='color: red !important; padding: 15px;'>Oops! Text scraper is not ready. Contact TW support!</h1></p>");
+        return ($('body')).prepend("<div align='center'><p><br /><br /><br /><h1 style='color: red !important; padding: 15px;'>Oops! None of the text scrapers are ready. <br />Are you sure you executed the bookmarklet on the right page?</h1></p></div>");
       }
     };
     return TravelHelper;
