@@ -54,7 +54,7 @@
         });
       } else {
         console.log("TravelHelper:: Does not have scraper ready!");
-        return ($('body')).prepend("<p><br /><br /><h1 style='color: red !important; padding: 15px;'>Oops! Text scraper is not ready. Contact TW support!</h1></p>");
+        return ($('body')).prepend("<p><br /><br /><br /><br /><h1 style='color: red !important; padding: 15px;'>Oops! Text scraper is not ready. Contact TW support!</h1></p>");
       }
     };
     return TravelHelper;

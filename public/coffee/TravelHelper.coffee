@@ -43,7 +43,7 @@ window.TravelHelper = class TravelHelper
       
     else
       console.log "TravelHelper:: Does not have scraper ready!"
-      ($ 'body').prepend "<p><br /><br /><h1 style='color: red !important; padding: 15px;'>Oops! Text scraper is not ready. Contact TW support!</h1></p>"
+      ($ 'body').prepend "<p><br /><br /><br /><br /><h1 style='color: red !important; padding: 15px;'>Oops! Text scraper is not ready. Contact TW support!</h1></p>"
   
 # =========== Code for injecting the travel helper =============
 

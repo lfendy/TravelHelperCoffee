@@ -3,9 +3,10 @@
   window.VirginScraper = VirginScraper = (function() {
     function VirginScraper() {}
     VirginScraper.prototype.isReady = function() {
-      var index;
-      index = ($(document)).text().toLowerCase().indexOf("virgin");
-      if (index !== -1) {
+      var index, passengerName;
+      index = ($(document)).text().toLowerCase().indexOf("Your booking");
+      passengerName = this.passengerName();
+      if (index !== -1 && passengerName !== null && passengerName.length > 0) {
         console.log('VirginScraper:: VirginScraper is ready for action');
         return true;
       } else {

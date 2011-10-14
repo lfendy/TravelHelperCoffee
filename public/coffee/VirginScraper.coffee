@@ -2,8 +2,9 @@ window.VirginScraper = class VirginScraper
   constructor: () -> 
 
   isReady: () ->
-    index = ($ document).text().toLowerCase().indexOf("virgin") 
-    if index != -1
+    index = ($ document).text().toLowerCase().indexOf("Your booking")
+    passengerName = @passengerName();
+    if index != -1 && passengerName != null && passengerName.length > 0
       console.log('VirginScraper:: VirginScraper is ready for action')
       true
     else
