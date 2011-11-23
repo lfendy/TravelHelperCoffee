@@ -8,7 +8,7 @@ table tr th {\
     height: 2em !important;\
     padding: 2px 4px !important;\
     text-align: left !important;\
-    white-space: nowrap !important;                                                                                                                                               \
+    white-space: nowrap !important;\
 }\
 </style>\
 \

@@ -1,43 +1,43 @@
 window.UtilScraper = class UtilScraper
-  
-  instance = null 
+
+  instance = null
 
   @get: ->
     if not instance?
       instance = new @
       instance.init('UtilScraper')
 
-    instance  
+    instance
 
   init: (name = "unknown") ->
     console.log "#{name} initialized"
-  
+
   queryGoogleDistanceMatrix: (sourceAddress, destinationAddress, targetDiv) ->
     ($ "span#" + targetDiv).html "Wait.."
     sourceAddress = sourceAddress + ", Australia"
     destinationAddress = destinationAddress + ", Australia"
-    
+
     if not matrix?
        ($ "span#" + targetDiv).html "Oops! Boo boo :("
        return false
     else
        console.log "Checking distance between [" + sourceAddress + "] and [" + destinationAddress + "]"
-    
-    matrix.getDistanceMatrix 
+
+    matrix.getDistanceMatrix
       origins: [ sourceAddress ]
       destinations: [ destinationAddress ]
       travelMode: google.maps.TravelMode.DRIVING
       avoidHighways: false
       avoidTolls: false, (json) ->
         UtilScraper.get().parseGoogleMapMatrix json, targetDiv
-   
+
   parseGoogleMapMatrix: (jsonObj, targetDiv) ->
     console.log "Got JSON : " + jsonObj + " and target element: " + targetDiv
     unless jsonObj.status == "OK" || jsonObj.status == google.maps.DistanceMatrixStatus.OK
       #console.log "Error was when trying to query Google distance matrix: " + jsonObj.status
       #($ "span#" + targetDiv).html "Oops! Boo boo :("
     else
-      
+
 
     console.log "Got JSON object from Google distance matrix: " + jsonObj
     elements = jsonObj.rows[0].elements
@@ -45,7 +45,7 @@ window.UtilScraper = class UtilScraper
     console.log result
     ($ "span#" + targetDiv).html result
     result
-      
+
 
   parseCar: (cells, i) ->
     city = cells[i].content.$t
@@ -57,9 +57,9 @@ window.UtilScraper = class UtilScraper
     c.company = company
     c.contact = contact
     c.phone = phone
-    console.log city + ' | ' + company + ' | ' + contact + ' | ' + phone                                                                                                          
-    c  
- 
+    console.log city + ' | ' + company + ' | ' + contact + ' | ' + phone
+    c
+
   getGoogleSpreadsheetAsJson: (spreadsheetId, gridId, callback) ->
     url = 'http://spreadsheets.google.com/feeds/cells/' + spreadsheetId + '/' + gridId + '/public/basic?alt=json-in-script'
     $.get url, (res) ->
@@ -75,19 +75,18 @@ window.UtilScraper = class UtilScraper
     json = jQuery.parseJSON jsonString
     console.log "Parsed JSON string from Google spreadsheet as object: " + json
     cells = json.feed.entry
-    cars = []                                                                                                                                                                     
-    
+    cars = []
+
     i = 4
     while i < cells.length
       cars.push @parseCar cells, i
       i = i + 4
     console.log cars
     view =
-      cars: cars     
+      cars: cars
     ($ "p#car-content").html ""
     UtilScraper.get().injectHtml UICarTemplate, view, ($ "p#car-content")
 
-  
   hotelGoogleSpreadsheetAjaxCallback: (jsonString, accommodation) ->
     console.log "Hosting city is: " + accommodation.hostingCity + " from: " + accommodation.stayFrom + " to: " + accommodation.stayTo
     json = jQuery.parseJSON jsonString
@@ -132,20 +131,23 @@ window.UtilScraper = class UtilScraper
     s
 
   estimateDatetime: (datetimeStr, minutesToSubstructInt) ->
+    console.log "datetimeStr: " + datetimeStr
+    console.log "minutesToSubstrauctInt: " + minutesToSubstructInt
     estimatedMillis = new Number(minutesToSubstructInt) * 1000 * 60
     console.log "Got [" + datetimeStr + "] to do estimation on"
     currMilliSeconds = Date.parse datetimeStr
     console.log "Parsed [" + datetimeStr + "] into milli seconds: " + currMilliSeconds
     estimatedNewTime = currMilliSeconds - estimatedMillis
+    console.log "Estimatated new time: " + estimatedNewTime
     date = new Date estimatedNewTime
-    
+
     minutes = parseInt(date.getMinutes())
     hours = parseInt(date.getHours())
-    
+
     if minutes < 10
       minutes = "0" + minutes
 
-    if hours < 12                                                                                                                                                               
+    if hours < 12
       minutes = minutes + "AM"
     else
       minutes = minutes + ""
@@ -168,7 +170,7 @@ window.UtilScraper = class UtilScraper
 
   handleOnChange: (direction, flightNumber) ->
     fromAddress = ($ "input#" + direction + "-" + flightNumber).val()
-    targetAirport = ($ "input#" + direction + "-airport-" + flightNumber).val()
+    targetAirport = ($ "input#" + direction + "-airport-" + flightNumber).val() + " International Airport"
     targetDatetime = ($ "input#" + direction + "-datetime-" + flightNumber).val()
     targetDiv = "div#" + direction + "-travelinfo-" + flightNumber
     formattedDatetime = targetDatetime
@@ -182,12 +184,12 @@ window.UtilScraper = class UtilScraper
       #console.log "Total minutes to substract: " + totalMinutes
       formattedDatetime = @estimateDatetime targetDatetime, totalMinutes
 
-    start = (if direction == "origin" then "To" else "From")
-    end = (if direction == "origin" then "From" else "To")
+    start = (if direction != "origin" then targetAirport else fromAddress)
+    end = (if direction == "origin" then targetAirport else fromAddress)
     journey = (if direction == "origin" then "departure" else "arrival")
     carTransferTime = "<strong>Car Transfer Time (on " + flightNumber + " " + journey + "): <span class='" + spanClass + "'>" + formattedDatetime + "</span></strong><br />"
-    carTransferTime = carTransferTime + start + ": " + targetAirport + " International Airport<br />"
-    carTransferTime = carTransferTime + end + ": " + fromAddress + "<br /><br />"
+    carTransferTime = carTransferTime + "From: " + start + "<br />"
+    carTransferTime = carTransferTime + "To:" + end + "<br /><br />"
     ($ targetDiv).html carTransferTime
 
   handleOnChangeAll: () ->

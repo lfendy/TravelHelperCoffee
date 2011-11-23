@@ -29,22 +29,22 @@ window.TravelHelper = class TravelHelper
       view = @createView readyScraper
       #inject ui
       UtilScraper.get().injectHtml UITemplate, view, ($ "body")
-     
+
       UtilScraper.get().getGoogleSpreadsheetAsJson 'pgZYLtdPRv51beYTHUIrFWg', 'od6', (result) -> UtilScraper.get().carGoogleSpreadsheetAjaxCallback(result)
       ac = readyScraper.accommodation()
       UtilScraper.get().getGoogleSpreadsheetAsJson 'pgZYLtdPRv50AK70fqJkQSw', 'od6', (result) -> UtilScraper.get().hotelGoogleSpreadsheetAjaxCallback(result, ac)
-      
+
       #bind listeners
       ($ 'input#mobileNumber').bind 'focusout', ->
         ($ 'span#mobileNumber').text '(' + ($ 'input#mobileNumber').val() + ')'
 
       ($ 'input#mobileNumber').change ->
         ($ 'span#mobileNumber').text '(' + ($ 'input#mobileNumber').val() + ')'
-      
+
     else
       console.log "TravelHelper:: Does not have scraper ready!"
       ($ 'body').prepend "<div align='center'><p><br /><br /><br /><h1 style='color: red !important; padding: 15px;'>Oops! None of the text scrapers are ready. <br />Are you sure you executed the bookmarklet on the right page?</h1></p></div>"
-  
+
 # =========== Code for injecting the travel helper =============
 
 

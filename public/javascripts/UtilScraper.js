@@ -145,11 +145,14 @@
     };
     UtilScraper.prototype.estimateDatetime = function(datetimeStr, minutesToSubstructInt) {
       var currMilliSeconds, date, estimatedMillis, estimatedNewTime, formattedDate, hours, minutes;
+      console.log("datetimeStr: " + datetimeStr);
+      console.log("minutesToSubstrauctInt: " + minutesToSubstructInt);
       estimatedMillis = new Number(minutesToSubstructInt) * 1000 * 60;
       console.log("Got [" + datetimeStr + "] to do estimation on");
       currMilliSeconds = Date.parse(datetimeStr);
       console.log("Parsed [" + datetimeStr + "] into milli seconds: " + currMilliSeconds);
       estimatedNewTime = currMilliSeconds - estimatedMillis;
+      console.log("Estimatated new time: " + estimatedNewTime);
       date = new Date(estimatedNewTime);
       minutes = parseInt(date.getMinutes());
       hours = parseInt(date.getHours());
@@ -182,7 +185,7 @@
     UtilScraper.prototype.handleOnChange = function(direction, flightNumber) {
       var arriveBeforeTime, carTransferTime, end, formattedDatetime, fromAddress, journey, spanClass, start, targetAirport, targetCarTravelTime, targetDatetime, targetDiv, totalMinutes;
       fromAddress = ($("input#" + direction + "-" + flightNumber)).val();
-      targetAirport = ($("input#" + direction + "-airport-" + flightNumber)).val();
+      targetAirport = ($("input#" + direction + "-airport-" + flightNumber)).val() + " International Airport";
       targetDatetime = ($("input#" + direction + "-datetime-" + flightNumber)).val();
       targetDiv = "div#" + direction + "-travelinfo-" + flightNumber;
       formattedDatetime = targetDatetime;
@@ -194,12 +197,12 @@
         totalMinutes = parseInt(targetCarTravelTime) + parseInt(arriveBeforeTime);
         formattedDatetime = this.estimateDatetime(targetDatetime, totalMinutes);
       }
-      start = (direction === "origin" ? "To" : "From");
-      end = (direction === "origin" ? "From" : "To");
+      start = (direction !== "origin" ? targetAirport : fromAddress);
+      end = (direction === "origin" ? targetAirport : fromAddress);
       journey = (direction === "origin" ? "departure" : "arrival");
       carTransferTime = "<strong>Car Transfer Time (on " + flightNumber + " " + journey + "): <span class='" + spanClass + "'>" + formattedDatetime + "</span></strong><br />";
-      carTransferTime = carTransferTime + start + ": " + targetAirport + " International Airport<br />";
-      carTransferTime = carTransferTime + end + ": " + fromAddress + "<br /><br />";
+      carTransferTime = carTransferTime + "From: " + start + "<br />";
+      carTransferTime = carTransferTime + "To:" + end + "<br /><br />";
       return ($(targetDiv)).html(carTransferTime);
     };
     UtilScraper.prototype.handleOnChangeAll = function() {

@@ -92,7 +92,7 @@ select#payment-status {\
 \
   <div id="cars-form">\
 	<h2>Cars</h2>\
-	\
+\
 	<table border="0" width="95%" cellspacing="1px" cellpadding="2px">\
 		{{#flights}}\
     	<tr>\
@@ -100,8 +100,8 @@ select#payment-status {\
 				<input type="hidden" class="flightNumbers" value="{{flightNumberNoWS}}" />\
 				<input type="hidden" id="origin-airport-{{flightNumberNoWS}}" value="{{origin}}" />\
 				<input type="hidden" id="destination-airport-{{flightNumberNoWS}}" value="{{destination}}" />\
-				<input type="hidden" id="origin-datetime-{{flightNumberNoWS}}" value="{{departureTime}} {{formattedDepartureDate}}" />\
-				<input type="hidden" id="destination-datetime-{{flightNumberNoWS}}" value="{{arrivalTime}} {{formattedArrivalDate}}" />\
+				<input type="hidden" id="origin-datetime-{{flightNumberNoWS}}" value="{{formattedDepartureDate}} {{departureTime}}" />\
+				<input type="hidden" id="destination-datetime-{{flightNumberNoWS}}" value="{{formattedArrivalDate}} {{arrivalTime}}" />\
 			</td>\
 		</tr>\
 		<tr>\
@@ -138,18 +138,15 @@ select#payment-status {\
     -----------------------------------------------------------------------<br /><br />\
     <div id="flights">\
     {{#flights}}\
-      \
+\
 	  <div id="origin-travelinfo-{{flightNumberNoWS}}"></div>\
-      \
 	  <strong>Flight Time <span class="green">{{departureTime}} {{formattedDepartureDate}}</span></strong><br />\
       Flight No: {{airline}} {{flightNumber}}<br />\
       Depart: {{departureDate}} {{departureTime}} - {{origin}} Domestic Airport<br />\
       Arrive: {{arrivalDate}} {{arrivalTime}} - {{destination}} Domestic Airport\
 	  <br /><br />\
  	  <div id="destination-travelinfo-{{flightNumberNoWS}}"></div>\
-      \
 	  <div class="accomodation-info"></div>\
-      \
 	{{/flights}}\
     </div>\
   </div>' + window.UIFooterTemplate + '</div>';

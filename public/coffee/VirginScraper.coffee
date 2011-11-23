@@ -1,5 +1,5 @@
 window.VirginScraper = class VirginScraper
-  constructor: () -> 
+  constructor: () ->
 
   isReady: () ->
     index = ($ document).text().toLowerCase().indexOf("virgin")
@@ -15,13 +15,13 @@ window.VirginScraper = class VirginScraper
 
   makePrettyDate: (scrapedDate) ->
     components = []
-                                                                                                                                                                                  
-    if scrapedDate.indexOf('-') != -1 
+
+    if scrapedDate.indexOf('-') != -1
       components = scrapedDate.split('-')
     else
-      components = scrapedDate.split(' ')   
+      components = scrapedDate.split(' ')
 
-   
+
     if components[2]? && components[2].length < 4
       components[2] = '20' + components[2]
 
@@ -62,7 +62,7 @@ window.VirginScraper = class VirginScraper
     originClone.find('span.flightTimeTerminus').remove()
     destinationClone.find('span.flightTimeTerminus').remove()
     f.origin        = originClone.text().trim()
-    f.origin        = f.origin.replace ///\s+///, '_' 
+    f.origin        = f.origin.replace ///\s+///, '_'
     f.destination   = destinationClone.text().trim()
     f.destination        = f.destination.replace ///\s+///, '_'
     f

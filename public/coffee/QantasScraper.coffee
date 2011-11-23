@@ -2,7 +2,7 @@ window.QantasScraper = class QantasScraper
   constructor: () ->
 
   isReady: () ->
-    index = ($ document).text().toLowerCase().indexOf("qantas") 
+    index = ($ document).text().toLowerCase().indexOf("qantas")
     if index != -1
       console.log('QantasScraper:: QantasScraper is ready for action')
       true
@@ -12,16 +12,16 @@ window.QantasScraper = class QantasScraper
 
   name: () ->
     "QantasScraper"
-  
+
   makePrettyDate: (scrapedDate) ->
     components = []
-    
-    if scrapedDate.indexOf('-') != -1 
+
+    if scrapedDate.indexOf('-') != -1
       components = scrapedDate.split('-')
     else
-      components = scrapedDate.split(' ')   
+      components = scrapedDate.split(' ')
 
-   
+
     if components[3]? && components[3].length < 4
       components[3] = '20' + components[3]
 
@@ -34,7 +34,7 @@ window.QantasScraper = class QantasScraper
     ($ 'div#ContactDetails').find('td').eq(0).text()
 
   mobileNumber: () ->
-    ($ "div#ContactDetails").find("table.pax-contact").find("tr").eq(5).find("td").eq(1).text()
+    ($ "div#ContactDetails").find("table.pax-contact").find("tr").eq(2).find("td").eq(1).text()
 
   reservationNumber: () ->
     ($ "div#title").find("h2").text().trim().split(/\s+/).filter((word, index) -> index == 2).join('')
@@ -43,7 +43,7 @@ window.QantasScraper = class QantasScraper
     p = new Passenger()
     p.name              = @passengerName()
     p.mobileNumber      = @mobileNumber()
-    p.reservationNumber = @reservationNumber()                                                                                                                                    
+    p.reservationNumber = @reservationNumber()
     p
 
   flights: () ->
@@ -64,11 +64,11 @@ window.QantasScraper = class QantasScraper
     f.destination   = ($ raw).find('td').eq(4).text().trim()
     f.origin        = f.origin.replace ///\s+///, '_'
     f.destination        = f.destination.replace ///\s+///, '_'
-    f 
+    f
 
   accommodation: () ->
     a = new Accommodation()
-    
+
     raw = ($ 'tr.tr_first:eq(0)')
     console.log "Raw: " + raw
     destinationClone      = ($ raw).find('td').eq(4).text().trim()
