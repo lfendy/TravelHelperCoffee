@@ -1,2 +1,2 @@
-window.Car = class Car                                                                                                                                          
+window.Car = class Car
   constructor: () ->

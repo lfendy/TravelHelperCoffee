@@ -9,7 +9,7 @@ window.Flight = class Flight
     arrivalDate:   @arrivalDate
     arrivalTime:   @arrivalTime
     origin:        @origin
-    destination:   @destination                                                                                                                                                   
+    destination:   @destination
     airline:       'Virgin Airlines'
     flightNumber:  @flightNumber
     flightNumberNoWS: @flightNumberNoWS

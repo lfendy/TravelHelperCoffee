@@ -105,10 +105,16 @@
     };
     UtilScraper.prototype.estimateDatetime = function(datetimeStr, minutesToSubstructInt) {
       var currMilliSeconds, date, estimatedMillis, estimatedNewTime, formattedDate, minutes;
+      console.log("datetimeStr: " + datetimeStr);
+      console.log("minutesToSubstrauctInt: " + minutesToSubstructInt);
       estimatedMillis = new Number(minutesToSubstructInt) * 1000 * 60;
+      console.log("estimatedMillis: " + estimatedMillis);
       currMilliSeconds = Date.parse(datetimeStr);
+      console.log("current milli seconds:" + currMilliSeconds);
       estimatedNewTime = currMilliSeconds - estimatedMillis;
+      console.log("Estimatated new time: " + estimatedNewTime);
       date = new Date(estimatedNewTime);
+      console.log("estimated date object: " + date);
       minutes = parseInt(date.getMinutes());
       if (minutes < 10) {
         minutes = "0" + minutes;
