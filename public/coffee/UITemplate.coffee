@@ -72,7 +72,7 @@ table tr th {
 				<input type="hidden" class="flightNumbers" value="{{flightNumberNoWS}}" />
 				<input type="hidden" id="origin-airport-{{flightNumberNoWS}}" value="{{origin}}" />
 				<input type="hidden" id="destination-airport-{{flightNumberNoWS}}" value="{{destination}}" />
-				<input type="hidden" id="origin-datetime-{{flightNumberNoWS}}" value="{{formattedDepartureDate}} {{departureTime} }" />
+				<input type="hidden" id="origin-datetime-{{flightNumberNoWS}}" value="{{formattedDepartureDate}} {{departureTime}}" />
 				<input type="hidden" id="destination-datetime-{{flightNumberNoWS}}" value="{{formattedArrivalDate}} {{arrivalTime}}" />
 			</td>
 		</tr>
