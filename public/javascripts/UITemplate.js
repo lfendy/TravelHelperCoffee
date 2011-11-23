@@ -65,7 +65,7 @@ table tr th {\
 \
   <div id="cars-form">\
 	<h2>Cars</h2>\
-	\
+\
 	<table border="0" width="95%" cellspacing="1px" cellpadding="2px">\
 		{{#flights}}\
     	<tr>\
@@ -73,8 +73,8 @@ table tr th {\
 				<input type="hidden" class="flightNumbers" value="{{flightNumberNoWS}}" />\
 				<input type="hidden" id="origin-airport-{{flightNumberNoWS}}" value="{{origin}}" />\
 				<input type="hidden" id="destination-airport-{{flightNumberNoWS}}" value="{{destination}}" />\
-				<input type="hidden" id="origin-datetime-{{flightNumberNoWS}}" value="{{departureTime}} {{formattedDepartureDate}}" />\
-				<input type="hidden" id="destination-datetime-{{flightNumberNoWS}}" value="{{arrivalTime}} {{formattedArrivalDate}}" />\
+				<input type="hidden" id="origin-datetime-{{flightNumberNoWS}}" value="{{formattedDepartureDate}} {{departureTime}}" />\
+				<input type="hidden" id="destination-datetime-{{flightNumberNoWS}}" value="{{formattedArrivalDate}} {{arrivalTime}}" />\
 			</td>\
 		</tr>\
 		<tr>\
@@ -111,16 +111,16 @@ table tr th {\
     -----------------------------------------------------------------------<br /><br />\
     <div id="flights">\
     {{#flights}}\
-      \
+\
 	  <div id="origin-travelinfo-{{flightNumberNoWS}}"></div>\
-      \
+\
 	  <strong>Flight Time {{departureTime}} {{formattedDepartureDate}}</strong><br />\
       Flight No: {{airline}} {{flightNumber}}<br />\
       Depart: {{departureDate}} {{departureTime}} - {{origin}} International Airport<br />\
       Arrive: {{arrivalDate}} {{arrivalTime}} - {{destination}} International Airport\
 	  <br /><br />\
  	  <div id="destination-travelinfo-{{flightNumberNoWS}}"></div>\
-      \
+\
 	{{/flights}}\
     </div>\
   </div>' + window.UIFooterTemplate + '</div>';

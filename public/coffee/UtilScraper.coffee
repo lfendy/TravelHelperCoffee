@@ -1,48 +1,48 @@
 window.UtilScraper = class UtilScraper
-  
-  instance = null 
+
+  instance = null
 
   @get: ->
     if not instance?
       instance = new @
       instance.init('UtilScraper')
 
-    instance  
+    instance
 
   init: (name = "unknown") ->
     console.log "#{name} initialized"
-  
+
   queryGoogleDistanceMatrix: (sourceAddress, destinationAddress, targetDiv) ->
     ($ "span#" + targetDiv).html "Wait.."
     sourceAddress = sourceAddress + ", Australia"
     destinationAddress = destinationAddress + ", Australia"
-    
+
     if not matrix?
        ($ "span#" + targetDiv).html "Oops! Boo boo :("
        return false
     else
        console.log "Checking distance between [" + sourceAddress + "] and [" + destinationAddress + "]"
-    
-    matrix.getDistanceMatrix 
+
+    matrix.getDistanceMatrix
       origins: [ sourceAddress ]
       destinations: [ destinationAddress ]
       travelMode: google.maps.TravelMode.DRIVING
       avoidHighways: false
       avoidTolls: false, (json) ->
         UtilScraper.get().parseGoogleMapMatrix json, targetDiv
-   
-  #Was used for testing and now deprecated (Still works though) 
+
+  #Was used for testing and now deprecated (Still works though)
   queryGoogleMap: (sourceAddress, destinationAddress, targetDiv) ->
     ($ "span#" + targetDiv).html "Wait.."
     sourceAddress = sourceAddress + ", Australia"
     destinationAddress = destinationAddress + ", Australia"
-    
-    #Trying to use JSON with padding (JSON-P) here, to bypass the ajax cross-domain restriction: http://en.wikipedia.org/wiki/JSONP, the 
-    # original Google distance matrix API does not support it (adding 'callback=?' to URL). 
+
+    #Trying to use JSON with padding (JSON-P) here, to bypass the ajax cross-domain restriction: http://en.wikipedia.org/wiki/JSONP, the
+    # original Google distance matrix API does not support it (adding 'callback=?' to URL).
     # Therefore I had to use my own server in the middle. Yeah... it is doggy... But using a bookmarklet kind of limits the options.
     # Better solution is required here, as http://kickme.in is a temporary fix.
     # http://maps.googleapis.com/maps/api/distancematrix/json?origins=&destinations=&mode=driving&sensor=false  <-- Google API used on http://kickme.in
-    
+
     url = 'http://kickme.in/travel.php?callback=?&sourceAddress=' + sourceAddress + '&destinationAddress=' + destinationAddress + '&target=' + targetDiv;
     $.getJSON url, (json) ->
         false
@@ -53,7 +53,7 @@ window.UtilScraper = class UtilScraper
       #console.log "Error was when trying to query Google distance matrix: " + jsonObj.status
       #($ "span#" + targetDiv).html "Oops! Boo boo :("
     else
-      
+
 
     console.log "Got JSON object from Google distance matrix: " + jsonObj
     elements = jsonObj.rows[0].elements
@@ -61,7 +61,7 @@ window.UtilScraper = class UtilScraper
     console.log result
     ($ "span#" + targetDiv).html result
     result
-      
+
 
   parseCar: (cells, i) ->
     city = cells[i].content.$t
@@ -73,9 +73,9 @@ window.UtilScraper = class UtilScraper
     c.company = company
     c.contact = contact
     c.phone = phone
-    console.log city + ' | ' + company + ' | ' + contact + ' | ' + phone                                                                                                          
-    c  
- 
+    console.log city + ' | ' + company + ' | ' + contact + ' | ' + phone
+    c
+
   getGoogleSpreadsheetAsJson: (spreadsheetId, gridId, target, callback) ->
     url = 'http://spreadsheets.google.com/feeds/cells/' + spreadsheetId + '/' + gridId + '/public/basic?alt=json-in-script'
     $.get url, (res) ->
@@ -88,24 +88,30 @@ window.UtilScraper = class UtilScraper
 
 
   carGoogleSpreadsheetAjaxCallback: (cells) ->
-    cars = []                                                                                                                                                                     
-    
+    cars = []
+
     i = 4
     while i < cells.length
       cars.push @parseCar cells, i
       i = i + 4
     console.log cars
     view =
-      cars: cars     
+      cars: cars
     ($ "p#car-content").html ""
     UtilScraper.get().injectHtml UICarTemplate, view, ($ "p#car-content")
 
-  
+
   estimateDatetime: (datetimeStr, minutesToSubstructInt) ->
+    console.log "datetimeStr: " + datetimeStr
+    console.log "minutesToSubstrauctInt: " + minutesToSubstructInt
     estimatedMillis = new Number(minutesToSubstructInt) * 1000 * 60
+    console.log "estimatedMillis: " + estimatedMillis
     currMilliSeconds = Date.parse datetimeStr
+    console.log "current milli seconds:" + currMilliSeconds
     estimatedNewTime = currMilliSeconds - estimatedMillis
+    console.log "Estimatated new time: " + estimatedNewTime
     date = new Date estimatedNewTime
+    console.log "estimated date object: " + date
     minutes = parseInt(date.getMinutes())
     if minutes < 10
       minutes = "0" + minutes
@@ -115,7 +121,7 @@ window.UtilScraper = class UtilScraper
 
   handleOnChange: (direction, flightNumber) ->
     fromAddress = ($ "input#" + direction + "-" + flightNumber).val()
-    targetAirport = ($ "input#" + direction + "-airport-" + flightNumber).val()
+    targetAirport = ($ "input#" + direction + "-airport-" + flightNumber).val() + " International Airport"
     targetDatetime = ($ "input#" + direction + "-datetime-" + flightNumber).val()
     targetDiv = "div#" + direction + "-travelinfo-" + flightNumber
     formattedDatetime = targetDatetime
@@ -127,12 +133,12 @@ window.UtilScraper = class UtilScraper
       #console.log "Total minutes to substract: " + totalMinutes
       formattedDatetime = @estimateDatetime targetDatetime, totalMinutes
 
-    start = (if direction == "origin" then "To" else "From")
-    end = (if direction == "origin" then "From" else "To")
+    start = (if direction != "origin" then targetAirport else fromAddress)
+    end = (if direction == "origin" then targetAirport else fromAddress)
     journey = (if direction == "origin" then "departure" else "arrival")
     carTransferTime = "<strong>Car Transfer Time (on " + flightNumber + " " + journey + "): " + formattedDatetime + "</strong><br />"
-    carTransferTime = carTransferTime + start + ": " + targetAirport + " International Airport<br />"
-    carTransferTime = carTransferTime + end + ": " + fromAddress + "<br /><br />"
+    carTransferTime = carTransferTime + "From: " + start + "<br />"
+    carTransferTime = carTransferTime + "To:" + end + "<br /><br />"
     ($ targetDiv).html carTransferTime
 
   handleOnChangeAll: () ->

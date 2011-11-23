@@ -27,20 +27,20 @@ window.TravelHelper = class TravelHelper
       view = @createView readyScraper
       #inject ui
       UtilScraper.get().injectHtml UITemplate, view, ($ "body")
-     
+
       UtilScraper.get().getGoogleSpreadsheetAsJson 'pgZYLtdPRv51beYTHUIrFWg', 'od6'
-      
+
       #bind listeners
       ($ 'input#mobileNumber').bind 'focusout', ->
         ($ 'span#mobileNumber').text '(' + ($ 'input#mobileNumber').val() + ')'
 
       ($ 'input#mobileNumber').change ->
         ($ 'span#mobileNumber').text '(' + ($ 'input#mobileNumber').val() + ')'
-      
+
     else
       console.log "TravelHelper:: Does not have scraper ready!"
       ($ 'body').prepend "<p><br /><br /><h1 style='color: red !important; padding: 15px;'>Oops! Text scraper is not ready. Contact TW support!</h1></p>"
-  
+
 # =========== Code for injecting the travel helper =============
 
 
