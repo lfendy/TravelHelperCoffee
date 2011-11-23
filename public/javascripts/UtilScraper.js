@@ -126,7 +126,7 @@
     UtilScraper.prototype.handleOnChange = function(direction, flightNumber) {
       var arriveBeforeTime, carTransferTime, end, formattedDatetime, fromAddress, journey, start, targetAirport, targetCarTravelTime, targetDatetime, targetDiv, totalMinutes;
       fromAddress = ($("input#" + direction + "-" + flightNumber)).val();
-      targetAirport = ($("input#" + direction + "-airport-" + flightNumber)).val();
+      targetAirport = ($("input#" + direction + "-airport-" + flightNumber)).val() + " International Airport";
       targetDatetime = ($("input#" + direction + "-datetime-" + flightNumber)).val();
       targetDiv = "div#" + direction + "-travelinfo-" + flightNumber;
       formattedDatetime = targetDatetime;
@@ -136,12 +136,12 @@
         totalMinutes = parseInt(targetCarTravelTime) + parseInt(arriveBeforeTime);
         formattedDatetime = this.estimateDatetime(targetDatetime, totalMinutes);
       }
-      start = (direction === "origin" ? "To" : "From");
-      end = (direction === "origin" ? "From" : "To");
+      start = (direction !== "origin" ? targetAirport : fromAddress);
+      end = (direction === "origin" ? targetAirport : fromAddress);
       journey = (direction === "origin" ? "departure" : "arrival");
       carTransferTime = "<strong>Car Transfer Time (on " + flightNumber + " " + journey + "): " + formattedDatetime + "</strong><br />";
-      carTransferTime = carTransferTime + start + ": " + targetAirport + " International Airport<br />";
-      carTransferTime = carTransferTime + end + ": " + fromAddress + "<br /><br />";
+      carTransferTime = carTransferTime + "From: " + start + "<br />";
+      carTransferTime = carTransferTime + "To:" + end + "<br /><br />";
       return ($(targetDiv)).html(carTransferTime);
     };
     UtilScraper.prototype.handleOnChangeAll = function() {

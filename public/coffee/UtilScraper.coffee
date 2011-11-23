@@ -121,7 +121,7 @@ window.UtilScraper = class UtilScraper
 
   handleOnChange: (direction, flightNumber) ->
     fromAddress = ($ "input#" + direction + "-" + flightNumber).val()
-    targetAirport = ($ "input#" + direction + "-airport-" + flightNumber).val()
+    targetAirport = ($ "input#" + direction + "-airport-" + flightNumber).val() + " International Airport"
     targetDatetime = ($ "input#" + direction + "-datetime-" + flightNumber).val()
     targetDiv = "div#" + direction + "-travelinfo-" + flightNumber
     formattedDatetime = targetDatetime
@@ -133,12 +133,12 @@ window.UtilScraper = class UtilScraper
       #console.log "Total minutes to substract: " + totalMinutes
       formattedDatetime = @estimateDatetime targetDatetime, totalMinutes
 
-    start = (if direction == "origin" then "To" else "From")
-    end = (if direction == "origin" then "From" else "To")
+    start = (if direction != "origin" then targetAirport else fromAddress)
+    end = (if direction == "origin" then targetAirport else fromAddress)
     journey = (if direction == "origin" then "departure" else "arrival")
     carTransferTime = "<strong>Car Transfer Time (on " + flightNumber + " " + journey + "): " + formattedDatetime + "</strong><br />"
-    carTransferTime = carTransferTime + start + ": " + targetAirport + " International Airport<br />"
-    carTransferTime = carTransferTime + end + ": " + fromAddress + "<br /><br />"
+    carTransferTime = carTransferTime + "From: " + start + "<br />"
+    carTransferTime = carTransferTime + "To:" + end + "<br /><br />"
     ($ targetDiv).html carTransferTime
 
   handleOnChangeAll: () ->
