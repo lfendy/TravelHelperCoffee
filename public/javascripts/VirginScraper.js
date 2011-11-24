@@ -38,8 +38,7 @@
       }).join(' ');
     };
     VirginScraper.prototype.mobileNumber = function() {
-      var _ref;
-      return (_ref = ($('div#BookingConfirmationMain')).find('tr').eq(1).find('td').eq(3).html()) != null ? _ref.split(/<br.*?>/g)[0] : void 0;
+      return ($('div#BookingConfirmationMain')).find('tr:eq(0)').find('td:eq(3)').text().trim();
     };
     VirginScraper.prototype.reservationNumber = function() {
       return ($('td.reservationnumber')).text().trim();

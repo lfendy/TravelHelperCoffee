@@ -12,7 +12,7 @@
                     <td>JACQUI\
 &nbsp;WEBB-PULLMAN</td>\
                     <td class="contactlabels">Agent Phone</td>\
-                    <td>+61-0487335313</td>\
+                    <td>##MOBILE_NUMBER##</td>\
                   </tr>\
                   <tr valign="top">\
                     <td class="contactlabels">Address</td>\
@@ -21,7 +21,7 @@
 VIC\
 &nbsp;3000<br>Australia</td>\
                     <td class="contactlabels" style="width:130px">Guest Phone<br>Alternative Phone</td>\
-                    <td>##MOBILE_NUMBER##<br>+61-0396916500</td>\
+                    <td>guestphone<br>+61-0396916500</td>\
                   </tr>\
                   <tr valign="top">\
                     <td class="contactlabels">Email</td>\

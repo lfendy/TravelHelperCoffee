@@ -39,9 +39,9 @@ window.VirginScraper = class VirginScraper
 
   mobileNumber: () ->
     ($ 'div#BookingConfirmationMain')
-      .find('tr').eq(1)
-      .find('td').eq(3)
-      .html()?.split(/<br.*?>/g)[0]
+      .find('tr:eq(0)')
+      .find('td:eq(3)')
+      .text().trim()
 
   reservationNumber: () ->
     ($ 'td.reservationnumber').text().trim()

@@ -70,7 +70,7 @@ select {\
 }\
 \
 select#payment-status {\
-    width: 80px !important;                                                                                                                                                      \
+    width: 80px !important;\
 }\
 </style>\
 \
@@ -87,7 +87,7 @@ select#payment-status {\
 \
   <div id="hotels-form">\
     <p id="hotel-content">Waiting for Google to respond..</p>\
-    \
+\
   </div>\
 \
   <div id="cars-form">\
