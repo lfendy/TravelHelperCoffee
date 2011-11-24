@@ -11,7 +11,7 @@ Virgin Blue 13 67 89<br /><br />
 Melbourne 0412 932 628<br />
 Sydney 0413 333 663<br />
 Perth 0488 366 042<br />
-Brisbane 07 3353 0644<br /><br /></p>
+Brisbane 07 3264 1011<br /><br /></p>
 
 <p>When travelling for ThoughtWorks you are covered by <b>CoverMore Travel Insurance</b><br />
 Account Name: ThoughtWorks Australia Pty Ltd<br />
