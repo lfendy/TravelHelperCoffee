@@ -181,7 +181,7 @@ Adult\
       var v;
       setupMobileNumber('+61-0430123456');
       v = new VirginScraper();
-      return (expect(v.mobileNumber())).toEqual('+61-0430123456');
+      return (expect(v.mobileNumber())).toEqual('0430123456');
     });
     it("should scrape reservation number", function() {
       var v;

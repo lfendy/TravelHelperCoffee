@@ -42,6 +42,7 @@ window.VirginScraper = class VirginScraper
       .find('tr:eq(0)')
       .find('td:eq(3)')
       .text().trim()
+      .replace('+61-','')
 
   reservationNumber: () ->
     ($ 'td.reservationnumber').text().trim()

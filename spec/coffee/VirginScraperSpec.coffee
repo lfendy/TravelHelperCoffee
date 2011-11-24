@@ -188,7 +188,7 @@ describe "VirginScraper", ->
   it "should scrape guest mobile number", ->
     setupMobileNumber '+61-0430123456'
     v = new VirginScraper()
-    (expect v.mobileNumber()).toEqual '+61-0430123456'
+    (expect v.mobileNumber()).toEqual '0430123456'
 
 
   it "should scrape reservation number", ->

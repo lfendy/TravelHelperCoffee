@@ -38,7 +38,7 @@
       }).join(' ');
     };
     VirginScraper.prototype.mobileNumber = function() {
-      return ($('div#BookingConfirmationMain')).find('tr:eq(0)').find('td:eq(3)').text().trim();
+      return ($('div#BookingConfirmationMain')).find('tr:eq(0)').find('td:eq(3)').text().trim().replace('+61-', '');
     };
     VirginScraper.prototype.reservationNumber = function() {
       return ($('td.reservationnumber')).text().trim();
