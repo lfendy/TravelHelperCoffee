@@ -170,7 +170,7 @@ window.UtilScraper = class UtilScraper
 
   handleOnChange: (direction, flightNumber) ->
     fromAddress = ($ "input#" + direction + "-" + flightNumber).val()
-    targetAirport = ($ "input#" + direction + "-airport-" + flightNumber).val() + " International Airport"
+    targetAirport = ($ "input#" + direction + "-airport-" + flightNumber).val() + " Domestic Airport"
     targetDatetime = ($ "input#" + direction + "-datetime-" + flightNumber).val()
     targetDiv = "div#" + direction + "-travelinfo-" + flightNumber
     formattedDatetime = targetDatetime
