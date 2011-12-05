@@ -72,6 +72,8 @@
         var jsonString;
         if (res.responseText != null) {
           res = res.responseText;
+        } else {
+          console.log("no hotel information from the speadsheet");
         }
         jsonString = res.substring(res.indexOf("{"), res.lastIndexOf("}") + 1);
         console.log("callback : " + callback);
