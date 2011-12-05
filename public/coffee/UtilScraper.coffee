@@ -62,12 +62,13 @@ window.UtilScraper = class UtilScraper
 
   getGoogleSpreadsheetAsJson: (spreadsheetId, gridId, callback) ->
     url = 'http://spreadsheets.google.com/feeds/cells/' + spreadsheetId + '/' + gridId + '/public/basic?alt=json-in-script'
+    console.log "about to get hotels from the spreadsheet"
     $.get url, (res) ->
         if res.responseText?
           res = res.responseText
         jsonString = res.substring(res.indexOf("{"), res.lastIndexOf("}") + 1)
         #console.log "Evaluating: " + callback + "('" + jsonString + "')"
-        console.log "callback: " + callback
+        console.log "callback : " + callback
         callback jsonString
 
 

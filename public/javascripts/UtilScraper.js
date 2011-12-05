@@ -67,13 +67,14 @@
     UtilScraper.prototype.getGoogleSpreadsheetAsJson = function(spreadsheetId, gridId, callback) {
       var url;
       url = 'http://spreadsheets.google.com/feeds/cells/' + spreadsheetId + '/' + gridId + '/public/basic?alt=json-in-script';
+      console.log("about to get hotels from the spreadsheet");
       return $.get(url, function(res) {
         var jsonString;
         if (res.responseText != null) {
           res = res.responseText;
         }
         jsonString = res.substring(res.indexOf("{"), res.lastIndexOf("}") + 1);
-        console.log("callback: " + callback);
+        console.log("callback : " + callback);
         return callback(jsonString);
       });
     };
@@ -185,7 +186,7 @@
     UtilScraper.prototype.handleOnChange = function(direction, flightNumber) {
       var arriveBeforeTime, carTransferTime, end, formattedDatetime, fromAddress, journey, spanClass, start, targetAirport, targetCarTravelTime, targetDatetime, targetDiv, totalMinutes;
       fromAddress = ($("input#" + direction + "-" + flightNumber)).val();
-      targetAirport = ($("input#" + direction + "-airport-" + flightNumber)).val() + " International Airport";
+      targetAirport = ($("input#" + direction + "-airport-" + flightNumber)).val() + " Domestic Airport";
       targetDatetime = ($("input#" + direction + "-datetime-" + flightNumber)).val();
       targetDiv = "div#" + direction + "-travelinfo-" + flightNumber;
       formattedDatetime = targetDatetime;
