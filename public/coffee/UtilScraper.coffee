@@ -63,16 +63,18 @@ window.UtilScraper = class UtilScraper
   getGoogleSpreadsheetAsJson: (spreadsheetId, gridId, callback) ->
     url = 'http://spreadsheets.google.com/feeds/cells/' + spreadsheetId + '/' + gridId + '/public/basic?alt=json-in-script'
     console.log "about to get hotels from the spreadsheet"
-    $.getJSON url, (res) ->
-        if res.responseText?
-          res = res.responseText
-        else 
-          console.log ("no hotel information from the speadsheet")
-        jsonString = res.substring(res.indexOf("{"), res.lastIndexOf("}") + 1)
-        #console.log "Evaluating: " + callback + "('" + jsonString + "')"
-        console.log "callback : " + callback
-        callback jsonString
-
+    $.ajax url,
+	    type: 'GET'
+	    dataType: 'text/javascript'
+	    error: (jqXHR, textStatus, errorThrown) ->
+	        console.log "AJAX Error: #{textStatus} #{errorThrown}"
+	    success: (data, textStatus, jqXHR) ->
+	        if res.responseText?
+	          res = res.responseText
+	        jsonString = res.substring(res.indexOf("{"), res.lastIndexOf("}") + 1)
+	        console.log "Evaluating: " + callback + "('" + jsonString + "')"
+	        console.log "callback : " + callback
+	        callback jsonString
 
   carGoogleSpreadsheetAjaxCallback: (jsonString) ->
     json = jQuery.parseJSON jsonString
