@@ -70,7 +70,7 @@
       console.log("about to get hotels from the spreadsheet");
       return $.ajax(url, {
         type: 'GET',
-        dataType: 'text/javascript',
+        dataType: 'script',
         error: function(jqXHR, textStatus, errorThrown) {
           return console.log("AJAX Error: " + textStatus + " " + errorThrown);
         },

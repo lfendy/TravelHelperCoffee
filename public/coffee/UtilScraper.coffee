@@ -65,7 +65,7 @@ window.UtilScraper = class UtilScraper
     console.log "about to get hotels from the spreadsheet"
     $.ajax url,
 	    type: 'GET'
-	    dataType: 'text/javascript'
+	    dataType: 'script'
 	    error: (jqXHR, textStatus, errorThrown) ->
 	        console.log "AJAX Error: #{textStatus} #{errorThrown}"
 	    success: (data, textStatus, jqXHR) ->
