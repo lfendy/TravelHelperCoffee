@@ -3,6 +3,8 @@
 window.TravelHelper = class TravelHelper
   constructor: () ->
 
+  @ac = null
+
   createView: (screenScraper) ->
     passenger = screenScraper.passenger()
     flights   = screenScraper.flights()
@@ -14,12 +16,12 @@ window.TravelHelper = class TravelHelper
     view
 
   carSpreadsheetCallback: (result) -> 
+    console.log(result)
     UtilScraper.get().carGoogleSpreadsheetAjaxCallback(result)
 
   hotelSpreadsheetCallback: (result) -> 
+    console.log(ac)
     UtilScraper.get().hotelGoogleSpreadsheetAjaxCallback(result, ac)
-
-  @ac = null
 
   run: () ->
     scrapers = []

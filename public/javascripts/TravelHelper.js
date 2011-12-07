@@ -2,6 +2,7 @@
   var TravelHelper, th;
   window.TravelHelper = TravelHelper = (function() {
     function TravelHelper() {}
+    TravelHelper.ac = null;
     TravelHelper.prototype.createView = function(screenScraper) {
       var flight, flights, passenger, view;
       passenger = screenScraper.passenger();
@@ -23,12 +24,13 @@
       return view;
     };
     TravelHelper.prototype.carSpreadsheetCallback = function(result) {
+      console.log(result);
       return UtilScraper.get().carGoogleSpreadsheetAjaxCallback(result);
     };
     TravelHelper.prototype.hotelSpreadsheetCallback = function(result) {
+      console.log(ac);
       return UtilScraper.get().hotelGoogleSpreadsheetAjaxCallback(result, ac);
     };
-    TravelHelper.ac = null;
     TravelHelper.prototype.run = function() {
       var ac, readyScraper, s, scrapers, view, _i, _len;
       scrapers = [];
