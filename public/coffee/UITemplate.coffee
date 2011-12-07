@@ -122,7 +122,7 @@ select#payment-status {
 
 	<div id="car-placeholder">
     	<h2>Contact Drivers</h2>
-        <p id="car-content">Waiting for Google to respond..</p>
+        <p id="car-content">Waiting for Google to respond ...</p>
     </div>
   </div>
 

@@ -3,6 +3,8 @@
 window.TravelHelper = class TravelHelper
   constructor: () ->
 
+  ac = null
+
   createView: (screenScraper) ->
     passenger = screenScraper.passenger()
     flights   = screenScraper.flights()
@@ -12,6 +14,13 @@ window.TravelHelper = class TravelHelper
       reservationNumber: passenger.reservationNumber
       flights:           flight.toJSON() for flight in flights
     view
+
+  carSpreadsheetCallback: (result) -> 
+    UtilScraper.get().carGoogleSpreadsheetAjaxCallback(result)
+
+  hotelSpreadsheetCallback: (result) -> 
+    console.log(ac)
+    UtilScraper.get().hotelGoogleSpreadsheetAjaxCallback(result, ac)
 
   run: () ->
     scrapers = []
@@ -30,9 +39,10 @@ window.TravelHelper = class TravelHelper
       #inject ui
       UtilScraper.get().injectHtml UITemplate, view, ($ "body")
 
-      UtilScraper.get().getGoogleSpreadsheetAsJson 'pgZYLtdPRv51beYTHUIrFWg', 'od6', (result) -> UtilScraper.get().carGoogleSpreadsheetAjaxCallback(result)
+      UtilScraper.get().getGoogleSpreadsheetAsJson 'pgZYLtdPRv51beYTHUIrFWg', 'od6', 'TravelHelper.prototype.carSpreadsheetCallback'
       ac = readyScraper.accommodation()
-      UtilScraper.get().getGoogleSpreadsheetAsJson 'pgZYLtdPRv50AK70fqJkQSw', 'od6', (result) -> UtilScraper.get().hotelGoogleSpreadsheetAjaxCallback(result, ac)
+      console.log ac
+      UtilScraper.get().getGoogleSpreadsheetAsJson 'pgZYLtdPRv50AK70fqJkQSw', 'od6', 'TravelHelper.prototype.hotelSpreadsheetCallback'
 
       #bind listeners
       ($ 'input#mobileNumber').bind 'focusout', ->

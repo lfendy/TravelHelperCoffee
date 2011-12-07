@@ -61,19 +61,15 @@ window.UtilScraper = class UtilScraper
     c
 
   getGoogleSpreadsheetAsJson: (spreadsheetId, gridId, callback) ->
-    url = 'http://spreadsheets.google.com/feeds/cells/' + spreadsheetId + '/' + gridId + '/public/basic?alt=json-in-script'
-    $.get url, (res) ->
-        if res.responseText?
-          res = res.responseText
-        jsonString = res.substring(res.indexOf("{"), res.lastIndexOf("}") + 1)
-        #console.log "Evaluating: " + callback + "('" + jsonString + "')"
-        console.log "callback: " + callback
-        callback jsonString
+    script = document.createElement('script')
+    url = 'http://spreadsheets.google.com/feeds/cells/' + spreadsheetId + '/' + gridId + '/public/basic?alt=json-in-script&callback='+ callback
+    script.setAttribute('src', url)
+    script.setAttribute('id', 'jsonScript')
+    script.setAttribute('type', 'text/javascript')
+    document.documentElement.firstChild.appendChild(script)
 
-
-  carGoogleSpreadsheetAjaxCallback: (jsonString) ->
-    json = jQuery.parseJSON jsonString
-    console.log "Parsed JSON string from Google spreadsheet as object: " + json
+  carGoogleSpreadsheetAjaxCallback: (json) ->
+    console.log "Received JSON string from Google spreadsheet as object: " + json
     cells = json.feed.entry
     cars = []
 
@@ -87,10 +83,9 @@ window.UtilScraper = class UtilScraper
     ($ "p#car-content").html ""
     UtilScraper.get().injectHtml UICarTemplate, view, ($ "p#car-content")
 
-  hotelGoogleSpreadsheetAjaxCallback: (jsonString, accommodation) ->
+  hotelGoogleSpreadsheetAjaxCallback: (json, accommodation) ->
     console.log "Hosting city is: " + accommodation.hostingCity + " from: " + accommodation.stayFrom + " to: " + accommodation.stayTo
-    json = jQuery.parseJSON jsonString
-    console.log "Parsed JSON string from Google hotel spreadsheet as object: " + json
+    console.log "Received JSON string from Google hotel spreadsheet as object: " + json
     cells = json.feed.entry
     hotels = []
     i = 4
@@ -170,7 +165,7 @@ window.UtilScraper = class UtilScraper
 
   handleOnChange: (direction, flightNumber) ->
     fromAddress = ($ "input#" + direction + "-" + flightNumber).val()
-    targetAirport = ($ "input#" + direction + "-airport-" + flightNumber).val() + " International Airport"
+    targetAirport = ($ "input#" + direction + "-airport-" + flightNumber).val() + " Domestic Airport"
     targetDatetime = ($ "input#" + direction + "-datetime-" + flightNumber).val()
     targetDiv = "div#" + direction + "-travelinfo-" + flightNumber
     formattedDatetime = targetDatetime
