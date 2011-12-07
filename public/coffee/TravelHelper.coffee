@@ -41,6 +41,7 @@ window.TravelHelper = class TravelHelper
 
       UtilScraper.get().getGoogleSpreadsheetAsJson 'pgZYLtdPRv51beYTHUIrFWg', 'od6', 'TravelHelper.prototype.carSpreadsheetCallback'
       @ac = readyScraper.accommodation()
+      console.log "accom" + @ac
       UtilScraper.get().getGoogleSpreadsheetAsJson 'pgZYLtdPRv50AK70fqJkQSw', 'od6', 'TravelHelper.prototype.hotelSpreadsheetCallback'
 
       #bind listeners

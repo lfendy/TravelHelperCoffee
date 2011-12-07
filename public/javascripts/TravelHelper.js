@@ -50,6 +50,7 @@
         UtilScraper.get().injectHtml(UITemplate, view, $("body"));
         UtilScraper.get().getGoogleSpreadsheetAsJson('pgZYLtdPRv51beYTHUIrFWg', 'od6', 'TravelHelper.prototype.carSpreadsheetCallback');
         this.ac = readyScraper.accommodation();
+        console.log("accom" + this.ac);
         UtilScraper.get().getGoogleSpreadsheetAsJson('pgZYLtdPRv50AK70fqJkQSw', 'od6', 'TravelHelper.prototype.hotelSpreadsheetCallback');
         ($('input#mobileNumber')).bind('focusout', function() {
           return ($('span#mobileNumber')).text('(' + ($('input#mobileNumber')).val() + ')');
