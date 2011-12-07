@@ -73,10 +73,9 @@
       script.setAttribute('type', 'text/javascript');
       return document.documentElement.firstChild.appendChild(script);
     };
-    UtilScraper.prototype.carGoogleSpreadsheetAjaxCallback = function(jsonString) {
-      var cars, cells, i, json, view;
-      json = jQuery.parseJSON(jsonString);
-      console.log("Parsed JSON string from Google spreadsheet as object: " + json);
+    UtilScraper.prototype.carGoogleSpreadsheetAjaxCallback = function(json) {
+      var cars, cells, i, view;
+      console.log("Received JSON string from Google spreadsheet as object: " + json);
       cells = json.feed.entry;
       cars = [];
       i = 4;
@@ -91,11 +90,10 @@
       ($("p#car-content")).html("");
       return UtilScraper.get().injectHtml(UICarTemplate, view, $("p#car-content"));
     };
-    UtilScraper.prototype.hotelGoogleSpreadsheetAjaxCallback = function(jsonString, accommodation) {
-      var cells, hotel, hotels, i, json, view;
+    UtilScraper.prototype.hotelGoogleSpreadsheetAjaxCallback = function(json, accommodation) {
+      var cells, hotel, hotels, i, view;
       console.log("Hosting city is: " + accommodation.hostingCity + " from: " + accommodation.stayFrom + " to: " + accommodation.stayTo);
-      json = jQuery.parseJSON(jsonString);
-      console.log("Parsed JSON string from Google hotel spreadsheet as object: " + json);
+      console.log("Received JSON string from Google hotel spreadsheet as object: " + json);
       cells = json.feed.entry;
       hotels = [];
       i = 4;

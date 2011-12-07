@@ -68,9 +68,8 @@ window.UtilScraper = class UtilScraper
     script.setAttribute('type', 'text/javascript')
     document.documentElement.firstChild.appendChild(script)
 
-  carGoogleSpreadsheetAjaxCallback: (jsonString) ->
-    json = jQuery.parseJSON jsonString
-    console.log "Parsed JSON string from Google spreadsheet as object: " + json
+  carGoogleSpreadsheetAjaxCallback: (json) ->
+    console.log "Received JSON string from Google spreadsheet as object: " + json
     cells = json.feed.entry
     cars = []
 
@@ -84,10 +83,9 @@ window.UtilScraper = class UtilScraper
     ($ "p#car-content").html ""
     UtilScraper.get().injectHtml UICarTemplate, view, ($ "p#car-content")
 
-  hotelGoogleSpreadsheetAjaxCallback: (jsonString, accommodation) ->
+  hotelGoogleSpreadsheetAjaxCallback: (json, accommodation) ->
     console.log "Hosting city is: " + accommodation.hostingCity + " from: " + accommodation.stayFrom + " to: " + accommodation.stayTo
-    json = jQuery.parseJSON jsonString
-    console.log "Parsed JSON string from Google hotel spreadsheet as object: " + json
+    console.log "Received JSON string from Google hotel spreadsheet as object: " + json
     cells = json.feed.entry
     hotels = []
     i = 4
