@@ -1,8 +1,9 @@
 (function() {
   var TravelHelper, th;
   window.TravelHelper = TravelHelper = (function() {
+    var ac;
     function TravelHelper() {}
-    TravelHelper.ac = null;
+    ac = null;
     TravelHelper.prototype.createView = function(screenScraper) {
       var flight, flights, passenger, view;
       passenger = screenScraper.passenger();
@@ -24,15 +25,14 @@
       return view;
     };
     TravelHelper.prototype.carSpreadsheetCallback = function(result) {
-      console.log(result);
       return UtilScraper.get().carGoogleSpreadsheetAjaxCallback(result);
     };
     TravelHelper.prototype.hotelSpreadsheetCallback = function(result) {
-      console.log(ac);
-      return UtilScraper.get().hotelGoogleSpreadsheetAjaxCallback(result, ac);
+      console.log(this.ac);
+      return UtilScraper.get().hotelGoogleSpreadsheetAjaxCallback(result, this.ac);
     };
     TravelHelper.prototype.run = function() {
-      var ac, readyScraper, s, scrapers, view, _i, _len;
+      var readyScraper, s, scrapers, view, _i, _len;
       scrapers = [];
       scrapers.push(new VirginScraper());
       scrapers.push(new QantasScraper());
@@ -49,7 +49,7 @@
         view = this.createView(readyScraper);
         UtilScraper.get().injectHtml(UITemplate, view, $("body"));
         UtilScraper.get().getGoogleSpreadsheetAsJson('pgZYLtdPRv51beYTHUIrFWg', 'od6', 'TravelHelper.prototype.carSpreadsheetCallback');
-        ac = readyScraper.accommodation();
+        this.ac = readyScraper.accommodation();
         UtilScraper.get().getGoogleSpreadsheetAsJson('pgZYLtdPRv50AK70fqJkQSw', 'od6', 'TravelHelper.prototype.hotelSpreadsheetCallback');
         ($('input#mobileNumber')).bind('focusout', function() {
           return ($('span#mobileNumber')).text('(' + ($('input#mobileNumber')).val() + ')');

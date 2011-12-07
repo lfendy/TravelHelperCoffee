@@ -3,7 +3,7 @@
 window.TravelHelper = class TravelHelper
   constructor: () ->
 
-  @ac = null
+  ac = null
 
   createView: (screenScraper) ->
     passenger = screenScraper.passenger()
@@ -16,12 +16,11 @@ window.TravelHelper = class TravelHelper
     view
 
   carSpreadsheetCallback: (result) -> 
-    console.log(result)
     UtilScraper.get().carGoogleSpreadsheetAjaxCallback(result)
 
   hotelSpreadsheetCallback: (result) -> 
-    console.log(ac)
-    UtilScraper.get().hotelGoogleSpreadsheetAjaxCallback(result, ac)
+    console.log(@ac)
+    UtilScraper.get().hotelGoogleSpreadsheetAjaxCallback(result, @ac)
 
   run: () ->
     scrapers = []
@@ -41,7 +40,7 @@ window.TravelHelper = class TravelHelper
       UtilScraper.get().injectHtml UITemplate, view, ($ "body")
 
       UtilScraper.get().getGoogleSpreadsheetAsJson 'pgZYLtdPRv51beYTHUIrFWg', 'od6', 'TravelHelper.prototype.carSpreadsheetCallback'
-      ac = readyScraper.accommodation()
+      @ac = readyScraper.accommodation()
       UtilScraper.get().getGoogleSpreadsheetAsJson 'pgZYLtdPRv50AK70fqJkQSw', 'od6', 'TravelHelper.prototype.hotelSpreadsheetCallback'
 
       #bind listeners
