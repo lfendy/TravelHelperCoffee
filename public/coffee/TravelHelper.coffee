@@ -13,6 +13,14 @@ window.TravelHelper = class TravelHelper
       flights:           flight.toJSON() for flight in flights
     view
 
+  carSpreadsheetCallback: (result) -> 
+    UtilScraper.get().carGoogleSpreadsheetAjaxCallback(result)
+
+  hotelSpreadsheetCallback: (result) -> 
+    UtilScraper.get().hotelGoogleSpreadsheetAjaxCallback(result, ac)
+
+  @ac = null
+
   run: () ->
     scrapers = []
     scrapers.push new VirginScraper()
@@ -30,9 +38,9 @@ window.TravelHelper = class TravelHelper
       #inject ui
       UtilScraper.get().injectHtml UITemplate, view, ($ "body")
 
-      UtilScraper.get().getGoogleSpreadsheetAsJson 'pgZYLtdPRv51beYTHUIrFWg', 'od6', (result) -> UtilScraper.get().carGoogleSpreadsheetAjaxCallback(result)
+      UtilScraper.get().getGoogleSpreadsheetAsJson 'pgZYLtdPRv51beYTHUIrFWg', 'od6', carSpreadsheetCallback
       ac = readyScraper.accommodation()
-      UtilScraper.get().getGoogleSpreadsheetAsJson 'pgZYLtdPRv50AK70fqJkQSw', 'od6', (result) -> UtilScraper.get().hotelGoogleSpreadsheetAjaxCallback(result, ac)
+      UtilScraper.get().getGoogleSpreadsheetAsJson 'pgZYLtdPRv50AK70fqJkQSw', 'od6', hotelSpreadsheetCallback
 
       #bind listeners
       ($ 'input#mobileNumber').bind 'focusout', ->

@@ -22,6 +22,13 @@
       };
       return view;
     };
+    TravelHelper.prototype.carSpreadsheetCallback = function(result) {
+      return UtilScraper.get().carGoogleSpreadsheetAjaxCallback(result);
+    };
+    TravelHelper.prototype.hotelSpreadsheetCallback = function(result) {
+      return UtilScraper.get().hotelGoogleSpreadsheetAjaxCallback(result, ac);
+    };
+    TravelHelper.ac = null;
     TravelHelper.prototype.run = function() {
       var ac, readyScraper, s, scrapers, view, _i, _len;
       scrapers = [];
@@ -39,13 +46,9 @@
         console.log("TravelHelper:: " + readyScraper.name() + " is starting to scrape..");
         view = this.createView(readyScraper);
         UtilScraper.get().injectHtml(UITemplate, view, $("body"));
-        UtilScraper.get().getGoogleSpreadsheetAsJson('pgZYLtdPRv51beYTHUIrFWg', 'od6', function(result) {
-          return UtilScraper.get().carGoogleSpreadsheetAjaxCallback(result);
-        });
+        UtilScraper.get().getGoogleSpreadsheetAsJson('pgZYLtdPRv51beYTHUIrFWg', 'od6', carSpreadsheetCallback);
         ac = readyScraper.accommodation();
-        UtilScraper.get().getGoogleSpreadsheetAsJson('pgZYLtdPRv50AK70fqJkQSw', 'od6', function(result) {
-          return UtilScraper.get().hotelGoogleSpreadsheetAjaxCallback(result, ac);
-        });
+        UtilScraper.get().getGoogleSpreadsheetAsJson('pgZYLtdPRv50AK70fqJkQSw', 'od6', hotelSpreadsheetCallback);
         ($('input#mobileNumber')).bind('focusout', function() {
           return ($('span#mobileNumber')).text('(' + ($('input#mobileNumber')).val() + ')');
         });
