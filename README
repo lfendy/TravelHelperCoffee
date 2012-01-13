@@ -25,3 +25,22 @@ Coffee Script 	- little language that compiles into JS
 guard         	- watches coffee files changes, auto-compile them to JS
 jasmine       	- JS BDD
 mustache      	- templating engine
+
+Instructions for installing TravelHelper: 
+-----------------------------------------
+
+1. In Chrome go to the 'View' menu and select 'Always Show Bookmarks Bar'
+
+2. Right click on the Bookmarks bar and go to 'Add page...'
+
+3. For the new bookmark add these details: 
+Name: TravelHelper
+Url: javascript:(function(){document.body.appendChild(document.createElement('script')).src='https://raw.github.com/lfendy/TravelHelperCoffee/master/TravelHelper.min.js';})();
+
+(Please note that installing the script this way means that any updates will be automatically applied for you) 
+
+To run TravelHelper: 
+--------------------
+
+Click on the Bookmark in the Bookmarks Bar called 'TravelHelper' when you're on the Virgin/Qantas booking page. 
+
