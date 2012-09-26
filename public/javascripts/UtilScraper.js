@@ -1,9 +1,13 @@
 (function() {
   var UtilScraper;
+
   window.UtilScraper = UtilScraper = (function() {
     var instance;
+
     function UtilScraper() {}
+
     instance = null;
+
     UtilScraper.get = function() {
       if (!(instance != null)) {
         instance = new this;
@@ -11,12 +15,14 @@
       }
       return instance;
     };
+
     UtilScraper.prototype.init = function(name) {
       if (name == null) {
         name = "unknown";
       }
       return console.log("" + name + " initialized");
     };
+
     UtilScraper.prototype.queryGoogleDistanceMatrix = function(sourceAddress, destinationAddress, targetDiv) {
       ($("span#" + targetDiv)).html("Wait..");
       sourceAddress = sourceAddress + ", Australia";
@@ -37,10 +43,13 @@
         return UtilScraper.get().parseGoogleMapMatrix(json, targetDiv);
       });
     };
+
     UtilScraper.prototype.parseGoogleMapMatrix = function(jsonObj, targetDiv) {
       var elements, result;
       console.log("Got JSON : " + jsonObj + " and target element: " + targetDiv);
-      if (!(jsonObj.status === "OK" || jsonObj.status === google.maps.DistanceMatrixStatus.OK)) {} else {
+      if (!(jsonObj.status === "OK" || jsonObj.status === google.maps.DistanceMatrixStatus.OK)) {
+
+      } else {
 
       }
       console.log("Got JSON object from Google distance matrix: " + jsonObj);
@@ -50,6 +59,7 @@
       ($("span#" + targetDiv)).html(result);
       return result;
     };
+
     UtilScraper.prototype.parseCar = function(cells, i) {
       var c, city, company, contact, phone;
       city = cells[i].content.$t;
@@ -64,6 +74,7 @@
       console.log(city + ' | ' + company + ' | ' + contact + ' | ' + phone);
       return c;
     };
+
     UtilScraper.prototype.getGoogleSpreadsheetAsJson = function(spreadsheetId, gridId, callback) {
       var script, url;
       script = document.createElement('script');
@@ -73,6 +84,7 @@
       script.setAttribute('type', 'text/javascript');
       return document.documentElement.firstChild.appendChild(script);
     };
+
     UtilScraper.prototype.carGoogleSpreadsheetAjaxCallback = function(json) {
       var cars, cells, i, view;
       console.log("Received JSON string from Google spreadsheet as object: " + json);
@@ -90,6 +102,7 @@
       ($("p#car-content")).html("");
       return UtilScraper.get().injectHtml(UICarTemplate, view, $("p#car-content"));
     };
+
     UtilScraper.prototype.hotelGoogleSpreadsheetAjaxCallback = function(json, accommodation) {
       var cells, hotel, hotels, i, view;
       console.log("Hosting city is: " + accommodation.hostingCity + " from: " + accommodation.stayFrom + " to: " + accommodation.stayTo);
@@ -113,6 +126,7 @@
       ($("div#hotels-form")).html("");
       return UtilScraper.get().injectHtml(UIHotelTemplate, view, $("div#hotels-form"));
     };
+
     UtilScraper.prototype.parseHotel = function(cells, i) {
       var address, city, h, hotel, phone;
       city = cells[i].content.$t;
@@ -130,6 +144,7 @@
       console.log(city + ' | ' + hotel + ' | ' + address + ' | ' + phone);
       return h;
     };
+
     UtilScraper.prototype.trim = function(s) {
       s = s.replace(/^\&nbsp;/, '');
       s = s.replace(/\&nbsp;$/, '');
@@ -137,6 +152,7 @@
       s = s.replace(/\s*$/, '');
       return s;
     };
+
     UtilScraper.prototype.estimateDatetime = function(datetimeStr, minutesToSubstructInt) {
       var currMilliSeconds, date, estimatedMillis, estimatedNewTime, formattedDate, hours, minutes;
       console.log("datetimeStr: " + datetimeStr);
@@ -162,6 +178,7 @@
       console.log("Estimatated date formatted: " + formattedDate);
       return formattedDate;
     };
+
     UtilScraper.prototype.handleAccommodationOnChange = function() {
       var pay, str;
       str = "<strong>Accommodation at " + ($("select#hotel-select option:selected")).text() + "</strong><br />";
@@ -176,6 +193,7 @@
       str = str + "Reservation No:&nbsp;" + ($("input#reservation")).val() + "<br /><br />";
       return ($("div.accomodation-info:eq(0)")).html(str);
     };
+
     UtilScraper.prototype.handleOnChange = function(direction, flightNumber) {
       var arriveBeforeTime, carTransferTime, end, formattedDatetime, fromAddress, journey, spanClass, start, targetAirport, targetCarTravelTime, targetDatetime, targetDiv, totalMinutes;
       fromAddress = ($("input#" + direction + "-" + flightNumber)).val();
@@ -199,6 +217,7 @@
       carTransferTime = carTransferTime + "To:" + end + "<br /><br />";
       return ($(targetDiv)).html(carTransferTime);
     };
+
     UtilScraper.prototype.handleOnChangeAll = function() {
       return ($("input.flightNumbers")).each(function() {
         console.log("Invoking 'handleOnChange' for flight number: " + $(this).val());
@@ -206,11 +225,15 @@
         return true;
       });
     };
+
     UtilScraper.prototype.injectHtml = function(uiTemplate, view, htmlElement) {
       var inputForm;
       inputForm = Mustache.to_html(uiTemplate, view);
       return htmlElement.prepend(inputForm);
     };
+
     return UtilScraper;
+
   })();
+
 }).call(this);

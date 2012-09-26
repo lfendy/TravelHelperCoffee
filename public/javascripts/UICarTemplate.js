@@ -1,4 +1,5 @@
 (function() {
+
   window.UICarTemplate = '\
 \
 <style type="text/css">\
@@ -23,4 +24,5 @@ table tr th {\
 	{{/cars}}\
 </table>\
 ';
+
 }).call(this);

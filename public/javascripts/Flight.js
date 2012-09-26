@@ -1,7 +1,10 @@
 (function() {
   var Flight;
+
   window.Flight = Flight = (function() {
+
     function Flight() {}
+
     Flight.prototype.toJSON = function() {
       return {
         departureDate: this.departureDate,
@@ -17,6 +20,9 @@
         flightNumberNoWS: this.flightNumberNoWS
       };
     };
+
     return Flight;
+
   })();
+
 }).call(this);

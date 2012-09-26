@@ -1,4 +1,5 @@
 (function() {
+
   window.UITemplate = '\
 \
 <style type="text/css">\
@@ -150,4 +151,5 @@ select#payment-status {\
 	{{/flights}}\
     </div>\
   </div>' + window.UIFooterTemplate + '</div>';
+
 }).call(this);

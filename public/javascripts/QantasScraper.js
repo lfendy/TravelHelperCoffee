@@ -1,7 +1,10 @@
 (function() {
   var QantasScraper;
+
   window.QantasScraper = QantasScraper = (function() {
+
     function QantasScraper() {}
+
     QantasScraper.prototype.isReady = function() {
       var index;
       index = ($(document)).text().toLowerCase().indexOf("qantas");
@@ -13,9 +16,11 @@
         return false;
       }
     };
+
     QantasScraper.prototype.name = function() {
       return "QantasScraper";
     };
+
     QantasScraper.prototype.makePrettyDate = function(scrapedDate) {
       var components, date, formattedDate, us_date;
       components = [];
@@ -32,17 +37,21 @@
       formattedDate = days[date.getDay()] + ' ' + date.getDate() + ' ' + months[date.getMonth()] + ' ' + date.getFullYear();
       return formattedDate;
     };
+
     QantasScraper.prototype.passengerName = function() {
       return ($('div#ContactDetails')).find('td').eq(0).text();
     };
+
     QantasScraper.prototype.mobileNumber = function() {
       return ($("div#ContactDetails")).find("table.pax-contact").find("tr").eq(2).find("td").eq(1).text();
     };
+
     QantasScraper.prototype.reservationNumber = function() {
       return ($("div#title")).find("h2").text().trim().split(/\s+/).filter(function(word, index) {
         return index === 2;
       }).join('');
     };
+
     QantasScraper.prototype.passenger = function() {
       var p;
       p = new Passenger();
@@ -51,6 +60,7 @@
       p.reservationNumber = this.reservationNumber();
       return p;
     };
+
     QantasScraper.prototype.flights = function() {
       var raw, result, _i, _len, _ref, _results;
       _ref = $('tr.tr_first');
@@ -61,6 +71,7 @@
       }
       return _results;
     };
+
     QantasScraper.prototype.parseFlight = function(raw) {
       var f;
       f = new Flight();
@@ -79,6 +90,7 @@
       f.destination = f.destination.replace(/\s+/, '_');
       return f;
     };
+
     QantasScraper.prototype.accommodation = function() {
       var a, destinationClone, hostingCity, raw;
       a = new Accommodation();
@@ -93,6 +105,9 @@
       a.stayTo = ($(raw)).find('td').eq(0).text().trim();
       return a;
     };
+
     return QantasScraper;
+
   })();
+
 }).call(this);

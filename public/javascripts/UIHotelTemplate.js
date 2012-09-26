@@ -1,4 +1,5 @@
 (function() {
+
   window.UIHotelTemplate = '\
     \
     <h2>Accommodation</h2>\
@@ -38,4 +39,5 @@
             <td>Reservation #: </td><td><input id="reservation" onchange="return UtilScraper.get().handleAccommodationOnChange()" type="text" size="35" value="" /></td>\
         </tr>\
     </table>';
+
 }).call(this);

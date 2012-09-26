@@ -1,9 +1,13 @@
 (function() {
   var TravelHelper, th;
+
   window.TravelHelper = TravelHelper = (function() {
     var ac;
+
     function TravelHelper() {}
+
     ac = null;
+
     TravelHelper.prototype.createView = function(screenScraper) {
       var flight, flights, passenger, view;
       passenger = screenScraper.passenger();
@@ -24,13 +28,16 @@
       };
       return view;
     };
+
     TravelHelper.prototype.carSpreadsheetCallback = function(result) {
       return UtilScraper.get().carGoogleSpreadsheetAjaxCallback(result);
     };
+
     TravelHelper.prototype.hotelSpreadsheetCallback = function(result) {
       console.log(ac);
       return UtilScraper.get().hotelGoogleSpreadsheetAjaxCallback(result, ac);
     };
+
     TravelHelper.prototype.run = function() {
       var readyScraper, s, scrapers, view, _i, _len;
       scrapers = [];
@@ -63,11 +70,17 @@
         return ($('body')).prepend("<div align='center'><p><br /><br /><br /><h1 style='color: red !important; padding: 15px;'>Oops! None of the text scrapers are ready. <br />Are you sure you executed the bookmarklet on the right page?</h1></p></div>");
       }
     };
+
     return TravelHelper;
+
   })();
+
   th = new TravelHelper();
+
   ($(document)).ready(function() {
     return th.run();
   });
+
   ($('div.logoVirginBlue')).hide();
+
 }).call(this);

@@ -1,7 +1,10 @@
 (function() {
   var JetStarScraper;
+
   window.JetStarScraper = JetStarScraper = (function() {
+
     function JetStarScraper() {}
+
     JetStarScraper.prototype.isReady = function() {
       var index;
       index = ($(document)).text().toLowerCase().indexOf("jetstar");
@@ -13,13 +16,19 @@
         return false;
       }
     };
+
     JetStarScraper.prototype.name = function() {
       return "JetStarScraper";
     };
+
     JetStarScraper.prototype.makePrettyDate = function(scrapedDate) {};
+
     JetStarScraper.prototype.passengerName = function() {};
+
     JetStarScraper.prototype.mobileNumber = function() {};
+
     JetStarScraper.prototype.reservationNumber = function() {};
+
     JetStarScraper.prototype.passenger = function() {
       var p;
       p = new Passenger();
@@ -28,6 +37,7 @@
       p.reservationNumber = this.reservationNumber();
       return p;
     };
+
     JetStarScraper.prototype.flights = function() {
       var raw, result, _i, _len, _ref, _results;
       _ref = $('blah-blah');
@@ -38,17 +48,22 @@
       }
       return _results;
     };
+
     JetStarScraper.prototype.parseFlight = function(raw) {
       var f;
       f = new Flight();
       f.airline = "JetStar";
       return f;
     };
+
     JetStarScraper.prototype.accommodation = function() {
       var a;
       a = new Accommodation();
       return a;
     };
+
     return JetStarScraper;
+
   })();
+
 }).call(this);

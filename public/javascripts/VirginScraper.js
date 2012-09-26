@@ -1,7 +1,10 @@
 (function() {
   var VirginScraper;
+
   window.VirginScraper = VirginScraper = (function() {
+
     function VirginScraper() {}
+
     VirginScraper.prototype.isReady = function() {
       var index;
       index = ($(document)).text().toLowerCase().indexOf("virgin");
@@ -13,9 +16,11 @@
         return false;
       }
     };
+
     VirginScraper.prototype.name = function() {
       return "VirginScraper";
     };
+
     VirginScraper.prototype.makePrettyDate = function(scrapedDate) {
       var components, date, formattedDate, us_date;
       components = [];
@@ -32,17 +37,21 @@
       formattedDate = days[date.getDay()] + ' ' + date.getDate() + ' ' + months[date.getMonth()] + ' ' + date.getFullYear();
       return formattedDate;
     };
+
     VirginScraper.prototype.passengerName = function() {
       return ($('td.itineraryGuestBaggageGuestHeadingWithButton')).find('span').eq(0).text().split(/\s+/).filter(function(word, index) {
         return index > 0;
       }).join(' ');
     };
+
     VirginScraper.prototype.mobileNumber = function() {
       return ($('div#BookingConfirmationMain')).find('tr:eq(0)').find('td:eq(3)').text().trim().replace('+61-', '');
     };
+
     VirginScraper.prototype.reservationNumber = function() {
       return ($('td.reservationnumber')).text().trim();
     };
+
     VirginScraper.prototype.parseFlight = function(raw) {
       var destinationClone, f, originClone;
       f = new Flight();
@@ -65,6 +74,7 @@
       f.destination = f.destination.replace(/\s+/, '_');
       return f;
     };
+
     VirginScraper.prototype.accommodation = function() {
       var a, destinationClone, hostingCity, raw;
       a = new Accommodation();
@@ -81,6 +91,7 @@
       a.stayTo = ($(raw)).find('td.flightDate').text();
       return a;
     };
+
     VirginScraper.prototype.flights = function() {
       var raw, result, _i, _len, _ref, _results;
       _ref = $('div.passengerDetailsFrame');
@@ -91,6 +102,7 @@
       }
       return _results;
     };
+
     VirginScraper.prototype.passenger = function() {
       var p;
       p = new Passenger();
@@ -99,6 +111,9 @@
       p.reservationNumber = this.reservationNumber();
       return p;
     };
+
     return VirginScraper;
+
   })();
+
 }).call(this);
