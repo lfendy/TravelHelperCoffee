@@ -35,7 +35,7 @@ Instructions for installing TravelHelper:
 
 3. For the new bookmark add these details: 
 Name: TravelHelper
-Url: javascript:(function(){document.body.appendChild(document.createElement('script')).src='https://raw.github.com/lfendy/TravelHelperCoffee/master/TravelHelper.min.js';})();
+Url: javascript:(function(){document.body.appendChild(document.createElement('script')).src='https://raw.github.com/lfendy/TravelHelperCoffee/gh-pages/TravelHelper.min.js';})();
 
 (Please note that installing the script this way means that any updates will be automatically applied for you) 
 
